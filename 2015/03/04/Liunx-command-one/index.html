@@ -1,0 +1,30 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Linux学习笔记2 - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2015-03-04T10:03:00.000Z" class="post__time">March 4, 2015</time><h1 class="post__title"><a href="/2015/03/04/Liunx-command-one/">Linux学习笔记2</a></h1></header><div class="post__main echo"><h3 id="1-建立linux账号"><a href="#1-建立linux账号" class="headerlink" title="1. 建立linux账号"></a>1. 建立linux账号</h3><p>需要在ROOT权限下执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -m username</div></pre></td></tr></table></figure>
+<p>新建一个用户名为<code>username</code>的账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd username</div></pre></td></tr></table></figure>
+<p>为<code>username</code>用户创建密码</p>
+<h3 id="2-nfs-server"><a href="#2-nfs-server" class="headerlink" title="2. nfs server"></a>2. nfs server</h3><p> In Fedora, the nfs-utils package is required for full NFS support. Run the following command to see if the nfs-utils is installed:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~]$ rpm -q nfs-utils</div><div class="line">package nfs-utils is not installed</div></pre></td></tr></table></figure>
+<p>If it is not installed and you want to use NFS, use the yum utility as root to install it:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~]# yum install nfs-utils</div></pre></td></tr></table></figure>
+<p>检查是否安装了nfs</p>
+<pre><code>    rpm -qa |grep nfs
+
+[kuaile@localhost ~]$ rpm -qa |grep nfs
+nfs-utils-1.2.8-6.0.fc20.x86_64
+libnfsidmap-0.25-7.fc20.x86_64
+</code></pre><p>输出这就是已经安装了.</p>
+<p>fedora 20 默认是已经安装的.</p>
+<p>配置nfs</p>
+<p>打开nfs配置文件exports</p>
+<p>sudo vi /etc/exports</p>
+<p>输入以下</p>
+<pre><code>/home/kuaile 192.168.122.1(insecure,rw,sync,no_root_squash)
+</code></pre><p>/home/kuaile       是共享的目录</p>
+<p>192.168.122.1    是允许挂在该目录的主机的IP地址, 如果不能确定 ,请使用 * ,表示任意IP 都可以</p>
+<p>insecure               是一个安全选项, 如果nfs服务端口号小于1024则可以不添加这个选项, 否则不添加的话, 是无法访问的.其他主机访问的话就会被拒绝.</p>
+<p>rw                          是共享目录的权限,rw 是可读写的权限,只读的权限是ro.</p>
+<p>sync                      是同步的选项, 可选的还有 async. sync是不使用缓存,随时写入同步, async是使用缓存的.</p>
+<p>no_root_squash   是NFS 服务共享的目录的属性, 如果用户是root, 那么对这个目录就有root的权限.</p>
+<p>如果有多个目录, 每个目录一行,可添加多个目录.</p>
+</div><footer class="post__foot u-cf"><a href="/2015/03/04/Liunx-command-one/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2015/03/09/wince-platform-builder-restore/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2015/02/28/Happy-Birthday/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>

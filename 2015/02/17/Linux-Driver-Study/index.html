@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Study of Linux Driver - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2015-02-16T23:52:00.000Z" class="post__time">February 17, 2015</time><h1 class="post__title"><a href="/2015/02/17/Linux-Driver-Study/">Study of Linux Driver</a></h1></header><div class="post__main echo"><p>今天开始复习?<br>学习Linux设备驱动, 就是为了新项目嘛..</p>
+<p>大概项目要用到的就只有最简单的字符设备就好.</p>
+<p>所以慢慢学</p>
+<h2 id="1-Hello-world模块"><a href="#1-Hello-world模块" class="headerlink" title="1. Hello world模块"></a>1. Hello world模块</h2><p>printf 不能用, 要用printk</p>
+<p><strong>用户空间和内核空间</strong></p>
+<p>内核空间是最高用户态, 拥有最多的权限可以进行所有的操作.<br>用户空间是运行在最低用户态, 处理器控制着对硬件的直接访问以及对内存的非授权访问.</p>
+<p>每当应用程序执行系统调用或者被硬件中断挂起时, Unix将执行模式从用户空间切换到内核空间.</p>
+<p>内核中的并发要注意, 所有驱动程序可能被很多个程序调用.</p>
+<p><strong>当前进程查看:</strong></p>
+<ol>
+<li><code>#include &lt;linux/sched.h&gt;</code></li>
+<li>‘printk(KERN_INFO “The process is %s (pid %i)”, current-&gt;comm, current-&gt;pid);’</li>
+</ol>
+<p>双下划线是接口的底层组件. 最好不要修改</p>
+<h2 id="2-编译和装载"><a href="#2-编译和装载" class="headerlink" title="2. 编译和装载"></a>2. 编译和装载</h2></div><footer class="post__foot u-cf"><a href="/2015/02/17/Linux-Driver-Study/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2015/02/28/Happy-Birthday/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2015/02/08/Review-of-2014/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>

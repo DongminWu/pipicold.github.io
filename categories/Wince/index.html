@@ -1,24 +1,28 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>wince - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2015-03-08T23:00:00.000Z" class="post__time">March 9, 2015</time><h1 class="post__title"><a href="/2015/03/09/2015-03-09-wince-platform-builder-restore/">Platform Builder 恢复调试方法</a></h1></header><div class="post__main echo"><p>转: <a href="http://blog.csdn.net/wirror800/article/details/4087968" target="_blank" rel="external">platform builder was unable to read the device settings from the datastore问题解决</a></p>
-<p>本文章主要讲的是当安装完CE6后，会发现Platform Builder for CE5的Connectivity Options不好用了，即使修改设置后点Apply也无法把新设置保存住在完全卸载CE6和VS2005后，点PB5的Connectivity Options会弹出这个错误： Platform Builder was unable to read the device settings from the Datastore.</p>
-<p>即使把CE5和PB5完全卸载，然后再重装，改错误仍然存在。</p>
-<p>方案一：</p>
-<p>1、关闭pb的所有进程，确保Cepb.exe, CeSvcHost.exe (CeSvcH~1.exe) and DeviceEmulator.exe 都已停止运行。</p>
-<p>2、备份C:/Documents and Settings/<user>/local settings/application data/microsoft/corecon文件夹。(可以不用备份，直接删除)</user></p>
-<p>3、备份C:/Documents and Settings/all users/application data/microsoft/corecon/1.0/addons文件夹。(可以不用备份，直接删除)</p>
-<p>4、在C:/Documents and Settings/all users/application data/microsoft/corecon/1.0目录下创建一个addons文件夹。</p>
-<p>5、将C:/Program Files/<pb install="" folder="">/CoreCon/SDK/XSL/Addons目录下的所有.xsl问价复制到第四步中新建的文件夹下。</pb></p>
-<p>6、将C:/Program Files/<pb install="" folder="">/CEPB/bin/microsoft.platformbuilder500.servicecategory.xsl也复制到第四步中新建的文件夹下。</pb></p>
-<p>注意：你可能找不到/local settings目录，需要在文件夹选项中选择不隐藏系统文件即可。</p>
-<p>方案二：</p>
-<p>1、在命令行中进入到你的platform目录</p>
-<p>如：C:/Program Files/Windows CE Platform Builder/5.00/CORECON/SCRIPTS/</p>
-<p>2、依次运行以下命令：</p>
-<p>disablecorecon <path></path><br>unregister <path></path><br>register <path></path><br>enablecorecon <path></path></p>
-<p>注意：这里的path格式应该为”C:/Program Files/Windows CE Platform Builder/5.00”，别忘了加引号。</p>
-<p>总结：</p>
-<pre><code>第一种方法我试验成功了，第二种方法不知道为什么没成功，但大家也可以借鉴一下
-</code></pre><p>pipicold: 第二种方法我实验成功了, 我的case是, 不知道为什么我的Documents and Settings/user里面的文件被重置了, 然后直接用第二个方法就ok了</p>
-</div><footer class="post__foot u-cf"><a href="/2015/03/09/2015-03-09-wince-platform-builder-restore/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>��始就遇到的问题..</p>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Wince - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2016-03-05T23:00:00.000Z" class="post__time">March 6, 2016</time><h1 class="post__title"><a href="/2016/03/06/Wince-Jenkins-Building/">Using Jenkins to Build Wince</a></h1></header><div class="post__main echo"><h1 id="Part-1-历史由来"><a href="#Part-1-历史由来" class="headerlink" title="Part 1 历史由来"></a>Part 1 历史由来</h1><p>好了, 这次让我们说中文, 就不瞎掰扯自己的垃圾英语水平了.</p>
+<p>公司项目里面用的是Windows CE 5.0 嵌入式系统, 这是个非常老旧的操作系统, 没记错的话整个系统只能有32个用户进程, 每个进程还不能完整使用全部的虚拟内存地址.</p>
+<p>关于这套系统: <a href="">https://en.wikipedia.org/wiki/Windows_CE</a></p>
+<p>这套古老的系统我维护了一年了, 工作是维护HAL, 也就是硬件外设层的代码.</p>
+<p>因为系统的古老所以一直以来这个项目的版本发布都是依赖于每个开发者自己编译和发布.</p>
+<p>有个10年前的子项目的发布步骤繁琐到令人发指, 照着文档做都很难完全做对.</p>
+<p>这样带来的问题可想而知, 去年我就因为发布的时候漏掉了一步导致被投诉…</p>
+<p>做维护的事情就是很烦而且还要负责任.</p>
+<p>那次事故之后, team里面就申请了一台服务器上的虚拟机用作专门版本发布.</p>
+<p>我就在工作之余慢慢研究整个的工作流程怎么移植到这台专用机器上面.</p>
+<h1 id="Part-2-Jenkins"><a href="#Part-2-Jenkins" class="headerlink" title="Part 2 Jenkins"></a>Part 2 Jenkins</h1><p>Jenkins, <a href="">http://jenkins-ci.org</a></p>
+<p>这应该是一个主流的自动化编译服务器框架吧.官网上说他的好处如下:</p>
+<blockquote>
+<p>Jenkins offers the following major features out of the box, and many more can be added through plugins:</p>
+<p>Easy installation: Just run java -jar jenkins.war, deploy it in a servlet container. No additional install, no database. Prefer an installer or native package? We have those as well.</p>
+<p>Easy configuration: Jenkins can be configured entirely from its friendly web GUI with extensive on-the-fly error checks and inline help.</p>
+<p>Rich plugin ecosystem: Jenkins integrates with virtually every SCM or build tool that exists. View plugins.</p>
+<p>Extensibility: Most parts of Jenkins can be extended and modified, and it’s easy to create new Jenkins plugins. This allows you to customize Jenkins to your needs.</p>
+<p>Distributed builds: Jenkins can distribute build/test loads to multiple computers with different operating systems. Building software for OS X, Linux, and Windows? No problem.</p>
+</blockquote>
+<p>在公司的项目中确实也有很多在用他来管理的, 所以大家的学习使用成本很低.</p>
+<p>但是问题是这是第一次在WINCE, 或者说是windows平台上进行这种automation的工作.</p>
+<p>宿主机器是Windows XP系统!</p>
+<p>PS: WINDOWS不死, 程序员的世界永远不会更美好.</p>
+<h1 id="Part-3-Jenkins-用户权限管理问题"><a href="#Part-3-Jenkins-用户权限管理问题" class="headerlink" title="Part 3 Jenkins 用户权限管理问题"></a>Part 3 Jenkins 用户权限管理问题</h1><p>这是安装Jenkins一开始就遇到的问题..</p>
 <p>注册了一个编译用的账号然而权限不足, 我是用直接改 Jenkins目录下 <code>config.xml</code> 的方法解决的额.</p>
 <p>可以参考这个: <a href="">http://www.cnblogs.com/gao241/archive/2013/03/20/2971416.html</a></p>
 <p>关于怎么在Windows XP 下面重启Jenkins, 我机器上面的是以服务模式运行的, 所以用的方法是直接在 CMD里面 输入:</p>
@@ -72,4 +76,4 @@
 <h1 id="Part-7-SSH-的问题"><a href="#Part-7-SSH-的问题" class="headerlink" title="Part 7 SSH 的问题"></a>Part 7 SSH 的问题</h1><p>这个问题是在尝试吧 GIT 仓库管理的部分集成在 <code>auto.py</code> 里面的时候遇到的, 虽然现在把这一块的管理移出到使用Jenkins插件了, 但是还是可以记录一下.</p>
 <p>ssh实现免密码登陆的话, 需要把私钥存在 <code>~/.ssh/id_rsa</code> 文件里面, 于是我可以用Git bash里面的小型的cygwin来运行这个 <code>auto.py</code> 并且把准备好的私钥文件copy到<code>~/.ssh/</code> 里面就好.</p>
 <p>然后在Jenkins的 Jenkins设置里面, 把shell的路径指定到 <code>C:\Program Files\Git\bin\bash.exe</code> 也就是GIT bash的可执行文件, 这样Jenkins在执行shell 命令的时候就会调用我们配置过SSH 私钥的Terminal了.</p>
-</div><footer class="post__foot u-cf"><a href="/2016/03/06/2016-03-06-Wince-Jenkins-Building/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>
+</div><footer class="post__foot u-cf"><a href="/2016/03/06/Wince-Jenkins-Building/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>

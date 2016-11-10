@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>pipicoldblog搭建下一步计划 - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-07-12T22:00:00.000Z" class="post__time">July 13, 2014</time><h1 class="post__title"><a href="/2014/07/13/Next-step-of-blog/">pipicoldblog搭建下一步计划</a></h1></header><div class="post__main echo"><p>恩…那个jQuery的实现其实就是意味着我的这个blog终于可以加一点动态效果了</p>
+<p>恩.要做出来的样子应该是有可以在blog里面显示图片的,每篇blog自己带一个文件夹</p>
+<p>但是由于svn的代码空间只有100MB所以要把资源文件.主要是图片.</p>
+<p>放在storage里面,这件事情已经探究过可行性了之前,只是觉得麻烦&gt;&lt;</p>
+<p>另外关于主界面,一开始的界面要修改了,现在这样虽然简洁吧但是也很简陋&gt;&lt;</p>
+<p>现在觉得既然是已经做了一个仿制PSP的界面就干脆利用这个?</p>
+<p>大概的想法是黑白风格,然后把blog分为<strong>BLOG</strong>,<strong>PROJECT</strong>,<strong>PROFILE</strong>三个大块</p>
+<p>然后至多采用三级菜单</p>
+<h2 id="BLOG部分"><a href="#BLOG部分" class="headerlink" title="BLOG部分"></a>BLOG部分</h2><ol>
+<li>每个blog要加入一个<code>&lt;tag&gt;&lt;/tag&gt;</code>标签来进行分类</li>
+<li>每个blog的文件名还是日期</li>
+<li>每个加入一个<code>&lt;version&gt;&lt;/version&gt;</code>标签来标记现在的版本号</li>
+</ol>
+<p>PS:标记版本号的目的就是为了不要每次都要遍历一次所有文件然后找出tag</p>
+<p>但是也有变通的方法就是另外做个小程序每次发布新的blog之后把svn提交还有tag数据库的更新整合在一起<strong>用python写个?</strong></p>
+<h2 id="PROJECT部分"><a href="#PROJECT部分" class="headerlink" title="PROJECT部分"></a>PROJECT部分</h2><p>大概就是吧每个项目的源码git地址搞下来然后再把readme.md弄下来就好</p>
+<h2 id="PROFILE部分"><a href="#PROFILE部分" class="headerlink" title="PROFILE部分"></a>PROFILE部分</h2><p>自己随意写写就好~~</p>
+</div><footer class="post__foot u-cf"><a href="/2014/07/13/Next-step-of-blog/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2014/09/01/Differents-between-pairs-and-ipairs-in-lua/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2014/07/13/Jqury-psp-menu/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>

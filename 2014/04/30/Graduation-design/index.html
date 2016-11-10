@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>月末的毕业设计 - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-04-29T22:00:00.000Z" class="post__time">April 30, 2014</time><h1 class="post__title"><a href="/2014/04/30/Graduation-design/">月末的毕业设计</a></h1></header><div class="post__main echo"><p>恩一转眼就月末了呢。</p>
+<p>这个星期大概就没什么进展，从上次编译出SDK以后就一直没有coding关于毕设的事情</p>
+<p>前几天看了一下教程<a href="http://hi.baidu.com/gouooo/item/6932bfa97d23d1981410736a" target="_blank" rel="external">【整理】如何在OpenWRT环境下做开发</a></p>
+<p>发现自己还是要学一些关于<strong>Makefile</strong>的东西，于是就找了个<strong>跟我一起学Makefile</strong>看了看，</p>
+<p>恩目前还没看完但是觉得还是挺有收获的。</p>
+<p>于是今天早上就按照教程上的写了个helloworld程序</p>
+<p>遇到了一下的问题恩</p>
+<p>一开始我的Makefile是这样写的。。（这里只是最后的一些执行语句）</p>
+<p><a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#x21;">&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#x21;</a></p>
+<p>#prepare</p>
+<p>define Build/Prepare<br>mkdir -p $(PKG_BUILD_DIR)<br>$(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
+<p>#install will be call</p>
+<p>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
+<p>#the function eval will add the text into makefile</p>
+<p>$(eval $(call BuildPackage,helloworld))</p>
+<p>但是每次make的时候总是报错说是最后一行少了一个分隔符（separator）</p>
+<p>百度了一下说是命令之前要加上一个<code>TAB</code>字符什么的</p>
+<p>但是Makefile直接调用函数什么的根本不用加<code>TAB</code>啊啊啊啊。。。</p>
+<p>于是琢磨了好久发现是在之前的<code>define</code>里面有问题</p>
+<p>Makefile的define就是宏。。就相当于是文本替换。所以在</p>
+<p><a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#33;&#x40;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#33;">&#33;&#x40;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#33;</a><br>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
+<p>这样打出的命令之前是没有<code>TAB</code>字符的。。于是在最后一行调用的时候就出现了缺少分隔符错误</p>
+<p>后来修改成这样就正确了</p>
+<p><a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x21;&#x40;&#64;&#x6d;&#97;&#107;&#101;&#x40;&#x40;&#x21;">&#x21;&#x40;&#64;&#x6d;&#97;&#107;&#101;&#x40;&#x40;&#x21;</a><br>define Build/Prepare<br>    mkdir -p $(PKG_BUILD_DIR)<br>    $(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
+<p>define Package/helloworld/install<br>    $(INSTALL_DIR) $(1)/bin<br>    $(INSTALL_BIN) $(PKG_BUILD_DIR)/helloworld $(1)/bin/<br>endef</p>
+<p>$(eval $(call BuildPackage,helloworld))<br><strong>注意上面这两个define中的行命令的行首都有TAB</strong></p>
+<p>恩。小问题但是要注意细节恩~</p>
+</div><footer class="post__foot u-cf"><a href="/2014/04/30/Graduation-design/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2014/05/03/Try-UCI/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2014/04/23/escape/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>

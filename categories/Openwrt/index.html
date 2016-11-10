@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Openwrt - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-05-15T22:00:00.000Z" class="post__time">May 16, 2014</time><h1 class="post__title"><a href="/2014/05/16/2014-05-16-virtual-ap-sta-mode/">虚拟AP和基础网模式</a></h1></header><div class="post__main echo"><p>今天的又在做毕设。</p>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Openwrt - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-05-15T22:00:00.000Z" class="post__time">May 16, 2014</time><h1 class="post__title"><a href="/2014/05/16/virtual-ap-sta-mode/">虚拟AP和基础网模式</a></h1></header><div class="post__main echo"><p>今天的又在做毕设。</p>
 <p>昨天把网页设置的部分完了一点。</p>
 <p>今天想添加新功能，虚拟AP，AP模式和基础网模式互换</p>
 <h2 id="Part-1-虚拟AP"><a href="#Part-1-虚拟AP" class="headerlink" title="Part.1 虚拟AP"></a>Part.1 虚拟AP</h2><p>就是用一个路由器广播多个ssid</p>
@@ -41,7 +41,7 @@ iwlist scan
 <p>成功变为基础网模式</p>
 <p>再次切换为AP模式只需恢复原有config即可</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">uci set wireless.@wifi-iface[0].network=lan</div><div class="line">uci set wireless.@wifi-iface[0].ssid=pipinet</div><div class="line">uci set wireless.@wifi-iface[0].mode=ap</div><div class="line">uci commit</div></pre></td></tr></table></figure>
-</div><footer class="post__foot u-cf"><a href="/2014/05/16/2014-05-16-virtual-ap-sta-mode/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-14T22:00:00.000Z" class="post__time">May 15, 2014</time><h1 class="post__title"><a href="/2014/05/15/2014-05-15-prepare-to-finish-wifi-module/">wifi路由要结题啦</a></h1></header><div class="post__main echo"><p>昨天清考去了感觉能过的恩。。。</p>
+</div><footer class="post__foot u-cf"><a href="/2014/05/16/virtual-ap-sta-mode/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-14T22:00:00.000Z" class="post__time">May 15, 2014</time><h1 class="post__title"><a href="/2014/05/15/prepare-to-finish-wifi-module/">wifi路由要结题啦</a></h1></header><div class="post__main echo"><p>昨天清考去了感觉能过的恩。。。</p>
 <p>于是欢脱的过了半天今天继续做毕设。</p>
 <p>不过老师给我消息说20号左右答辩，要把论文也写出来</p>
 <p>。。。</p>
@@ -69,7 +69,7 @@ iwlist scan
 <h4 id="二、写毕业论文"><a href="#二、写毕业论文" class="headerlink" title="二、写毕业论文"></a>二、写毕业论文</h4><p>提纲</p>
 <p>正文</p>
 <p>翻译文献</p>
-</div><footer class="post__foot u-cf"><a href="/2014/05/15/2014-05-15-prepare-to-finish-wifi-module/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-02T22:00:00.000Z" class="post__time">May 3, 2014</time><h1 class="post__title"><a href="/2014/05/03/2014-05-03-Try-UCI/">try UCI</a></h1></header><div class="post__main echo"><p>恩昨天的串口弄了一天继续失败，于是为了赶进度来做uci的部分。</p>
+</div><footer class="post__foot u-cf"><a href="/2014/05/15/prepare-to-finish-wifi-module/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-02T22:00:00.000Z" class="post__time">May 3, 2014</time><h1 class="post__title"><a href="/2014/05/03/Try-UCI/">try UCI</a></h1></header><div class="post__main echo"><p>恩昨天的串口弄了一天继续失败，于是为了赶进度来做uci的部分。</p>
 <p>主要参考资料</p>
 <p><a href="http://wiki.openwrt.org/zh-cn/doc/uci" target="_blank" rel="external">UCI系统</a></p>
 <p><a href="http://www.sl088.com/voyage/2012/03/3407.slboat" target="_blank" rel="external">OPENWRT的一些UCI命令 BY 船长@又在折腾</a></p>
@@ -115,7 +115,7 @@ iwlist scan
 <p>恩早上高数复习（高效一点啦）</p>
 <p>下午之后用lua吧uci命令运行一下试一试~</p>
 <p>串口那里改个波特率试试？最好还是能双向通讯吧</p>
-</div><footer class="post__foot u-cf"><a href="/2014/05/03/2014-05-03-Try-UCI/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-04-29T22:00:00.000Z" class="post__time">April 30, 2014</time><h1 class="post__title"><a href="/2014/04/30/2014-04-30-Graduation-design/">月末的毕业设计</a></h1></header><div class="post__main echo"><p>恩一转眼就月末了呢。</p>
+</div><footer class="post__foot u-cf"><a href="/2014/05/03/Try-UCI/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-04-29T22:00:00.000Z" class="post__time">April 30, 2014</time><h1 class="post__title"><a href="/2014/04/30/Graduation-design/">月末的毕业设计</a></h1></header><div class="post__main echo"><p>恩一转眼就月末了呢。</p>
 <p>这个星期大概就没什么进展，从上次编译出SDK以后就一直没有coding关于毕设的事情</p>
 <p>前几天看了一下教程<a href="http://hi.baidu.com/gouooo/item/6932bfa97d23d1981410736a" target="_blank" rel="external">【整理】如何在OpenWRT环境下做开发</a></p>
 <p>发现自己还是要学一些关于<strong>Makefile</strong>的东西，于是就找了个<strong>跟我一起学Makefile</strong>看了看，</p>
@@ -123,7 +123,7 @@ iwlist scan
 <p>于是今天早上就按照教程上的写了个helloworld程序</p>
 <p>遇到了一下的问题恩</p>
 <p>一开始我的Makefile是这样写的。。（这里只是最后的一些执行语句）</p>
-<p><a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#64;&#x40;&#33;">&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#64;&#x40;&#33;</a></p>
+<p><a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#x21;">&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#x21;</a></p>
 <p>#prepare</p>
 <p>define Build/Prepare<br>mkdir -p $(PKG_BUILD_DIR)<br>$(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
 <p>#install will be call</p>
@@ -135,11 +135,11 @@ iwlist scan
 <p>但是Makefile直接调用函数什么的根本不用加<code>TAB</code>啊啊啊啊。。。</p>
 <p>于是琢磨了好久发现是在之前的<code>define</code>里面有问题</p>
 <p>Makefile的define就是宏。。就相当于是文本替换。所以在</p>
-<p><a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#33;&#64;&#64;&#109;&#97;&#107;&#x65;&#x40;&#x40;&#x21;">&#33;&#64;&#64;&#109;&#97;&#107;&#x65;&#x40;&#x40;&#x21;</a><br>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
+<p><a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#33;&#x40;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#33;">&#33;&#x40;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#33;</a><br>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
 <p>这样打出的命令之前是没有<code>TAB</code>字符的。。于是在最后一行调用的时候就出现了缺少分隔符错误</p>
 <p>后来修改成这样就正确了</p>
-<p><a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#58;&#33;&#x40;&#64;&#x6d;&#97;&#x6b;&#x65;&#x40;&#x40;&#33;">&#33;&#x40;&#64;&#x6d;&#97;&#x6b;&#x65;&#x40;&#x40;&#33;</a><br>define Build/Prepare<br>    mkdir -p $(PKG_BUILD_DIR)<br>    $(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
+<p><a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x21;&#x40;&#64;&#x6d;&#97;&#107;&#101;&#x40;&#x40;&#x21;">&#x21;&#x40;&#64;&#x6d;&#97;&#107;&#101;&#x40;&#x40;&#x21;</a><br>define Build/Prepare<br>    mkdir -p $(PKG_BUILD_DIR)<br>    $(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
 <p>define Package/helloworld/install<br>    $(INSTALL_DIR) $(1)/bin<br>    $(INSTALL_BIN) $(PKG_BUILD_DIR)/helloworld $(1)/bin/<br>endef</p>
 <p>$(eval $(call BuildPackage,helloworld))<br><strong>注意上面这两个define中的行命令的行首都有TAB</strong></p>
 <p>恩。小问题但是要注意细节恩~</p>
-</div><footer class="post__foot u-cf"><a href="/2014/04/30/2014-04-30-Graduation-design/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>
+</div><footer class="post__foot u-cf"><a href="/2014/04/30/Graduation-design/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>try UCI - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-05-02T22:00:00.000Z" class="post__time">May 3, 2014</time><h1 class="post__title"><a href="/2014/05/03/Try-UCI/">try UCI</a></h1></header><div class="post__main echo"><p>恩昨天的串口弄了一天继续失败，于是为了赶进度来做uci的部分。</p>
+<p>主要参考资料</p>
+<p><a href="http://wiki.openwrt.org/zh-cn/doc/uci" target="_blank" rel="external">UCI系统</a></p>
+<p><a href="http://www.sl088.com/voyage/2012/03/3407.slboat" target="_blank" rel="external">OPENWRT的一些UCI命令 BY 船长@又在折腾</a></p>
+<p>然后自己折腾了一下</p>
+<p>恩</p>
+<p>首先可以用</p>
+<pre><code>uci export
+</code></pre><p>来输出所有的当前信息</p>
+<p>然后，用</p>
+<pre><code>uci show 【package名字】
+</code></pre><p>就可以看到这个包下面的所有参数和选项了。</p>
+<p>然后就</p>
+<pre><code>uci set
+</code></pre><p>命令就可以设置每个选项的具体值</p>
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><p>恩今天改了个无线的ssid试了一下</p>
+<p>先<code>uci export</code></p>
+<p>发现wireless包下面有ssid的选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package wireless</div><div class="line"></div><div class="line">config wifi-device &apos;radio0&apos;</div><div class="line">	option type &apos;mac80211&apos;</div><div class="line">	option hwmode &apos;11ng&apos;</div><div class="line">	option path &apos;platform/ar933x_wmac&apos;</div><div class="line">	list ht_capab &apos;SHORT-GI-20&apos;</div><div class="line">	list ht_capab &apos;SHORT-GI-40&apos;</div><div class="line">	list ht_capab &apos;RX-STBC1&apos;</div><div class="line">	list ht_capab &apos;DSSS_CCK-40&apos;</div><div class="line">	option disabled &apos;0&apos;</div><div class="line">	option channel &apos;auto&apos;</div><div class="line">	option htmode &apos;HT40+&apos;</div><div class="line">	option country &apos;CN&apos;</div><div class="line">	option noscan &apos;1&apos;</div><div class="line"></div><div class="line">config wifi-iface</div><div class="line">	option device &apos;radio0&apos;</div><div class="line">	option network &apos;lan&apos;</div><div class="line">	option mode &apos;ap&apos;</div><div class="line">	option encryption &apos;none&apos;</div><div class="line">	option ssid &apos;FUCKMATH&apos;</div></pre></td></tr></table></figure>
+<p>于是运行<code>uci show</code></p>
+<p>输出信息如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">wireless.radio0=wifi-device</div><div class="line">wireless.radio0.type=mac80211</div><div class="line">wireless.radio0.hwmode=11ng</div><div class="line">wireless.radio0.path=platform/ar933x_wmac</div><div class="line">wireless.radio0.ht_capab=SHORT-GI-20 SHORT-GI-40 RX-STBC1 DSSS_CCK-40</div><div class="line">wireless.radio0.disabled=0</div><div class="line">wireless.radio0.channel=auto</div><div class="line">wireless.radio0.htmode=HT40+</div><div class="line">wireless.radio0.country=CN</div><div class="line">wireless.radio0.noscan=1</div><div class="line">wireless.@wifi-iface[0]=wifi-iface</div><div class="line">wireless.@wifi-iface[0].device=radio0</div><div class="line">wireless.@wifi-iface[0].network=lan</div><div class="line">wireless.@wifi-iface[0].mode=ap</div><div class="line">wireless.@wifi-iface[0].encryption=none</div><div class="line">wireless.@wifi-iface[0].ssid=FUCKMATH</div></pre></td></tr></table></figure>
+<p>根据最后一条信息。。</p>
+<p>输入<code>uci set wireless.@wifi-iface[0].ssid=pipicoldnet</code></p>
+<p>运行成功没提示恩。</p>
+<p>再次输入<code>uci commit</code></p>
+<p>然后输入<code>/etc/init.d/network restart</code></p>
+<p>或者重启也行。就能看到网络的ssid改了</p>
+<h4 id="关于一些命令的使用-使用中会陆续添加"><a href="#关于一些命令的使用-使用中会陆续添加" class="headerlink" title="关于一些命令的使用(使用中会陆续添加)"></a>关于一些命令的使用(使用中会陆续添加)</h4><p><code>uci export</code></p>
+<p>这个是导出所有的当前配置文件。。所有的包和选项，可以使用<code>uci export &gt; export.txt</code>类似的组合命令输出到文件</p>
+<p><code>uci import</code> <strong><em>暂未试用</em></strong></p>
+<p>顾名思义，导入配置，</p>
+<p><code>uci show 【package】</code></p>
+<p>显示某个包的内容</p>
+<p><code>uci set</code></p>
+<p>这个set后面要跟具体的选项的从属关系和值，具体的用法参见上文实例</p>
+<p><code>uci commit</code></p>
+<p>提交set命令所进行的修改</p>
+<p><code>uci get</code></p>
+<p>获取某个特定的配置项的值</p>
+<h4 id="config文件的形式"><a href="#config文件的形式" class="headerlink" title="config文件的形式"></a>config文件的形式</h4><p>关于每个package的config文件怎么配置就要看第一个链接里面的那个各个config文件详述的表格了</p>
+<p>觉得uci命令是配置路由器基础功能的核心部分</p>
+<p>明天的任务：</p>
+<p>恩早上高数复习（高效一点啦）</p>
+<p>下午之后用lua吧uci命令运行一下试一试~</p>
+<p>串口那里改个波特率试试？最好还是能双向通讯吧</p>
+</div><footer class="post__foot u-cf"><a href="/2014/05/03/Try-UCI/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2014/05/15/prepare-to-finish-wifi-module/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2014/04/30/Graduation-design/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>
