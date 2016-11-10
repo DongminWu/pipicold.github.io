@@ -1,127 +1,576 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>leetcode - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2015-06-03T22:00:00.000Z" class="post__time">June 4, 2015</time><h1 class="post__title"><a href="/2015/06/04/Symmetric-Tree/">leetcode, 判断对称二叉树</a></h1></header><div class="post__main echo"><p> 题目:</p>
-<blockquote>
-<p><strong>Symmetric Tree</strong></p>
-<p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
-<p>For example, this binary tree is symmetric:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    1</div><div class="line">   / \</div><div class="line">  2   2</div><div class="line">/ \ / \</div><div class="line">3  4 4  3</div></pre></td></tr></table></figure>
-<p>But the following is not:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">    1</div><div class="line">   / \</div><div class="line">  2   2</div><div class="line">   \   \</div><div class="line">   3    3</div><div class="line">``` </div><div class="line"></div><div class="line">&gt;Note:</div><div class="line">&gt;Bonus points if you could solve it both recursively and iteratively.</div><div class="line"> </div><div class="line">&gt;confused what &quot;&#123;1,#,2,3&#125;&quot; means? &gt; read more on how binary tree is serialized on OJ.</div><div class="line"> </div><div class="line">&gt;OJ&apos;s Binary Tree Serialization:</div><div class="line"> </div><div class="line">&gt;The serialization of a binary tree follows a level order traversal, where &apos;#&apos; signifies a path terminator where no node exists below.</div><div class="line"> </div><div class="line">&gt;Here&apos;s an example:</div><div class="line"> &gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>   1<br>  / \<br> 2   3<br>    /<br>   4<br>    \<br>     5<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt;The above binary tree is serialized as `&#123;1,2,3,#,#,4,#,#,5&#125;`. </div><div class="line"></div><div class="line">刚刚看的时候觉得挺难得, 应该, 因为你看对称啊什么的很难解决,</div><div class="line"></div><div class="line">后来看到这个OJ的二叉树表示法的提示之后就想诶能不能通过吧二叉树转化为列表然后比较列表是否对称就行了啊</div><div class="line"></div><div class="line">说起二叉树转化成列表就又想到了**前序, 中序, 后序**遍历</div><div class="line"></div><div class="line">比如前序遍历, 它的遍历方法是`根-&gt;左-&gt;右`</div><div class="line"></div><div class="line">所以如果是镜像二叉树的话, 前序遍历的结果应该是相当于原始二叉树的`根-&gt;右-&gt;左`</div><div class="line"></div><div class="line">所以如果</div><div class="line"></div><div class="line">原始二叉树: `根-&gt;左-&gt;右`遍历</div><div class="line">镜像二叉树: `根-&gt;右-&gt;左`遍历</div><div class="line"></div><div class="line">他们分别得到的列表应该是相同的. </div><div class="line">就用这个来判断</div><div class="line"></div><div class="line">提交的时候发现不能完全用教科书上的遍历方法</div><div class="line"></div><div class="line">因为有这个case:</div><div class="line"></div><div class="line">`[1,2,2,null,3,null,3]`</div><div class="line"></div><div class="line">就是这样的树</div></pre></td></tr></table></figure></p>
-<pre><code>1
-</code></pre><p>   /   \<br>  2    2<br> /  \ /  \</p>
-<h1 id="3-3"><a href="#3-3" class="headerlink" title="3 #   3"></a>3 #   3</h1><p>(# == null)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">所以也要把空的子节点记录下来</div><div class="line"></div><div class="line"></div><div class="line">最后A过的python代码如下</div><div class="line"></div><div class="line">```python</div><div class="line"># Definition for a binary tree node.</div><div class="line"># class TreeNode:</div><div class="line">#     def __init__(self, x):</div><div class="line">#         self.val = x</div><div class="line">#         self.left = None</div><div class="line">#         self.right = None</div><div class="line">class Solution:</div><div class="line">    # @param &#123;TreeNode&#125; root</div><div class="line">    # @return &#123;boolean&#125;</div><div class="line">    def isSymmetric(self, root):</div><div class="line">        def preorder_left_first(node):</div><div class="line">            ret=[];</div><div class="line">            if node == None:</div><div class="line">                return [None]</div><div class="line">            ret.append(node.val)</div><div class="line">            ret = ret + preorder_left_first(node.left)</div><div class="line">            ret = ret + preorder_left_first(node.right)</div><div class="line">            return ret</div><div class="line">        def preorder_right_first(node):</div><div class="line">            ret=[];</div><div class="line">            if node == None:</div><div class="line">                return [None]</div><div class="line">            ret.append(node.val)</div><div class="line">            ret = ret + preorder_right_first(node.right)</div><div class="line">            ret = ret + preorder_right_first(node.left)</div><div class="line">            return ret</div><div class="line">        # logic start here</div><div class="line">        if root in [None,[],&#123;&#125;]:</div><div class="line">            return True</div><div class="line">        if (root.left == None and root.right == None):</div><div class="line">            return True</div><div class="line">        if root.left == None or root.right == None:</div><div class="line">            return False</div><div class="line">        left_root = root.left</div><div class="line">        right_root = root.right</div><div class="line">        if left_root.val != right_root.val:</div><div class="line">            return False</div><div class="line">        else:</div><div class="line">            right_ret= preorder_right_first(right_root)</div><div class="line">            left_ret = preorder_left_first(left_root)</div><div class="line">            if right_ret == left_ret:</div><div class="line">                return True</div><div class="line">            else:</div><div class="line">                return False</div></pre></td></tr></table></figure></p>
-</div><footer class="post__foot u-cf"><a href="/2015/06/04/Symmetric-Tree/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-06-02T22:00:00.000Z" class="post__time">June 3, 2015</time><h1 class="post__title"><a href="/2015/06/03/post-order-Traversal-of-btree/">leetcode, 非递归, 实现后序遍历二叉树</a></h1></header><div class="post__main echo"><p>题目:</p>
-<blockquote>
-<p><strong>Binary Tree Postorder Traversal</strong> </p>
-<p>Given a binary tree, return the postorder traversal of its nodes’ values.</p>
-<p>For example:<br>Given binary tree {1,#,2,3},</p>
-<p> 1<br>   \<br>   2<br>   /<br>  3</p>
-<p>return [3,2,1].</p>
-<p>Note: Recursive solution is trivial, could you do it iteratively?</p>
-</blockquote>
-<p>这个问题貌似是一个挺经典的面试题</p>
-<p>先要搞清楚后序遍历是什么</p>
-<blockquote>
-<p>先遍历左节点, 然后右节点, 最后根节点</p>
-</blockquote>
-<p>百度百科里面的递归算法</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> btnode</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> d;</div><div class="line">    <span class="keyword">struct</span> btnode *lchild;</div><div class="line">    <span class="keyword">struct</span> btnode *rchild;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">postrav</span><span class="params">(<span class="keyword">struct</span> btnode *bt)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(bt!=<span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        postrav(bt-&gt;lchild);</div><div class="line">        postrav(bt-&gt;rchild);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,bt-&gt;d);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>思路是这样的. 虽然有点复杂</p>
-<p>有两个堆栈, 一个用来存每个叶子的节点的地址 叫做: <code>pointer_stack</code>,</p>
-<p> 另一个用来存这个节点是否被访问过,叫做 <code>flag_stack</code></p>
-<p>其实两个堆栈的指针都是走的同一个位置…</p>
-<p>把节点存入<code>pointer_stack</code>堆栈的时候, 如果这个节点被访问过的话, <code>flag_stack</code>堆栈会被相应的存入 一个 1</p>
-<p>否则存入 0</p>
-<p>如果没有子节点可以遍历了就弹出堆栈里面的节点继续遍历.</p>
-<p>恩, 于是A过的代码是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.top = <span class="number">-1</span></div><div class="line">        self.stack=[];</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.top  &lt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">else</span>: </div><div class="line">            ret = self.stack[self.top]</div><div class="line">            <span class="keyword">del</span> self.stack[self.top]</div><div class="line">            self.top = self.top - <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> ret</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, x)</span>:</span></div><div class="line">        self.top = self.top + <span class="number">1</span></div><div class="line">        self.stack.append(x)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.top &lt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">peek</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.top &lt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self.stack[self.top]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dump</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">print</span> self.stack , <span class="string">"top:"</span>, self.top</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bottomValue</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.top &lt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self.stack[<span class="number">0</span>]</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param &#123;TreeNode&#125; root</span></div><div class="line">    <span class="comment"># @return &#123;integer[]&#125;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">postorderTraversal</span><span class="params">(self, root)</span>:</span></div><div class="line">        pointer_stack = Stack();</div><div class="line">        flag_stack = Stack();</div><div class="line">        ret_list=[]</div><div class="line">        <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line">        pointer_stack.push(root)</div><div class="line">        flag_stack.push(<span class="number">0</span>)</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">not</span> pointer_stack.isEmpty()):</div><div class="line">            pointer = pointer_stack.pop()</div><div class="line">            flag = flag_stack.pop()</div><div class="line">            <span class="keyword">if</span> (flag == <span class="number">0</span>):</div><div class="line">                <span class="keyword">if</span> pointer.left != <span class="keyword">None</span>:</div><div class="line">                    <span class="comment">#1. if has left child, push current position first</span></div><div class="line">                    flag_stack.push(<span class="number">1</span>) <span class="comment">#has been visited</span></div><div class="line">                    pointer_stack.push(pointer)</div><div class="line">                    <span class="comment">#1.2. if right child != None, push right child</span></div><div class="line">                    <span class="keyword">if</span> pointer.right != <span class="keyword">None</span>:</div><div class="line">                        flag_stack.push(<span class="number">0</span>)</div><div class="line">                        pointer_stack.push(pointer.right)</div><div class="line">                    <span class="comment">#1.3. push left child, due to that, left child will be visited firstly</span></div><div class="line">                    flag_stack.push(<span class="number">0</span>) </div><div class="line">                    pointer_stack.push(pointer.left)</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                <span class="keyword">if</span> pointer.right != <span class="keyword">None</span>:</div><div class="line">                    <span class="comment"># 2. if no left and has right, only push current position</span></div><div class="line">                    flag_stack.push(<span class="number">1</span>) <span class="comment">#has been visited</span></div><div class="line">                    pointer_stack.push(pointer)</div><div class="line">                    <span class="comment"># 2.1 push right child</span></div><div class="line">                    flag_stack.push(<span class="number">0</span>) </div><div class="line">                    pointer_stack.push(pointer.right)</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                <span class="keyword">if</span> (pointer.left == <span class="keyword">None</span> <span class="keyword">and</span> pointer.right == <span class="keyword">None</span>):</div><div class="line">                    ret_list.append(pointer.val);</div><div class="line">            <span class="keyword">elif</span> (flag == <span class="number">1</span>):</div><div class="line">                ret_list.append(pointer.val)</div><div class="line">        <span class="keyword">return</span> ret_list</div></pre></td></tr></table></figure>
-<p>看看百度百科里面的非递归算法</p>
-<p>好像和我的差不多. 只不过它的二叉树的节点里面可以存储一个tag, 标记有没有被访问过</p>
-<p>再<a href="http://blog.chinaunix.net/uid-7897183-id-75493.html" target="_blank" rel="external">在网上看到了另外一个不用堆栈的方法, 就是非递归,非堆栈</a>, </p>
-<p>也是巧妙的构造了一个特殊的可以存储父节点的二叉树节点来做的</p>
-<p>引用:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**************************************************************</span></div><div class="line"> * $ID: PostOrderWalkOfBST.h</div><div class="line"> * $DESC: postorder walk a BST, without stack, no recursion</div><div class="line"> * $AUTHOR: rockins chen</div><div class="line"> * $DATE: Mon Sep 24 23:15:55 CST 2007</div><div class="line"> * $<span class="doctag">BUG:</span> ybc2084@163.com or</div><div class="line"> *        www.dormforce.net/blog/rockins</div><div class="line"> **************************************************************/</div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span>    _POST_ORDER_WALK_OF_BST_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>    _POST_ORDER_WALK_OF_BST_H_</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// BST node definition</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _BST_NODE &#123;</div><div class="line">    <span class="keyword">void</span>    * private_data;        <span class="comment">// store private data</span></div><div class="line">    <span class="keyword">int</span>        key;</div><div class="line">    <span class="keyword">struct</span> _BST_NODE * parent;</div><div class="line">    <span class="keyword">struct</span> _BST_NODE * lchild;</div><div class="line">    <span class="keyword">struct</span> _BST_NODE * rchild;</div><div class="line">&#125; BST_NODE, *PBST_NODE;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// post order walk a BST</span></div><div class="line"><span class="comment">// root denotes the BST</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">PostOrderWalkBST</span><span class="params">(PBST_NODE root)</span></span>;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// find first postorder node of BST</span></div><div class="line"><span class="comment">// root denotes the BST(maybe a subtree)</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">static</span> PBST_NODE <span class="title">FindFirstPostOrderNodeOfBST</span><span class="params">(PBST_NODE root)</span></span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"><span class="comment">/**************************************************************</span></div><div class="line"> * $ID: PostOrderWalkOfBST.c</div><div class="line"> * $DESC: postorder walk a bst, without stack, no recursion</div><div class="line"> * $AUTHOR: rockins chen</div><div class="line"> * $DATE: Mon Sep 24 23:17:03 CST 2007</div><div class="line"> * $<span class="doctag">BUG:</span> ybc2084@163.com or</div><div class="line"> *        www.dormforce.net/blog/rockins</div><div class="line"> **************************************************************/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"PostOrderWalkOfBST.h"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span></span></div><div class="line"><span class="title">PostOrderWalkBST</span><span class="params">(PBST_NODE root)</span></div><div class="line">&#123;</div><div class="line">    PBST_NODE curr_node;</div><div class="line">    PBST_NODE next_node;</div><div class="line">    </div><div class="line">    <span class="comment">// fist go to the first postorder node of BST</span></div><div class="line">    curr_node = FindFirstPostOrderNodeOfBST(root);</div><div class="line">    </div><div class="line">    <span class="comment">// if current node's parent is NULL, then curr_node must be root of BST, finished</span></div><div class="line">    <span class="keyword">while</span> (!curr_node-&gt;parent) &#123;</div><div class="line">    </div><div class="line">        <span class="comment">// if current node is parent node's left child and parent has no right child,</span></div><div class="line">        <span class="comment">// then parent is next node to visit</span></div><div class="line">        <span class="keyword">if</span> (curr_node-&gt;parent-&gt;lchild == curr_node &amp;&amp;</div><div class="line">            !curr_node-&gt;parent-&gt;rchild)</div><div class="line">            next_node = curr_node-&gt;parent;</div><div class="line">            </div><div class="line">        <span class="comment">// if current node is parent node's left child and parent has right child,</span></div><div class="line">        <span class="comment">// then the fist postorder node of parent's right subtree is next node to visit</span></div><div class="line">        <span class="keyword">if</span> (curr_node-&gt;parent-&gt;lchild == curr_node &amp;&amp;</div><div class="line">            curr_node-&gt;parent-&gt;rchild)</div><div class="line">            next_node = FindFirstPostOrderNodeOfBST(</div><div class="line">                            curr_node-&gt;parent-&gt;rchild);</div><div class="line">        </div><div class="line">        <span class="comment">// if current node is parent node's right child(implicitly indicate parent node is not null),</span></div><div class="line">        <span class="comment">// then parent node is just next node</span></div><div class="line">        <span class="keyword">if</span> (curr_node-&gt;parent-&gt;rchild == curr_node)</div><div class="line">            next_node = curr_node-&gt;parent;</div><div class="line">        </div><div class="line">        <span class="comment">//</span></div><div class="line">        <span class="comment">// <span class="doctag">XXX:</span> now visit curr_node, if necessary</span></div><div class="line">        <span class="comment">//</span></div><div class="line">        VisitNode(curr_node);</div><div class="line">        </div><div class="line">        <span class="comment">// step</span></div><div class="line">        curr_node = next_node;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// find fist postorder node of BST</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">static</span> PBST_NODE</span></div><div class="line"><span class="title">FindFirstPostOrderNodeOfBST</span><span class="params">(PBST_NODE root)</span></div><div class="line">&#123;</div><div class="line">    PBST_NODE pNode;</div><div class="line">    </div><div class="line">    pNode = root;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> (pNode-&gt;lchild || pNode-&gt;rchild) &#123;</div><div class="line">        <span class="keyword">if</span> (pNode-&gt;lchild)</div><div class="line">            pNode = pNode-&gt;lchild;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (pNode-&gt;rchild)</div><div class="line">            pNode = pNode-&gt;rchild;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> (pNode);</div><div class="line">&#125;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// virtual visiting pNode, do nothing</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></div><div class="line"><span class="title">VisitNode</span><span class="params">(PBST_NODE pNode)</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</div><footer class="post__foot u-cf"><a href="/2015/06/03/post-order-Traversal-of-btree/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-05-31T22:00:00.000Z" class="post__time">June 1, 2015</time><h1 class="post__title"><a href="/2015/06/01/about-power-algorithm/">leetcode, 二分求幂实现pow函数</a></h1></header><div class="post__main echo"><p>###实现二分求幂</p>
-<p>题目:</p>
-<blockquote>
-<p>Pow(x, n) </p>
-<p>Implement pow(x, n).</p>
-</blockquote>
-<p>简单粗暴的只用实现求幂函数pow(x,n)</p>
-<p>其实网上有一篇挺好的文章:</p>
-<p>[<a href="http://blog.jobbole.com/74468/" target="_blank" rel="external">http://blog.jobbole.com/74468/</a>]</p>
-<p>英文版:</p>
-<p>[<a href="http://videlalvaro.github.io/2014/03/the-power-algorithm.html" target="_blank" rel="external">http://videlalvaro.github.io/2014/03/the-power-algorithm.html</a>]</p>
-<p>A过的代码如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myPow</span><span class="params">(self, x, n)</span>:</span></div><div class="line">		y=<span class="number">1</span></div><div class="line">		<span class="keyword">if</span> n &lt; <span class="number">0</span>:</div><div class="line">			index = -n</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			index = n</div><div class="line">		<span class="keyword">while</span> (<span class="number">1</span>):</div><div class="line">			ret = index % <span class="number">2</span> </div><div class="line">			<span class="keyword">if</span> ret == <span class="number">1</span>:</div><div class="line">				y *= x</div><div class="line">			index /= <span class="number">2</span></div><div class="line">			<span class="keyword">if</span> index==<span class="number">0</span>:</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			x *= x</div><div class="line">		<span class="keyword">if</span> n &lt; <span class="number">0</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">1</span>/y</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">return</span> y</div></pre></td></tr></table></figure>
-<p>…</p>
-<p>刚刚躺床上玩了半个小时手机归来.</p>
-<p>试图自己阐述一遍思路:</p>
-<p>原理是这样的. 比如2的6次方, 相当于3个2的2次方相乘, 或者是一个2的4次方乘以2的平方.</p>
-<p>所以就可以以平方 为单位把求幂的过程分解</p>
-<p>假设求x的y次方,<br>用<code>index</code> 表示 y/2 之后的整数部分的值<br>用<code>mod</code> 表示y/2 的余数</p>
-<p>那么一开始的算式是:</p>
-<pre><code>result = x^y
-</code></pre><p>提取一个平方</p>
-<pre><code>result = x^2*(x^(y/2)*x^mod) = x^2*x^(y/2)*(x^2)*x^mod
-</code></pre><p>再次提取一个平方</p>
-<pre><code>result = x^2*x^2*(x^(y/(2*2))*x^mod)*(x^2)*x^mod
-       = (x^2)^2*x^(y/(2^2))*(x^2)^2*x^mod*x^2*x^mod
-</code></pre><p>这里面就有递归迭代的意思了<br>, 所以呢. 无节操引用个别人的用递归实现的方法</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution </div><div class="line">&#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">   <span class="function"><span class="keyword">double</span> <span class="title">pow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">int</span> index = n;</div><div class="line">       <span class="keyword">if</span> (n == <span class="number">0</span>)</div><div class="line">           <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">       <span class="keyword">if</span> (n == <span class="number">1</span>)</div><div class="line">           <span class="keyword">return</span> x;</div><div class="line">       <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</div><div class="line">           index = -n;</div><div class="line">       <span class="keyword">double</span> rev = index%<span class="number">2</span>==<span class="number">0</span> ? <span class="built_in">pow</span>(x*x, index&gt;&gt;<span class="number">1</span>) : <span class="built_in">pow</span>(x*x, index&gt;&gt;<span class="number">1</span>)*x;</div><div class="line">       <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</div><div class="line">           <span class="keyword">return</span> <span class="number">1</span> / rev;</div><div class="line">       <span class="keyword">else</span></div><div class="line">           <span class="keyword">return</span> rev;</div><div class="line">   &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>另外既然是二分查找, 就可以看到二进制数和二分查找的相关性, </p>
-<p>其实这个查找过程就和求二进制数是一样的</p>
-<p>不断的除以二然后记录余数…直到商为0</p>
-<p>所以可以用遍历幂的二进制形式的方法来解答, 继续盗代码</p>
-<p>[<a href="http://blog.csdn.net/fengbingyang/article/details/12236121" target="_blank" rel="external">http://blog.csdn.net/fengbingyang/article/details/12236121</a>]</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">my_pow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(n==<span class="number">0</span>)</div><div class="line">        	<span class="keyword">return</span> <span class="number">1.0</span>;</div><div class="line">	<span class="keyword">if</span>(n&lt;<span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">1.0</span> / <span class="built_in">pow</span>(x,-n);</div><div class="line">	<span class="keyword">double</span> ans = <span class="number">1.0</span> ;</div><div class="line">	<span class="keyword">for</span>(; n&gt;<span class="number">0</span>; x *= x, n&gt;&gt;=<span class="number">1</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(n&amp;<span class="number">1</span>&gt;<span class="number">0</span>)</div><div class="line">			ans *= x;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>恩关于应用呢.</p>
-<p>在第一篇引用的文章里面有写, 可以做方便的repeat函数用, 因为求幂运算就是不断重复一个</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">function_foo</span><span class="params">(a,b)</span>:</span></div><div class="line">	<span class="keyword">return</span> a*b</div></pre></td></tr></table></figure>
-<p>的运算, 只不过传进去的是 <code>function_foo(x,x)</code></p>
-<p>所以这样的算法可以降低所有repeat函数的时间复杂度到O(log(n))</p>
-</div><footer class="post__foot u-cf"><a href="/2015/06/01/about-power-algorithm/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-05-27T22:00:00.000Z" class="post__time">May 28, 2015</time><h1 class="post__title"><a href="/2015/05/28/count-prime/">leetcode, count prime数素数</a></h1></header><div class="post__main echo"><p>在看之前没写完的一题</p>
-<blockquote>
-<p>Count Primes </p>
-<p>Description:<br>Count the number of prime numbers less than a non-negative number, n.</p>
-<p>Credits:<br>Special thanks to @mithmatt for adding this problem and creating all test cases.</p>
-</blockquote>
-<p>自己先先写了一个解法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">countPrimes</span><span class="params">(self, n)</span>:</span></div><div class="line">        i=<span class="number">0</span></div><div class="line">        flag=<span class="number">0</span></div><div class="line">        <span class="keyword">for</span> val <span class="keyword">in</span> range(<span class="number">0</span>,n):</div><div class="line">            <span class="keyword">if</span> self.is_prime(val):</div><div class="line">                i=i+<span class="number">1</span></div><div class="line">        <span class="keyword">return</span> i;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(self,n)</span>:</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>, n):</div><div class="line">            <span class="keyword">if</span> n % i == <span class="number">0</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
-<p>这样的话会超时, 因为时间复杂度是O(n2)<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Submission Result: Time Limit Exceeded</div><div class="line">       Last executed input:</div><div class="line">               	499979</div></pre></td></tr></table></figure></p>
-<p> 听了同事的意见, 用求根号来解决</p>
-<blockquote>
-<p>如果n不是素数 n=a<em>b (n&gt;a&gt;1 n&gt;b&gt;1)<br>那么 a 和 b一定有一个不超过根号n [否则 n=a</em>b&gt;(根号n)*(根号n)=n,矛盾]<br>于是只要除到根号n就可以判断是否是素数</p>
-</blockquote>
-<p>后来google了一个更加棒的</p>
-<p>(<a href="http://bookshadow.com/weblog/2015/04/27/leetcode-count-primes/" target="_blank" rel="external">http://bookshadow.com/weblog/2015/04/27/leetcode-count-primes/</a>)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param &#123;integer&#125; n</span></div><div class="line">    <span class="comment"># @return &#123;integer&#125;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">countPrimes</span><span class="params">(self, n)</span>:</span></div><div class="line">        isPrime = [<span class="keyword">True</span>] * max(n, <span class="number">2</span>)</div><div class="line">        isPrime[<span class="number">0</span>], isPrime[<span class="number">1</span>] = <span class="keyword">False</span>, <span class="keyword">False</span></div><div class="line">        x = <span class="number">2</span></div><div class="line">        <span class="keyword">while</span> x * x &lt; n:</div><div class="line">            <span class="keyword">if</span> isPrime[x]:</div><div class="line">                p = x * x</div><div class="line">                <span class="keyword">while</span> p &lt; n:</div><div class="line">                    isPrime[p] = <span class="keyword">False</span></div><div class="line">                    p += x</div><div class="line">            x += <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> sum(isPrime)</div></pre></td></tr></table></figure>
-<p>他结合了根号 和 那个筛选法, </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span> x*x &lt; n:</div></pre></td></tr></table></figure>
-<p>这一句限制了他在根号内取值, 因为最多x取到 sqrt(n)</p>
-<p>然后用一个列表 存储了 筛选的结果</p>
-</div><footer class="post__foot u-cf"><a href="/2015/05/28/count-prime/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-05-27T22:00:00.000Z" class="post__time">May 28, 2015</time><h1 class="post__title"><a href="/2015/05/28/deleteDuplicates/">leetcode, deleteDuplicates删除重复链表</a></h1></header><div class="post__main echo"><p>问题</p>
-<blockquote>
-<p>Remove Duplicates from Sorted List </p>
-<p>Given a sorted linked list, delete all duplicates such that each element appear only once.</p>
-<p>For example,</p>
-<p>Given 1-&gt;1-&gt;2, return 1-&gt;2.</p>
-<p>Given 1-&gt;1-&gt;2-&gt;3-&gt;3, return 1-&gt;2-&gt;3. </p>
-</blockquote>
-<p>这题终于是自己搞定的了</p>
-<p>一开始的时候是觉得这就是个简单的链表所以一次遍历把所有的重复的链表接上就好了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for singly-linked list.</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param &#123;ListNode&#125; head</span></div><div class="line">    <span class="comment"># @return &#123;ListNode&#125;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(self, head)</span>:</span></div><div class="line">        <span class="keyword">if</span> head == <span class="keyword">None</span> <span class="keyword">or</span> head == [] <span class="keyword">or</span> head == &#123;&#125;:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        tmp=head</div><div class="line">        <span class="keyword">while</span> (tmp.next != <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">if</span> tmp.val == tmp.next.val:</div><div class="line">                tmp.next = tmp.next.next</div><div class="line">            <span class="keyword">if</span> tmp.next != <span class="keyword">None</span>:</div><div class="line">                tmp=tmp.next</div><div class="line">        <span class="keyword">return</span> head</div></pre></td></tr></table></figure>
-<p>后来发现在[1,1,1,1,1]<br>这种重复数据的case里面会出错</p>
-<p>于是重复调用了自己, 然后这样就能消除多个重复值的影响, </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for singly-linked list.</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param &#123;ListNode&#125; head</span></div><div class="line">    <span class="comment"># @return &#123;ListNode&#125;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(self, head)</span>:</span></div><div class="line">        <span class="keyword">if</span> head == <span class="keyword">None</span> <span class="keyword">or</span> head == [] <span class="keyword">or</span> head == &#123;&#125;:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        tmp=head</div><div class="line">        <span class="keyword">while</span> (tmp.next != <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">if</span> tmp.val == tmp.next.val:</div><div class="line">                tmp.next = tmp.next.next</div><div class="line">                self.deleteDuplicates(tmp)</div><div class="line">            <span class="keyword">if</span> tmp.next != <span class="keyword">None</span>:</div><div class="line">                tmp=tmp.next</div><div class="line">        <span class="keyword">return</span> head</div></pre></td></tr></table></figure>
-<p>但是这样的时间效率好低啊…</p>
-<p>时间复杂度应该是O(n2), 如果没算错的话</p>
-<p>看看别人的解法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplicates</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line"> </div><div class="line">        ListNode prev = head;    </div><div class="line">        ListNode p = head.next;</div><div class="line"> </div><div class="line">        <span class="keyword">while</span>(p != <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(p.val == prev.val)&#123;</div><div class="line">                prev.next = p.next;</div><div class="line">                p = p.next;</div><div class="line">                <span class="comment">//no change prev</span></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                prev = p;</div><div class="line">                p = p.next; </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>老子写的真垃圾…</p>
-<p>直接通过判断是不是一样的决定指针走不走不就行了…</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for singly-linked list.</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param &#123;ListNode&#125; head</span></div><div class="line">    <span class="comment"># @return &#123;ListNode&#125;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(self, head)</span>:</span></div><div class="line">        <span class="keyword">if</span> head == <span class="keyword">None</span> <span class="keyword">or</span> head == [] <span class="keyword">or</span> head == &#123;&#125;:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        tmp=head</div><div class="line">        <span class="keyword">while</span> (tmp.next != <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">if</span> tmp.val == tmp.next.val:</div><div class="line">                tmp.next = tmp.next.next</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                tmp=tmp.next</div><div class="line">        <span class="keyword">return</span> head</div></pre></td></tr></table></figure>
-<p>运行时间一下从快700ms降到了80多ms</p>
-<p>!!!!</p>
-</div><footer class="post__foot u-cf"><a href="/2015/05/28/deleteDuplicates/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="The blog of myself">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PIPICOLD">
+<meta property="og:url" content="http://pipicold.github.com/categories/leetcode/index.html">
+<meta property="og:site_name" content="PIPICOLD">
+<meta property="og:description" content="The blog of myself">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PIPICOLD">
+<meta name="twitter:description" content="The blog of myself">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pipicold.github.com/categories/leetcode/"/>
+
+
+  <title> Kategorie: leetcode | PIPICOLD </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">PIPICOLD</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Wish I can finish my every year's plan</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        leetcode
+        <small>Kategorie</small>
+      </h2>
+    </div>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2015/06/04/Symmetric-Tree/" itemprop="url">
+              
+                <span itemprop="name">leetcode, 判断对称二叉树</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2015-06-04T00:00:00+02:00"
+              content="2015-06-04" >
+          06-04
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2015/06/03/post-order-Traversal-of-btree/" itemprop="url">
+              
+                <span itemprop="name">leetcode, 非递归, 实现后序遍历二叉树</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2015-06-03T00:00:00+02:00"
+              content="2015-06-03" >
+          06-03
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2015/06/01/about-power-algorithm/" itemprop="url">
+              
+                <span itemprop="name">leetcode, 二分求幂实现pow函数</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2015-06-01T00:00:00+02:00"
+              content="2015-06-01" >
+          06-01
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2015/05/28/count-prime/" itemprop="url">
+              
+                <span itemprop="name">leetcode, count prime数素数</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2015-05-28T00:00:00+02:00"
+              content="2015-05-28" >
+          05-28
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2015/05/28/deleteDuplicates/" itemprop="url">
+              
+                <span itemprop="name">leetcode, deleteDuplicates删除重复链表</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2015-05-28T00:00:00+02:00"
+              content="2015-05-28" >
+          05-28
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Dongmin Wu" />
+          <p class="site-author-name" itemprop="name">Dongmin Wu</p>
+          <p class="site-description motion-element" itemprop="description">The blog of myself</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongmin Wu</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

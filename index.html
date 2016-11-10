@@ -1,4 +1,310 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="The blog of myself"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2016-03-16T23:00:00.000Z" class="post__time">March 17, 2016</time><h1 class="post__title"><a href="/2016/03/17/Linux-Device-Tree-Study/">Some notes about Linux Device Tree</a></h1></header><div class="post__main echo"><h1 id="Part-1-Kernel-相关文档"><a href="#Part-1-Kernel-相关文档" class="headerlink" title="Part 1 Kernel 相关文档"></a>Part 1 Kernel 相关文档</h1><p>找到kernel的这个文档:</p>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="The blog of myself">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PIPICOLD">
+<meta property="og:url" content="http://pipicold.github.com/index.html">
+<meta property="og:site_name" content="PIPICOLD">
+<meta property="og:description" content="The blog of myself">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PIPICOLD">
+<meta name="twitter:description" content="The blog of myself">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pipicold.github.com/"/>
+
+
+  <title> PIPICOLD </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">PIPICOLD</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Wish I can finish my every year's plan</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/17/Linux-Device-Tree-Study/" itemprop="url">
+                  Some notes about Linux Device Tree
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-03-17T00:00:00+01:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Part-1-Kernel-相关文档"><a href="#Part-1-Kernel-相关文档" class="headerlink" title="Part 1 Kernel 相关文档"></a>Part 1 Kernel 相关文档</h1><p>找到kernel的这个文档:</p>
 <p><a href="">https://www.kernel.org/doc/Documentation/devicetree/bindings/mtd/partition.txt</a></p>
 <p>这里面说的很清楚怎么给nand分区</p>
 <h1 id="Part-2-关于-address-cells-size-cells-是什么意思"><a href="#Part-2-关于-address-cells-size-cells-是什么意思" class="headerlink" title="Part 2 关于 address-cells, size-cells 是什么意思"></a>Part 2 关于 address-cells, size-cells 是什么意思</h1><p>这得从 <code>reg</code> 字串开始说起,</p>
@@ -25,7 +331,119 @@
 <p>这个是基于PowerPC的一个bootloader啦</p>
 <h1 id="Part-3-博通的NAND的device-tree的描述格式"><a href="#Part-3-博通的NAND的device-tree的描述格式" class="headerlink" title="Part 3 博通的NAND的device tree的描述格式"></a>Part 3 博通的NAND的device tree的描述格式</h1><p>在这里, 讲的很清楚, 连例子都有</p>
 <p><a href="">https://www.kernel.org/doc/Documentation/devicetree/bindings/mtd/brcm,brcmnand.txt</a></p>
-</div><footer class="post__foot u-cf"><a href="/2016/03/17/Linux-Device-Tree-Study/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2016-03-05T23:00:00.000Z" class="post__time">March 6, 2016</time><h1 class="post__title"><a href="/2016/03/06/Wince-Jenkins-Building/">Using Jenkins to Build Wince</a></h1></header><div class="post__main echo"><h1 id="Part-1-历史由来"><a href="#Part-1-历史由来" class="headerlink" title="Part 1 历史由来"></a>Part 1 历史由来</h1><p>好了, 这次让我们说中文, 就不瞎掰扯自己的垃圾英语水平了.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/06/Wince-Jenkins-Building/" itemprop="url">
+                  Using Jenkins to Build Wince
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T00:00:00+01:00" content="2016-03-06">
+              2016-03-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Wince/" itemprop="url" rel="index">
+                    <span itemprop="name">Wince</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Part-1-历史由来"><a href="#Part-1-历史由来" class="headerlink" title="Part 1 历史由来"></a>Part 1 历史由来</h1><p>好了, 这次让我们说中文, 就不瞎掰扯自己的垃圾英语水平了.</p>
 <p>公司项目里面用的是Windows CE 5.0 嵌入式系统, 这是个非常老旧的操作系统, 没记错的话整个系统只能有32个用户进程, 每个进程还不能完整使用全部的虚拟内存地址.</p>
 <p>关于这套系统: <a href="">https://en.wikipedia.org/wiki/Windows_CE</a></p>
 <p>这套古老的系统我维护了一年了, 工作是维护HAL, 也就是硬件外设层的代码.</p>
@@ -103,7 +521,119 @@
 <h1 id="Part-7-SSH-的问题"><a href="#Part-7-SSH-的问题" class="headerlink" title="Part 7 SSH 的问题"></a>Part 7 SSH 的问题</h1><p>这个问题是在尝试吧 GIT 仓库管理的部分集成在 <code>auto.py</code> 里面的时候遇到的, 虽然现在把这一块的管理移出到使用Jenkins插件了, 但是还是可以记录一下.</p>
 <p>ssh实现免密码登陆的话, 需要把私钥存在 <code>~/.ssh/id_rsa</code> 文件里面, 于是我可以用Git bash里面的小型的cygwin来运行这个 <code>auto.py</code> 并且把准备好的私钥文件copy到<code>~/.ssh/</code> 里面就好.</p>
 <p>然后在Jenkins的 Jenkins设置里面, 把shell的路径指定到 <code>C:\Program Files\Git\bin\bash.exe</code> 也就是GIT bash的可执行文件, 这样Jenkins在执行shell 命令的时候就会调用我们配置过SSH 私钥的Terminal了.</p>
-</div><footer class="post__foot u-cf"><a href="/2016/03/06/Wince-Jenkins-Building/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2016-03-04T23:00:00.000Z" class="post__time">March 5, 2016</time><h1 class="post__title"><a href="/2016/03/05/Study-React/">Study Notes of React Tutorial</a></h1></header><div class="post__main echo"><blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/05/Study-React/" itemprop="url">
+                  Study Notes of React Tutorial
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T00:00:00+01:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
 <p>The Link of React Tutorial: <a href="http://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">http://facebook.github.io/react/docs/tutorial.html</a></p>
 </blockquote>
 <p>Above is the tutorial which told me that I need to setted up a node.js server</p>
@@ -189,7 +719,119 @@
 <p>also, I was not so familir with the “function” of Javascript, I should learn about it</p>
 <p>It is so tired for me, because it is already 1.30 am now…I must go to bed…</p>
 <p>There is an extension for debuging React, on chrome.</p>
-</div><footer class="post__foot u-cf"><a href="/2016/03/05/Study-React/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-06-17T22:00:00.000Z" class="post__time">June 18, 2015</time><h1 class="post__title"><a href="/2015/06/18/Nor-Flash-Learning/">学习一下norflash</a></h1></header><div class="post__main echo"><p>最近公司项目遇到了两个关于Nor Flash的问题, 于是就学习了一下NorFlash是怎么操作的.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/18/Nor-Flash-Learning/" itemprop="url">
+                  学习一下norflash
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-06-18T00:00:00+02:00" content="2015-06-18">
+              2015-06-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Embedded/" itemprop="url" rel="index">
+                    <span itemprop="name">Embedded</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近公司项目遇到了两个关于Nor Flash的问题, 于是就学习了一下NorFlash是怎么操作的.</p>
 <p>项目的平台是博通(boardcom)的, 不过应该nor的操作是通用而相似的.</p>
 <p>首先是找了一个特别好的文章 ===&gt; <a href="http://wiki.dzsc.com/info/5353.html" target="_blank" rel="external">Nor Flash</a></p>
 <p>文章讲的很清楚, 接下来讲下遇到的问题</p>
@@ -206,7 +848,100 @@
 <p>然后还涉及到一个命令集的事情, 其实就是Nor 不仅仅有CFI命令, 还有自己的比如读数据, 写数据, 擦除数据的时候的指令集</p>
 <p>之前提到的文章<a href="http://wiki.dzsc.com/info/5353.html" target="_blank" rel="external">Nor Flash</a>里面有详细的说法.</p>
 <p>ok that is all</p>
-</div><footer class="post__foot u-cf"><a href="/2015/06/18/Nor-Flash-Learning/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-06-06T22:00:00.000Z" class="post__time">June 7, 2015</time><h1 class="post__title"><a href="/2015/06/07/Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/"></a></h1></header><div class="post__main echo"><p>题目: </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/07/Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" itemprop="url">
+                  Unbenannt
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-06-07T00:00:00+02:00" content="2015-06-07">
+              2015-06-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>题目: </p>
 <blockquote>
 <p><strong>Construct Binary Tree from Preorder and Inorder Traversal</strong></p>
 <p>Given preorder and inorder traversal of a tree, construct the binary tree.</p>
@@ -261,7 +996,119 @@
 <p>因为运行时间竟然到了916ms, 平均水平我觉得应该是200ms左右…</p>
 <p>我的代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildTree</span><span class="params">(self, preorder, inorder)</span>:</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">hasZero</span><span class="params">(direct,search_list, index)</span>:</span></div><div class="line">            pointer= index</div><div class="line">            <span class="keyword">if</span> direct == <span class="string">"left"</span>:</div><div class="line">                <span class="keyword">if</span> index &lt;= <span class="number">0</span>:</div><div class="line">                    <span class="comment"># print "left False"</span></div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                pointer -= <span class="number">1</span></div><div class="line">                <span class="keyword">while</span> (pointer &gt;= <span class="number">0</span>):</div><div class="line">                    <span class="keyword">if</span> (search_list[pointer] == <span class="number">1</span> <span class="keyword">and</span> pointer &lt; index <span class="number">-1</span>):</div><div class="line">                        <span class="comment"># print "left True"</span></div><div class="line">                        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">                    <span class="keyword">elif</span> (search_list[pointer] == <span class="number">1</span> <span class="keyword">and</span> pointer &gt;= index <span class="number">-1</span>):</div><div class="line">                        <span class="comment"># print "left False"</span></div><div class="line">                        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                    pointer -= <span class="number">1</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="comment"># print "left True"</span></div><div class="line">                    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">if</span> direct == <span class="string">"right"</span>:</div><div class="line">                <span class="keyword">if</span> index &gt;= len(search_list)<span class="number">-1</span>:</div><div class="line">                    <span class="comment"># print "right False"</span></div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                pointer += <span class="number">1</span></div><div class="line">                <span class="keyword">while</span> (pointer &lt;= len(search_list)<span class="number">-1</span>):</div><div class="line">                    <span class="comment"># print pointer</span></div><div class="line">                    <span class="keyword">if</span> (search_list[pointer] == <span class="number">1</span> <span class="keyword">and</span> pointer &gt; index +<span class="number">1</span>):</div><div class="line">                        <span class="comment"># print "right True"</span></div><div class="line">                        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">                    <span class="keyword">if</span> (search_list[pointer] == <span class="number">1</span> <span class="keyword">and</span> pointer &lt;= index +<span class="number">1</span>):</div><div class="line">                        <span class="comment"># print "right False"</span></div><div class="line">                        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                    pointer += <span class="number">1</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="comment"># print "right True"</span></div><div class="line">                    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">                    </div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">recursive</span><span class="params">(pre_visited, in_visited, preorder, inorder, current_node, pre_index)</span>:</span></div><div class="line">            in_index = inorder.index(preorder[pre_index])</div><div class="line">        <span class="comment">#    if pre_index &gt;= len(preorder)+1:</span></div><div class="line">                <span class="comment">#return None</span></div><div class="line">            pre_visited[pre_index] = <span class="number">1</span></div><div class="line">            in_visited[in_index] = <span class="number">1</span></div><div class="line">            current_node.val = preorder[pre_index] </div><div class="line">            <span class="comment"># print "recursive[", pre_index,"]:in_visited", in_visited, ":pre_visited:" ,pre_visited</span></div><div class="line">            <span class="keyword">if</span> hasZero(<span class="string">"left"</span>, in_visited, in_index):</div><div class="line">                <span class="comment">#there are some un-visited nodes left</span></div><div class="line">                <span class="keyword">try</span>:</div><div class="line">                    next_index = pre_visited.index(<span class="number">0</span>)</div><div class="line">                <span class="keyword">except</span> ValueError:</div><div class="line">                    <span class="keyword">assert</span>(<span class="keyword">True</span>)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="comment"># print "[",pre_index,"] -&gt; left"</span></div><div class="line">                    current_node.left = TreeNode(<span class="keyword">None</span>)</div><div class="line">                    recursive(pre_visited,in_visited,preorder,inorder,current_node.left,next_index)</div><div class="line">            <span class="keyword">if</span> hasZero(<span class="string">"right"</span>, in_visited, in_index):</div><div class="line">                <span class="comment">#there are some un-visited nodes right</span></div><div class="line">                <span class="keyword">try</span>:</div><div class="line">                    next_index = pre_visited.index(<span class="number">0</span>)</div><div class="line">                <span class="keyword">except</span> ValueError:</div><div class="line">                    <span class="keyword">assert</span>(<span class="keyword">True</span>)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="comment"># print "[",pre_index,"] -&gt; right"</span></div><div class="line">                    current_node.right = TreeNode(<span class="keyword">None</span>)</div><div class="line">                    recursive(pre_visited,in_visited,preorder,inorder,current_node.right,next_index)</div><div class="line">            <span class="comment"># print "leaf.val", current_node.val</span></div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">if</span> inorder <span class="keyword">in</span>  [<span class="keyword">None</span>, [], &#123;&#125;]:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">if</span> preorder <span class="keyword">in</span>  [<span class="keyword">None</span>, [], &#123;&#125;]:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        root_node = TreeNode(<span class="keyword">None</span>)</div><div class="line">        pre_visited = [<span class="number">0</span>]*len(preorder)</div><div class="line">        in_visited = [<span class="number">0</span>]*len(inorder)</div><div class="line">        recursive(pre_visited,in_visited,preorder,inorder,root_node,<span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> root_node</div></pre></td></tr></table></figure>
-</div><footer class="post__foot u-cf"><a href="/2015/06/07/Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-06-03T22:00:00.000Z" class="post__time">June 4, 2015</time><h1 class="post__title"><a href="/2015/06/04/Symmetric-Tree/">leetcode, 判断对称二叉树</a></h1></header><div class="post__main echo"><p> 题目:</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/04/Symmetric-Tree/" itemprop="url">
+                  leetcode, 判断对称二叉树
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-06-04T00:00:00+02:00" content="2015-06-04">
+              2015-06-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 题目:</p>
 <blockquote>
 <p><strong>Symmetric Tree</strong></p>
 <p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
@@ -274,7 +1121,119 @@
 <pre><code>1
 </code></pre><p>   /   \<br>  2    2<br> /  \ /  \</p>
 <h1 id="3-3"><a href="#3-3" class="headerlink" title="3 #   3"></a>3 #   3</h1><p>(# == null)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">所以也要把空的子节点记录下来</div><div class="line"></div><div class="line"></div><div class="line">最后A过的python代码如下</div><div class="line"></div><div class="line">```python</div><div class="line"># Definition for a binary tree node.</div><div class="line"># class TreeNode:</div><div class="line">#     def __init__(self, x):</div><div class="line">#         self.val = x</div><div class="line">#         self.left = None</div><div class="line">#         self.right = None</div><div class="line">class Solution:</div><div class="line">    # @param &#123;TreeNode&#125; root</div><div class="line">    # @return &#123;boolean&#125;</div><div class="line">    def isSymmetric(self, root):</div><div class="line">        def preorder_left_first(node):</div><div class="line">            ret=[];</div><div class="line">            if node == None:</div><div class="line">                return [None]</div><div class="line">            ret.append(node.val)</div><div class="line">            ret = ret + preorder_left_first(node.left)</div><div class="line">            ret = ret + preorder_left_first(node.right)</div><div class="line">            return ret</div><div class="line">        def preorder_right_first(node):</div><div class="line">            ret=[];</div><div class="line">            if node == None:</div><div class="line">                return [None]</div><div class="line">            ret.append(node.val)</div><div class="line">            ret = ret + preorder_right_first(node.right)</div><div class="line">            ret = ret + preorder_right_first(node.left)</div><div class="line">            return ret</div><div class="line">        # logic start here</div><div class="line">        if root in [None,[],&#123;&#125;]:</div><div class="line">            return True</div><div class="line">        if (root.left == None and root.right == None):</div><div class="line">            return True</div><div class="line">        if root.left == None or root.right == None:</div><div class="line">            return False</div><div class="line">        left_root = root.left</div><div class="line">        right_root = root.right</div><div class="line">        if left_root.val != right_root.val:</div><div class="line">            return False</div><div class="line">        else:</div><div class="line">            right_ret= preorder_right_first(right_root)</div><div class="line">            left_ret = preorder_left_first(left_root)</div><div class="line">            if right_ret == left_ret:</div><div class="line">                return True</div><div class="line">            else:</div><div class="line">                return False</div></pre></td></tr></table></figure></p>
-</div><footer class="post__foot u-cf"><a href="/2015/06/04/Symmetric-Tree/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-06-02T22:00:00.000Z" class="post__time">June 3, 2015</time><h1 class="post__title"><a href="/2015/06/03/post-order-Traversal-of-btree/">leetcode, 非递归, 实现后序遍历二叉树</a></h1></header><div class="post__main echo"><p>题目:</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/03/post-order-Traversal-of-btree/" itemprop="url">
+                  leetcode, 非递归, 实现后序遍历二叉树
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-06-03T00:00:00+02:00" content="2015-06-03">
+              2015-06-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>题目:</p>
 <blockquote>
 <p><strong>Binary Tree Postorder Traversal</strong> </p>
 <p>Given a binary tree, return the postorder traversal of its nodes’ values.</p>
@@ -305,7 +1264,119 @@
 <p>也是巧妙的构造了一个特殊的可以存储父节点的二叉树节点来做的</p>
 <p>引用:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**************************************************************</span></div><div class="line"> * $ID: PostOrderWalkOfBST.h</div><div class="line"> * $DESC: postorder walk a BST, without stack, no recursion</div><div class="line"> * $AUTHOR: rockins chen</div><div class="line"> * $DATE: Mon Sep 24 23:15:55 CST 2007</div><div class="line"> * $<span class="doctag">BUG:</span> ybc2084@163.com or</div><div class="line"> *        www.dormforce.net/blog/rockins</div><div class="line"> **************************************************************/</div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span>    _POST_ORDER_WALK_OF_BST_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>    _POST_ORDER_WALK_OF_BST_H_</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// BST node definition</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _BST_NODE &#123;</div><div class="line">    <span class="keyword">void</span>    * private_data;        <span class="comment">// store private data</span></div><div class="line">    <span class="keyword">int</span>        key;</div><div class="line">    <span class="keyword">struct</span> _BST_NODE * parent;</div><div class="line">    <span class="keyword">struct</span> _BST_NODE * lchild;</div><div class="line">    <span class="keyword">struct</span> _BST_NODE * rchild;</div><div class="line">&#125; BST_NODE, *PBST_NODE;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// post order walk a BST</span></div><div class="line"><span class="comment">// root denotes the BST</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">PostOrderWalkBST</span><span class="params">(PBST_NODE root)</span></span>;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// find first postorder node of BST</span></div><div class="line"><span class="comment">// root denotes the BST(maybe a subtree)</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">static</span> PBST_NODE <span class="title">FindFirstPostOrderNodeOfBST</span><span class="params">(PBST_NODE root)</span></span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"><span class="comment">/**************************************************************</span></div><div class="line"> * $ID: PostOrderWalkOfBST.c</div><div class="line"> * $DESC: postorder walk a bst, without stack, no recursion</div><div class="line"> * $AUTHOR: rockins chen</div><div class="line"> * $DATE: Mon Sep 24 23:17:03 CST 2007</div><div class="line"> * $<span class="doctag">BUG:</span> ybc2084@163.com or</div><div class="line"> *        www.dormforce.net/blog/rockins</div><div class="line"> **************************************************************/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"PostOrderWalkOfBST.h"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span></span></div><div class="line"><span class="title">PostOrderWalkBST</span><span class="params">(PBST_NODE root)</span></div><div class="line">&#123;</div><div class="line">    PBST_NODE curr_node;</div><div class="line">    PBST_NODE next_node;</div><div class="line">    </div><div class="line">    <span class="comment">// fist go to the first postorder node of BST</span></div><div class="line">    curr_node = FindFirstPostOrderNodeOfBST(root);</div><div class="line">    </div><div class="line">    <span class="comment">// if current node's parent is NULL, then curr_node must be root of BST, finished</span></div><div class="line">    <span class="keyword">while</span> (!curr_node-&gt;parent) &#123;</div><div class="line">    </div><div class="line">        <span class="comment">// if current node is parent node's left child and parent has no right child,</span></div><div class="line">        <span class="comment">// then parent is next node to visit</span></div><div class="line">        <span class="keyword">if</span> (curr_node-&gt;parent-&gt;lchild == curr_node &amp;&amp;</div><div class="line">            !curr_node-&gt;parent-&gt;rchild)</div><div class="line">            next_node = curr_node-&gt;parent;</div><div class="line">            </div><div class="line">        <span class="comment">// if current node is parent node's left child and parent has right child,</span></div><div class="line">        <span class="comment">// then the fist postorder node of parent's right subtree is next node to visit</span></div><div class="line">        <span class="keyword">if</span> (curr_node-&gt;parent-&gt;lchild == curr_node &amp;&amp;</div><div class="line">            curr_node-&gt;parent-&gt;rchild)</div><div class="line">            next_node = FindFirstPostOrderNodeOfBST(</div><div class="line">                            curr_node-&gt;parent-&gt;rchild);</div><div class="line">        </div><div class="line">        <span class="comment">// if current node is parent node's right child(implicitly indicate parent node is not null),</span></div><div class="line">        <span class="comment">// then parent node is just next node</span></div><div class="line">        <span class="keyword">if</span> (curr_node-&gt;parent-&gt;rchild == curr_node)</div><div class="line">            next_node = curr_node-&gt;parent;</div><div class="line">        </div><div class="line">        <span class="comment">//</span></div><div class="line">        <span class="comment">// <span class="doctag">XXX:</span> now visit curr_node, if necessary</span></div><div class="line">        <span class="comment">//</span></div><div class="line">        VisitNode(curr_node);</div><div class="line">        </div><div class="line">        <span class="comment">// step</span></div><div class="line">        curr_node = next_node;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// find fist postorder node of BST</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">static</span> PBST_NODE</span></div><div class="line"><span class="title">FindFirstPostOrderNodeOfBST</span><span class="params">(PBST_NODE root)</span></div><div class="line">&#123;</div><div class="line">    PBST_NODE pNode;</div><div class="line">    </div><div class="line">    pNode = root;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> (pNode-&gt;lchild || pNode-&gt;rchild) &#123;</div><div class="line">        <span class="keyword">if</span> (pNode-&gt;lchild)</div><div class="line">            pNode = pNode-&gt;lchild;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (pNode-&gt;rchild)</div><div class="line">            pNode = pNode-&gt;rchild;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> (pNode);</div><div class="line">&#125;</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// virtual visiting pNode, do nothing</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span></span></div><div class="line"><span class="title">VisitNode</span><span class="params">(PBST_NODE pNode)</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</div><footer class="post__foot u-cf"><a href="/2015/06/03/post-order-Traversal-of-btree/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-05-31T22:00:00.000Z" class="post__time">June 1, 2015</time><h1 class="post__title"><a href="/2015/06/01/about-power-algorithm/">leetcode, 二分求幂实现pow函数</a></h1></header><div class="post__main echo"><p>###实现二分求幂</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/01/about-power-algorithm/" itemprop="url">
+                  leetcode, 二分求幂实现pow函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-06-01T00:00:00+02:00" content="2015-06-01">
+              2015-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###实现二分求幂</p>
 <p>题目:</p>
 <blockquote>
 <p>Pow(x, n) </p>
@@ -344,7 +1415,119 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">function_foo</span><span class="params">(a,b)</span>:</span></div><div class="line">	<span class="keyword">return</span> a*b</div></pre></td></tr></table></figure>
 <p>的运算, 只不过传进去的是 <code>function_foo(x,x)</code></p>
 <p>所以这样的算法可以降低所有repeat函数的时间复杂度到O(log(n))</p>
-</div><footer class="post__foot u-cf"><a href="/2015/06/01/about-power-algorithm/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-05-27T22:00:00.000Z" class="post__time">May 28, 2015</time><h1 class="post__title"><a href="/2015/05/28/new-boring-day/">linux 用户组配置, 挂载新硬盘</a></h1></header><div class="post__main echo"><p>今天上班没事做, 一点事都没…</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/28/new-boring-day/" itemprop="url">
+                  linux 用户组配置, 挂载新硬盘
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-05-28T00:00:00+02:00" content="2015-05-28">
+              2015-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天上班没事做, 一点事都没…</p>
 <p>于是把自己的笔记搬上来</p>
 <h3 id="建立Liunx账号"><a href="#建立Liunx账号" class="headerlink" title="建立Liunx账号"></a>建立Liunx账号</h3><p>需要在ROOT权限下执行</p>
 <pre><code>useradd -m username
@@ -373,7 +1556,119 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/home1                                                   </div><div class="line"> $ sudo chgrp -R dongmwu dongmwu                       </div><div class="line">/home1                                                   </div><div class="line"> $ ll                                                 </div><div class="line">total 20K                                                </div><div class="line">drwxr-xr-x. 2 root dongmwu 4.0K May 27 10:11 dongmwu     </div><div class="line">drwx------. 2 root root     16K May 26 23:29 lost+found</div></pre></td></tr></table></figure>
 <p>用chown修改用户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/home1                                                           </div><div class="line"> $ sudo chown -R dongmwu dongmwu                       [10:15:21]</div><div class="line">/home1                                                           </div><div class="line"> $ ll                                                  [10:15:27]</div><div class="line">total 20K                                                        </div><div class="line">drwxr-xr-x. 2 dongmwu dongmwu 4.0K May 27 10:11 dongmwu          </div><div class="line">drwx------. 2 root    root     16K May 26 23:29 lost+found</div></pre></td></tr></table></figure>
-</div><footer class="post__foot u-cf"><a href="/2015/05/28/new-boring-day/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-05-27T22:00:00.000Z" class="post__time">May 28, 2015</time><h1 class="post__title"><a href="/2015/05/28/deleteDuplicates/">leetcode, deleteDuplicates删除重复链表</a></h1></header><div class="post__main echo"><p>问题</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/28/deleteDuplicates/" itemprop="url">
+                  leetcode, deleteDuplicates删除重复链表
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2015-05-28T00:00:00+02:00" content="2015-05-28">
+              2015-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>问题</p>
 <blockquote>
 <p>Remove Duplicates from Sorted List </p>
 <p>Given a sorted linked list, delete all duplicates such that each element appear only once.</p>
@@ -396,4 +1691,242 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for singly-linked list.</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param &#123;ListNode&#125; head</span></div><div class="line">    <span class="comment"># @return &#123;ListNode&#125;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(self, head)</span>:</span></div><div class="line">        <span class="keyword">if</span> head == <span class="keyword">None</span> <span class="keyword">or</span> head == [] <span class="keyword">or</span> head == &#123;&#125;:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        tmp=head</div><div class="line">        <span class="keyword">while</span> (tmp.next != <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">if</span> tmp.val == tmp.next.val:</div><div class="line">                tmp.next = tmp.next.next</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                tmp=tmp.next</div><div class="line">        <span class="keyword">return</span> head</div></pre></td></tr></table></figure>
 <p>运行时间一下从快700ms降到了80多ms</p>
 <p>!!!!</p>
-</div><footer class="post__foot u-cf"><a href="/2015/05/28/deleteDuplicates/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><a title="Next" href="/page/2/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Dongmin Wu" />
+          <p class="site-author-name" itemprop="name">Dongmin Wu</p>
+          <p class="site-description motion-element" itemprop="description">The blog of myself</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongmin Wu</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
