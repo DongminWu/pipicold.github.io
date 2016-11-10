@@ -105,7 +105,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -119,7 +119,7 @@
   <title> PIPICOLD </title>
 </head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="">
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -174,7 +174,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -182,23 +182,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule" rel="section">
-            
-            Schedule
+            归档
           </a>
         </li>
       
@@ -241,8 +225,8 @@
             
               
                 
-                <a class="post-title-link" href="/2014/07/13/Jqury-psp-menu/" itemprop="url">
-                  老子回来了!带着jQuery
+                <a class="post-title-link" href="/2014/07/13/Next-step-of-blog/" itemprop="url">
+                  pipicoldblog搭建下一步计划
                 </a>
               
             
@@ -254,7 +238,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-07-13T00:00:00+02:00" content="2014-07-13">
               2014-07-13
             </time>
@@ -266,11 +250,11 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
                   </a>
                 </span>
 
@@ -304,190 +288,23 @@
       
         
           
-            <p>说起来真的好久没更新blog了</p>
-<p>上一次的文章日期还是5月16日.</p>
-<p>于是快过了2个月过来报道一下!</p>
-<p>唔这两个月对于技术方面真的是很少更新.</p>
-<p>上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计</p>
-<p>大概是一个FLASH+Arduino的一个展示性的项目</p>
-<p>唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧</p>
-<p>之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&gt;&lt;</p>
-<p>一个人来到上海找房子安顿下来开始上班,然后最近陷入了一点对未来的迷茫之中…</p>
-<p>回归正题,这两天下班的时候想了想不能那么无聊是吧~于是自己学了一下jQuery这个框架怎么使用,发现它确实比原生的Javascript要好用和方便许多~!!!!</p>
-<p>大概就属于随意敲敲代码就能弄出漂亮网页应用</p>
-<p>目前还是一个完成了一半的状态</p>
-<p>先是展示</p>
-<p>就是一个点击就能切换二级菜单的东西..</p>
-<p>唔用的原理是仿造于<strong>图片轮播</strong>的</p>
-<p>然后自己加上了一些按键控制和主菜单动画</p>
-<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><pre><code>&lt;!@@javascript@@!&gt;
-/**
- * Created by Wu on 14-7-6.
- */
-
-
-//    2 vector test success
-//    var aa=new Array();
-//    aa[0]=new Array();
-//    aa[0][0]=10;
-//    alert(aa[0][0]);
-//
-
-
-
-var Main_index=0;//当前主按钮序号
-var Child_index=0;//当前子按钮序号
-var animate_time=200;//每个动画的执行时间
-var main_panel_button_counts=0;
-var child_panel_counts= new Array();
-var child_now_index=new Array();
-var can_press_key=true;
-
-
-
-$(document).ready(function(){
-
-    //init
-    main_panel_button_counts=$(&quot;li.buttons&quot;).length;//count the sum of button in main panel
-    count_child_menu();
-    init_child_now_index();
-    main_panel_change(Main_index);
-    can_press_key=true;
-
-    $(document).keydown(function(event){
-    if(can_press_key==true){
-        log(&quot;keyCode:&quot;+event.keyCode+&quot; is clicked.&quot;);
-        if (event.keyCode==37){
-           //left key down
-       if (Main_index-1 &gt;=0 ){
-        main_panel_change(Main_index-1);
-       }
-        };
-        if (event.keyCode==39){
-            //right key down
-        if (Main_index+1&lt;main_panel_button_counts){
-            main_panel_change(Main_index+1);
-        }
-        }
-        if (event.keyCode==38){
-            //up key down
-        if(child_now_index[Main_index]&gt;0){
-            child_panel_change(child_now_index[Main_index]-1);
-        }
-        }
-    if (event.keyCode==40){
-        //down key down
-        if (child_now_index[Main_index]&lt;child_panel_counts[Main_index]-1){
-            child_panel_change(child_now_index[Main_index]+1);
-        }
-    }
-    }
-
-
-    });
-//funciton main_panel_change(destination)
-//this function is used to move main panel,
-//when key down or mouse click;
-//let $(&quot;li.buttons) move to destination
-//and run the animate.
-//
-
-
-    function main_panel_change(destination){
-    can_press_key=false;
-    log(&quot;can_press_key:&quot;+can_press_key);
-    //change the child panel
-
-
-    //=================bug 1 when click the keys quickly, display will be wrong===========
-    //$(&quot;li.mymenu&quot;).eq(0).fadeOut(animate_time);
-    //$(&quot;li.mymenu&quot;).eq(1).fadeOut(animate_time);
-    //$(&quot;li.mymenu&quot;).eq(2).fadeOut(animate_time);
-    //$(&quot;li.mymenu&quot;).eq(4).fadeOut(animate_time);
-    //$(&quot;li.mymenu&quot;).eq(5).fadeOut(animate_time);
-    $(&quot;li.mymenu&quot;).eq(Main_index).fadeOut(animate_time,function(){$(&quot;li.mymenu&quot;).eq(destination).fadeIn(animate_time);can_press_key=true;});
-
-    //change main panel background-color
-    for (var i=0;i&lt;main_panel_button_counts;i++){
-        if (i==destination){
-            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
-        }else{
-            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
-        }
-    }
-
-    //move main panel
-
-    var now_left=$(&quot;div#main_menu_panel&quot;).css(&quot;left&quot;);
-        var move_distance=100;
-
-        $(&quot;div#main_menu_panel&quot;).animate({left:&quot;-=&quot;+(destination-Main_index)*move_distance+&quot;px&quot;})
-
-        //let Main_index=destination
-           Main_index=destination;
-    child_panel_change(child_now_index[destination]);
-    }
-
-    //function child_panel_change()
-    //when key down up and down, call this
-    //1. get Main_index number to decide change which one
-    //2
-    function child_panel_change(destination){
-        log(&quot;child_destination :&quot;+destination);
-    //change main panel background-color
-    for (var i=0;i&lt;child_panel_counts[Main_index];i++){
-        if (i==destination){
-            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
-        }else{
-            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
-        }
-    }
-    child_now_index[Main_index]=destination;
-    }
-
-
-
-    //function count_child_menu()
-    //a for loop to init the child_panel_counts[]
-    function count_child_menu(){
-    for (var i=0;i&lt;main_panel_button_counts;i++){
-        child_panel_counts[i]=$(&quot;ul.popupmenu&quot;).eq(i).children(&quot;li&quot;).length;
-    }
-    }
-    //function init_child_now_index()
-    //init child_now_index to all 0
-    function init_child_now_index(){
-    for (var i=0;i&lt;main_panel_button_counts;i++){
-        child_now_index[i]=0;
-    }
-    }
-    //function log(data)
-    //to output @ &lt;p id=&quot;logoutput&quot;&gt;&lt;/p&gt;
-    function log(data){
-
-//    $(&quot;#logoutput&quot;).text($(&quot;#logoutput&quot;).text()+&quot;\r\n&quot;+data);
-    }
-//----------------------------below this line is mouse click event-------------------
-
-    //$(&quot;#logoutput&quot;).text(&quot;start test&quot;);
-    $(&quot;li.buttons&quot;).click(function(){
-
-        var now_index=$(this).index();
-        main_panel_change(now_index);
-        });
-
-    //子菜单被点击事件
-    $(&quot;ul.popupmenu li&quot;).click(function(){
-
-      //  alert(&quot;index:&quot;+);
-      var now_child_index=$(this).index();
-          child_panel_change(now_child_index);
-
-    });
-
-});
-</code></pre><h3 id="稍微分析一下吧"><a href="#稍微分析一下吧" class="headerlink" title="稍微分析一下吧"></a>稍微分析一下吧</h3><p>主要的两个函数是<strong><code>main_panel_change</code></strong>和<strong><code>child_panel_change</code></strong>这两个分别是主菜单和子菜单的控制函数,</p>
-<p>貌似没什么好讲的都挺简单&gt;&lt;</p>
+            <p>恩…那个jQuery的实现其实就是意味着我的这个blog终于可以加一点动态效果了</p>
+<p>恩.要做出来的样子应该是有可以在blog里面显示图片的,每篇blog自己带一个文件夹</p>
+<p>但是由于svn的代码空间只有100MB所以要把资源文件.主要是图片.</p>
+<p>放在storage里面,这件事情已经探究过可行性了之前,只是觉得麻烦&gt;&lt;</p>
+<p>另外关于主界面,一开始的界面要修改了,现在这样虽然简洁吧但是也很简陋&gt;&lt;</p>
+<p>现在觉得既然是已经做了一个仿制PSP的界面就干脆利用这个?</p>
+<p>大概的想法是黑白风格,然后把blog分为<strong>BLOG</strong>,<strong>PROJECT</strong>,<strong>PROFILE</strong>三个大块</p>
+<p>然后至多采用三级菜单</p>
+<h2 id="BLOG部分"><a href="#BLOG部分" class="headerlink" title="BLOG部分"></a>BLOG部分</h2><ol>
+<li>每个blog要加入一个<code>&lt;tag&gt;&lt;/tag&gt;</code>标签来进行分类</li>
+<li>每个blog的文件名还是日期</li>
+<li>每个加入一个<code>&lt;version&gt;&lt;/version&gt;</code>标签来标记现在的版本号</li>
+</ol>
+<p>PS:标记版本号的目的就是为了不要每次都要遍历一次所有文件然后找出tag</p>
+<p>但是也有变通的方法就是另外做个小程序每次发布新的blog之后把svn提交还有tag数据库的更新整合在一起<strong>用python写个?</strong></p>
+<h2 id="PROJECT部分"><a href="#PROJECT部分" class="headerlink" title="PROJECT部分"></a>PROJECT部分</h2><p>大概就是吧每个项目的源码git地址搞下来然后再把readme.md弄下来就好</p>
+<h2 id="PROFILE部分"><a href="#PROFILE部分" class="headerlink" title="PROFILE部分"></a>PROFILE部分</h2><p>自己随意写写就好~~</p>
 
           
         
@@ -550,7 +367,7 @@ $(document).ready(function(){
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-05-16T00:00:00+02:00" content="2014-05-16">
               2014-05-16
             </time>
@@ -562,7 +379,7 @@ $(document).ready(function(){
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Openwrt/" itemprop="url" rel="index">
@@ -705,7 +522,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-05-15T00:00:00+02:00" content="2014-05-15">
               2014-05-15
             </time>
@@ -717,7 +534,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Openwrt/" itemprop="url" rel="index">
@@ -845,7 +662,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-05-03T00:00:00+02:00" content="2014-05-03">
               2014-05-03
             </time>
@@ -857,7 +674,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Openwrt/" itemprop="url" rel="index">
@@ -1003,7 +820,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-30T00:00:00+02:00" content="2014-04-30">
               2014-04-30
             </time>
@@ -1015,7 +832,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Openwrt/" itemprop="url" rel="index">
@@ -1061,7 +878,7 @@ iwlist scan
 <p>于是今天早上就按照教程上的写了个helloworld程序</p>
 <p>遇到了一下的问题恩</p>
 <p>一开始我的Makefile是这样写的。。（这里只是最后的一些执行语句）</p>
-<p><a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#x21;">&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#x21;</a></p>
+<p><a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x21;&#64;&#x40;&#109;&#x61;&#107;&#101;&#x40;&#64;&#33;">&#x21;&#64;&#x40;&#109;&#x61;&#107;&#101;&#x40;&#64;&#33;</a></p>
 <p>#prepare</p>
 <p>define Build/Prepare<br>mkdir -p $(PKG_BUILD_DIR)<br>$(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
 <p>#install will be call</p>
@@ -1073,10 +890,10 @@ iwlist scan
 <p>但是Makefile直接调用函数什么的根本不用加<code>TAB</code>啊啊啊啊。。。</p>
 <p>于是琢磨了好久发现是在之前的<code>define</code>里面有问题</p>
 <p>Makefile的define就是宏。。就相当于是文本替换。所以在</p>
-<p><a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#33;&#x40;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#33;">&#33;&#x40;&#64;&#109;&#97;&#107;&#101;&#x40;&#x40;&#33;</a><br>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
+<p><a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x21;&#x40;&#x40;&#x6d;&#97;&#x6b;&#101;&#64;&#64;&#x21;">&#x21;&#x40;&#x40;&#x6d;&#97;&#x6b;&#101;&#64;&#64;&#x21;</a><br>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
 <p>这样打出的命令之前是没有<code>TAB</code>字符的。。于是在最后一行调用的时候就出现了缺少分隔符错误</p>
 <p>后来修改成这样就正确了</p>
-<p><a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x21;&#x40;&#64;&#x6d;&#97;&#107;&#101;&#x40;&#x40;&#x21;">&#x21;&#x40;&#64;&#x6d;&#97;&#107;&#101;&#x40;&#x40;&#x21;</a><br>define Build/Prepare<br>    mkdir -p $(PKG_BUILD_DIR)<br>    $(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
+<p><a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#33;&#x40;&#64;&#x6d;&#x61;&#107;&#x65;&#x40;&#x40;&#33;">&#33;&#x40;&#64;&#x6d;&#x61;&#107;&#x65;&#x40;&#x40;&#33;</a><br>define Build/Prepare<br>    mkdir -p $(PKG_BUILD_DIR)<br>    $(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
 <p>define Package/helloworld/install<br>    $(INSTALL_DIR) $(1)/bin<br>    $(INSTALL_BIN) $(PKG_BUILD_DIR)/helloworld $(1)/bin/<br>endef</p>
 <p>$(eval $(call BuildPackage,helloworld))<br><strong>注意上面这两个define中的行命令的行首都有TAB</strong></p>
 <p>恩。小问题但是要注意细节恩~</p>
@@ -1142,7 +959,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-23T00:00:00+02:00" content="2014-04-23">
               2014-04-23
             </time>
@@ -1154,7 +971,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Blog/" itemprop="url" rel="index">
@@ -1255,7 +1072,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-22T00:00:00+02:00" content="2014-04-22">
               2014-04-22
             </time>
@@ -1267,7 +1084,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Blog/" itemprop="url" rel="index">
@@ -1386,7 +1203,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-04-21T00:00:00+02:00" content="2014-04-21">
               2014-04-21
             </time>
@@ -1398,7 +1215,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Life/" itemprop="url" rel="index">
@@ -1515,7 +1332,7 @@ iwlist scan
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2014-03-25T00:52:00+01:00" content="2014-03-25">
               2014-03-25
             </time>
@@ -1527,7 +1344,7 @@ iwlist scan
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Blog/" itemprop="url" rel="index">
@@ -1657,7 +1474,7 @@ iwlist scan
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">29</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
@@ -1665,17 +1482,17 @@ iwlist scan
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
+                <span class="site-state-item-name">标签</span>
+              
             </div>
           
 
@@ -1718,11 +1535,11 @@ iwlist scan
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
