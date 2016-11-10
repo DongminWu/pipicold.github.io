@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Lua语言中pairs和ipairs的区别 - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-08-31T23:52:00.000Z" class="post__time">September 1, 2014</time><h1 class="post__title"><a href="/2014/09/01/2014-04-19-Differents-between-pairs-and-ipairs-in-lua/">Lua语言中pairs和ipairs的区别</a></h1></header><div class="post__main echo"><p>tbl = {“alpha”, “beta”, [“one”] = “uno”, [“two”] = “dos”}</p>
+<pre><code>for key, value in ipairs(tbl) do
+
+        print(key, value)
+
+end
+</code></pre><p>-pairs()函数基本和ipairs()函数用法相同， 区别在于：</p>
+<p>pairs()可以遍历整个table，即包括数组及非数组部分。</p>
+<p>–&gt;如有pairs迭代输出如下：</p>
+<p>–&gt;1 alpha</p>
+<p>–&gt;2 beta</p>
+<p>–&gt;one uno</p>
+<p>–&gt;two dos</p>
+<p>ipairs()函数用于遍历table中的数组部分。</p>
+<p>–&gt;如有ipairs迭代输出如下：</p>
+<p>–&gt;1 alpha</p>
+<p>–&gt;2 beta</p>
+<p>###&amp;&amp;&amp;</p>
+<p>将键值对插入一个表就直接在空表里面符值就好</p>
+<p>###关于串口监听的问题</p>
+<p>原来的想法是用串口发送AT指令什么的。<br>现在暂时取消，采用单纯web来控制，以后再添加。先以完成demo为主</p>
+</div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/Lua/" class="post__tag__link">Lua</a></li></ul><a href="/2014/09/01/2014-04-19-Differents-between-pairs-and-ipairs-in-lua/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/2015/02/05/2015-02-05-hello-jeklly/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><a title="Next" href="/2014/07/13/2014-07-13-Jqury-psp-menu/" class="page-menu__link icon-arrow-right"></a></li></menu></footer></body></html>

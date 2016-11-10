@@ -1,0 +1,272 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>Javascript - PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2016-03-04T23:00:00.000Z" class="post__time">March 5, 2016</time><h1 class="post__title"><a href="/2016/03/05/2016-03-05-Study-React/">Study Notes of React Tutorial</a></h1></header><div class="post__main echo"><blockquote>
+<p>The Link of React Tutorial: <a href="http://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">http://facebook.github.io/react/docs/tutorial.html</a></p>
+</blockquote>
+<p>Above is the tutorial which told me that I need to setted up a node.js server</p>
+<h2 id="About-installing-the-Node"><a href="#About-installing-the-Node" class="headerlink" title="About installing the Node"></a>About installing the Node</h2><p>npm install<br>node server.js<br>By the command above, I can start a Node.JS server on 127.0.0.1:3000</p>
+<p>I have not used any node.js server anymore, so I searched some topic about what the “npm” it is.</p>
+<p>The link of the usage of npm: <a href="http://www.tutorialspoint.com/nodejs/nodejs_npm.htm" target="_blank" rel="external">http://www.tutorialspoint.com/nodejs/nodejs_npm.htm</a></p>
+<p>For my MAC, I use brew to install node.js, the command is:</p>
+<p>brew install nodejs<br>The GIT repo address of my learning is: <a href="https://git.coding.net/pipicold/react-test.git" target="_blank" rel="external">https://git.coding.net/pipicold/react-test.git</a></p>
+<h2 id="About-the-fundamental-knowledge"><a href="#About-the-fundamental-knowledge" class="headerlink" title="About the fundamental knowledge"></a>About the fundamental knowledge</h2><p>To create a React component: <code>React.createClass()</code></p>
+<p>While creating a component, a important method is</p>
+<p><code>render: ()</code></p>
+<p>In this method, you can added some codes for when your component is firstly added.</p>
+<p>You do not have to return basic HTML. You can return a tree of components that you (or someone else) built.</p>
+<p><code>ReactDOM.render()</code> instantiates the root component, starts the framework, and injects the markup into a raw DOM element, provided as the second argument.</p>
+<p><img src="/img/2016-03-05/1.png" alt="first render"></p>
+<p>The class name of a component equals the name of the tag</p>
+<p>example:</p>
+<p>If I defined a class named “CommentBox” by the code:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> CommentBox = React.createClass();</div></pre></td></tr></table></figure>
+<p>I should call this component by:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render(        &lt;CommentBox /&gt;,        document.getElementById("content"))</div></pre></td></tr></table></figure>
+<h2 id="Composing-Components"><a href="#Composing-Components" class="headerlink" title="Composing Components"></a>Composing Components</h2><p>I found that maybe React cannot divide the code into separated files</p>
+<p>Firstly, I wrote 3 files</p>
+<ol>
+<li>tutorial2.js</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> CommentList = React.createClass(   </div><div class="line">    &#123;           </div><div class="line">        <span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;         </div><div class="line">            <span class="keyword">return</span>(         </div><div class="line">               &lt;div className="commentList"&gt;     </div><div class="line">                    Hello, I am a CommentList      </div><div class="line">               &lt;/div&gt;        </div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div><div class="line"><span class="keyword">var</span> CommentForm = React.createClass(</div><div class="line">    &#123;            </div><div class="line">        <span class="attr">render</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                </div><div class="line">            <span class="keyword">return</span>(                        </div><div class="line">                &lt;div className = "commentForm"&gt;                        </div><div class="line">                    Hey, I am a Comment Form                      </div><div class="line">                &lt;/div&gt;</div><div class="line">            );            </div><div class="line">        &#125;        </div><div class="line">    &#125;        </div><div class="line">);</div></pre></td></tr></table></figure>
+<ol>
+<li>tutorialall.js</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var CommentBox = React.createClass(</div><div class="line">        &#123;</div><div class="line">render: function()&#123;                </div><div class="line">return (                        </div><div class="line">        //'className' means 'class' in standard HTML</div><div class="line">        &lt;div className = "commentBox"&gt;                        </div><div class="line">        Hello pipicold                        </div><div class="line">        &lt;h1&gt;Comments&lt;/h1&gt;</div><div class="line">        &lt;CommentList /&gt;                        </div><div class="line">        &lt;CommentForm /&gt;                        </div><div class="line">        &lt;/div&gt;                      </div><div class="line">       );  </div><div class="line">&#125;        </div><div class="line">&#125;        </div><div class="line">);</div><div class="line">ReactDOM.render(</div><div class="line">        &lt;CommentBox /&gt;,      </div><div class="line">        document.getElementById('content')        </div><div class="line">        );</div></pre></td></tr></table></figure>
+<ol>
+<li>index.html</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span>     <span class="tag">&lt;<span class="name">html</span>&gt;</span>  </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>React Tutorial<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="comment">&lt;!-- Not present in the tutorial. Just for basic styling. --&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/base.css"</span> /&gt;</span>    </div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span>  </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span> <span class="attr">src</span>=<span class="string">"scripts/tutorial2.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span> <span class="attr">src</span>=<span class="string">"scripts/tutorialall.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span> <span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>It will not work.</p>
+<p>After I merged those two JS file into one, the page went to normal.</p>
+<p>Using props</p>
+<p>the braces seems to mean the call of properties</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"comment"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">className</span>=<span class="string">"commentAuthor"</span>&gt;</span></div><div class="line">&#123;this.props.author&#125;  </div><div class="line"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span>  </div><div class="line">&#123;this.props.children&#125;       </div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>what should be came up with is that the <code>{this.props.children}</code> means the elements between the tags: <code>&lt;Comment&gt; &lt;/Comment&gt;</code></p>
+<h2 id="Component-Properties"><a href="#Component-Properties" class="headerlink" title="Component Properties"></a>Component Properties</h2><p>Pass the properties like original HTML</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render: function()&#123;                </div><div class="line">    return(                        </div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"commentList"</span>&gt;</span>                        </div><div class="line">            <span class="tag">&lt;<span class="name">Comment</span> <span class="attr">author</span>=<span class="string">"Mrs. Wu"</span>&gt;</span> I do not like baby<span class="tag">&lt;/<span class="name">Comment</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">Comment</span> <span class="attr">author</span>=<span class="string">"Mr. Wu"</span>&gt;</span> I don't like baby<span class="tag">&lt;/<span class="name">Comment</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">          );            </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>By the way, I found that it is unimportant for the sequence of each Component, you can put a Component at any where but should before the line :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render();</div></pre></td></tr></table></figure>
+<p>Besides, you can use any characters between tags in JSX</p>
+<p>The rendered page showed like follow:</p>
+<p><img src="/img/2016-03-05/3.png" alt="first render"></p>
+<h2 id="Adding-Markdown"><a href="#Adding-Markdown" class="headerlink" title="Adding Markdown"></a>Adding Markdown</h2><p><a href="http://facebook.github.io/react/docs/tutorial.html#adding-markdown" target="_blank" rel="external">http://facebook.github.io/react/docs/tutorial.html#adding-markdown</a></p>
+<p>Marked is a external library wirtten in JS</p>
+<p>offical usage in its github website: <a href="https://github.com/chjj/marked" target="_blank" rel="external">https://github.com/chjj/marked</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Marked in the browser<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"lib/marked.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML =      marked(<span class="string">'# Marked in browser\n\nRendered by **marked**.'</span>);  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Whlie applying it to React, just us the braces to run your JS code</p>
+<p>the content in the braces means the JS code, outside of that is the HTML part</p>
+<p>besides, you cannot use “;” in the return, reason:</p>
+<p><a href="http://blog.csdn.net/lihongxun945/article/details/45826851" target="_blank" rel="external">http://blog.csdn.net/lihongxun945/article/details/45826851</a></p>
+<blockquote>
+<p>因为 React.createElement(“div”, null, var a = 1;) 是语法错误。</p>
+<p>那么你也可以理解为什么大括号中的js表达式不能有分号结尾了吧。</p>
+<p>需要注意的是，如果你在属性中输出JS变量，是不能加引号的，不然会被当做字符串而不被解析。</p>
+<p>应该是这样：</p>
+</blockquote>
+<p>the renderred page is like this:</p>
+<p><img src="/img/2016-03-05/2.png" alt="first render"></p>
+<p>according to the description of React’s tutorial</p>
+<p>That’s React protecting you from an XSS attack. There’s a way to get around it but the framework warns you not to use it:</p>
+<p>two steps:</p>
+<ol>
+<li>using html: tag</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rawMarkup: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> rawMarkup = marked(<span class="keyword">this</span>.props.children.toString(), &#123;<span class="attr">sanitize</span>: <span class="literal">true</span>&#125;);</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">__html</span>: rawMarkup &#125;;</div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
+<ol>
+<li>using span tag</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;this.rawMarkup()&#125;</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>caution! you must use comma to separate two functions</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> Comment = React.createClass(</div><div class="line">        &#123;</div><div class="line">            <span class="attr">rawMarkup</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></div><div class="line">            &#123;</div><div class="line">                <span class="keyword">var</span> rawMarkup = marked( <span class="keyword">this</span>.props.children.toString(), &#123;<span class="attr">sanitize</span>:<span class="literal">true</span>&#125;);</div><div class="line">                <span class="keyword">return</span> &#123;<span class="attr">__html</span>: rawMarkup&#125;;</div><div class="line">            &#125;,<span class="comment">//be careful of this comma!!</span></div><div class="line">            render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">return</span>(</div><div class="line">                        <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"comment"</span>&gt;</span></span></div><div class="line">                            <span class="tag">&lt;<span class="name">h2</span> <span class="attr">className</span>=<span class="string">"commentAuthor"</span>&gt;</span></div><div class="line">                                &#123;this.props.author&#125;</div><div class="line">                            <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">span</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;this.rawMarkup()&#125;/</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                        );</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        );</div></pre></td></tr></table></figure>
+<h2 id="Hook-up-the-data-model"><a href="#Hook-up-the-data-model" class="headerlink" title="Hook up the data model"></a>Hook up the data model</h2><p>It is so fun and free while using function in JavaScript:</p>
+<p><a href="http://www.jb51.net/article/22742.htm" target="_blank" rel="external">http://www.jb51.net/article/22742.htm</a></p>
+<p>再有一个值得说一下的，就是JS中的函数的参数不一定是严格匹配的，通常的编程经验，比如有这样一个函数 fun(aa,bb)，那么我们在调用这个函数的时候就应该给他传递两个参数。但是在JS中，我们可以给他传递任意个参数，1个，3个，等等，都可以。JS中的参数传递，不完全是按照函数声明时指定的那些参数，在每次调用函数的时候，都会有一个命名为arguments的数组，这个数组里面存储了函数调用时，传递进来的所有参数，有了它，我们甚至可以不再函数声明时指定形式参数</p>
+<h2 id="Reactive-state"><a href="#Reactive-state" class="headerlink" title="Reactive state"></a>Reactive state</h2><p> To implement interactions, we introduce mutable state to the component. this.state is private to the component and can be changed by calling this.setState(). When the state updates, the component re-renders itself.</p>
+<h2 id="Adding-new-comments"><a href="#Adding-new-comments" class="headerlink" title="Adding new comments"></a>Adding new comments</h2><p>it is so hard for me to debug in React, maybe I should find a way to debug it.</p>
+<p>also, I was not so familir with the “function” of Javascript, I should learn about it</p>
+<p>It is so tired for me, because it is already 1.30 am now…I must go to bed…</p>
+<p>There is an extension for debuging React, on chrome.</p>
+</div><footer class="post__foot u-cf"><a href="/2016/03/05/2016-03-05-Study-React/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2015-02-05T23:00:00.000Z" class="post__time">February 6, 2015</time><h1 class="post__title"><a href="/2015/02/06/2015-02-06-Starting-stud-bootstrap/">Start to Learn Bootstrap</a></h1></header><div class="post__main echo"><p>Start to have a glimpse on Bootstrap, it’s enough to know how to modify themes that built by Bootstrap.</p>
+</div><footer class="post__foot u-cf"><a href="/2015/02/06/2015-02-06-Starting-stud-bootstrap/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-07-12T22:00:00.000Z" class="post__time">July 13, 2014</time><h1 class="post__title"><a href="/2014/07/13/2014-07-13-Jqury-psp-menu/">老子回来了!带着jQuery</a></h1></header><div class="post__main echo"><p>说起来真的好久没更新blog了</p>
+<p>上一次的文章日期还是5月16日.</p>
+<p>于是快过了2个月过来报道一下!</p>
+<p>唔这两个月对于技术方面真的是很少更新.</p>
+<p>上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计</p>
+<p>大概是一个FLASH+Arduino的一个展示性的项目</p>
+<p>唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧</p>
+<p>之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&gt;&lt;</p>
+<p>一个人来到上海找房子安顿下来开始上班,然后最近陷入了一点对未来的迷茫之中…</p>
+<p>回归正题,这两天下班的时候想了想不能那么无聊是吧~于是自己学了一下jQuery这个框架怎么使用,发现它确实比原生的Javascript要好用和方便许多~!!!!</p>
+<p>大概就属于随意敲敲代码就能弄出漂亮网页应用</p>
+<p>目前还是一个完成了一半的状态</p>
+<p>先是展示</p>
+<p>就是一个点击就能切换二级菜单的东西..</p>
+<p>唔用的原理是仿造于<strong>图片轮播</strong>的</p>
+<p>然后自己加上了一些按键控制和主菜单动画</p>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><pre><code>&lt;!@@javascript@@!&gt;
+/**
+ * Created by Wu on 14-7-6.
+ */
+
+
+//    2 vector test success
+//    var aa=new Array();
+//    aa[0]=new Array();
+//    aa[0][0]=10;
+//    alert(aa[0][0]);
+//
+
+
+
+var Main_index=0;//当前主按钮序号
+var Child_index=0;//当前子按钮序号
+var animate_time=200;//每个动画的执行时间
+var main_panel_button_counts=0;
+var child_panel_counts= new Array();
+var child_now_index=new Array();
+var can_press_key=true;
+
+
+
+$(document).ready(function(){
+
+    //init
+    main_panel_button_counts=$(&quot;li.buttons&quot;).length;//count the sum of button in main panel
+    count_child_menu();
+    init_child_now_index();
+    main_panel_change(Main_index);
+    can_press_key=true;
+
+    $(document).keydown(function(event){
+    if(can_press_key==true){
+        log(&quot;keyCode:&quot;+event.keyCode+&quot; is clicked.&quot;);
+        if (event.keyCode==37){
+           //left key down
+       if (Main_index-1 &gt;=0 ){
+        main_panel_change(Main_index-1);
+       }
+        };
+        if (event.keyCode==39){
+            //right key down
+        if (Main_index+1&lt;main_panel_button_counts){
+            main_panel_change(Main_index+1);
+        }
+        }
+        if (event.keyCode==38){
+            //up key down
+        if(child_now_index[Main_index]&gt;0){
+            child_panel_change(child_now_index[Main_index]-1);
+        }
+        }
+    if (event.keyCode==40){
+        //down key down
+        if (child_now_index[Main_index]&lt;child_panel_counts[Main_index]-1){
+            child_panel_change(child_now_index[Main_index]+1);
+        }
+    }
+    }
+
+
+    });
+//funciton main_panel_change(destination)
+//this function is used to move main panel,
+//when key down or mouse click;
+//let $(&quot;li.buttons) move to destination
+//and run the animate.
+//
+
+
+    function main_panel_change(destination){
+    can_press_key=false;
+    log(&quot;can_press_key:&quot;+can_press_key);
+    //change the child panel
+
+
+    //=================bug 1 when click the keys quickly, display will be wrong===========
+    //$(&quot;li.mymenu&quot;).eq(0).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(1).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(2).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(4).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(5).fadeOut(animate_time);
+    $(&quot;li.mymenu&quot;).eq(Main_index).fadeOut(animate_time,function(){$(&quot;li.mymenu&quot;).eq(destination).fadeIn(animate_time);can_press_key=true;});
+
+    //change main panel background-color
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        if (i==destination){
+            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
+        }else{
+            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
+        }
+    }
+
+    //move main panel
+
+    var now_left=$(&quot;div#main_menu_panel&quot;).css(&quot;left&quot;);
+        var move_distance=100;
+
+        $(&quot;div#main_menu_panel&quot;).animate({left:&quot;-=&quot;+(destination-Main_index)*move_distance+&quot;px&quot;})
+
+        //let Main_index=destination
+           Main_index=destination;
+    child_panel_change(child_now_index[destination]);
+    }
+
+    //function child_panel_change()
+    //when key down up and down, call this
+    //1. get Main_index number to decide change which one
+    //2
+    function child_panel_change(destination){
+        log(&quot;child_destination :&quot;+destination);
+    //change main panel background-color
+    for (var i=0;i&lt;child_panel_counts[Main_index];i++){
+        if (i==destination){
+            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
+        }else{
+            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
+        }
+    }
+    child_now_index[Main_index]=destination;
+    }
+
+
+
+    //function count_child_menu()
+    //a for loop to init the child_panel_counts[]
+    function count_child_menu(){
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        child_panel_counts[i]=$(&quot;ul.popupmenu&quot;).eq(i).children(&quot;li&quot;).length;
+    }
+    }
+    //function init_child_now_index()
+    //init child_now_index to all 0
+    function init_child_now_index(){
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        child_now_index[i]=0;
+    }
+    }
+    //function log(data)
+    //to output @ &lt;p id=&quot;logoutput&quot;&gt;&lt;/p&gt;
+    function log(data){
+
+//    $(&quot;#logoutput&quot;).text($(&quot;#logoutput&quot;).text()+&quot;\r\n&quot;+data);
+    }
+//----------------------------below this line is mouse click event-------------------
+
+    //$(&quot;#logoutput&quot;).text(&quot;start test&quot;);
+    $(&quot;li.buttons&quot;).click(function(){
+
+        var now_index=$(this).index();
+        main_panel_change(now_index);
+        });
+
+    //子菜单被点击事件
+    $(&quot;ul.popupmenu li&quot;).click(function(){
+
+      //  alert(&quot;index:&quot;+);
+      var now_child_index=$(this).index();
+          child_panel_change(now_child_index);
+
+    });
+
+});
+</code></pre><h3 id="稍微分析一下吧"><a href="#稍微分析一下吧" class="headerlink" title="稍微分析一下吧"></a>稍微分析一下吧</h3><p>主要的两个函数是<strong><code>main_panel_change</code></strong>和<strong><code>child_panel_change</code></strong>这两个分别是主菜单和子菜单的控制函数,</p>
+<p>貌似没什么好讲的都挺简单&gt;&lt;</p>
+</div><footer class="post__foot u-cf"><a href="/2014/07/13/2014-07-13-Jqury-psp-menu/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled"></span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>

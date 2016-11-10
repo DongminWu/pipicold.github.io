@@ -1,0 +1,401 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="PIPICOLD" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>PIPICOLD</title><link rel="stylesheet" href="/css/main.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="head"><h1 class="head-title u-fl"><a href="/">PIPICOLD</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a href="/" class="head-nav__link">Home</a></li><li class="head-nav__item"><a href="/archives" class="head-nav__link">Archives</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"><time datetime="2014-07-12T22:00:00.000Z" class="post__time">July 13, 2014</time><h1 class="post__title"><a href="/2014/07/13/2014-07-13-Jqury-psp-menu/">老子回来了!带着jQuery</a></h1></header><div class="post__main echo"><p>说起来真的好久没更新blog了</p>
+<p>上一次的文章日期还是5月16日.</p>
+<p>于是快过了2个月过来报道一下!</p>
+<p>唔这两个月对于技术方面真的是很少更新.</p>
+<p>上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计</p>
+<p>大概是一个FLASH+Arduino的一个展示性的项目</p>
+<p>唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧</p>
+<p>之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&gt;&lt;</p>
+<p>一个人来到上海找房子安顿下来开始上班,然后最近陷入了一点对未来的迷茫之中…</p>
+<p>回归正题,这两天下班的时候想了想不能那么无聊是吧~于是自己学了一下jQuery这个框架怎么使用,发现它确实比原生的Javascript要好用和方便许多~!!!!</p>
+<p>大概就属于随意敲敲代码就能弄出漂亮网页应用</p>
+<p>目前还是一个完成了一半的状态</p>
+<p>先是展示</p>
+<p>就是一个点击就能切换二级菜单的东西..</p>
+<p>唔用的原理是仿造于<strong>图片轮播</strong>的</p>
+<p>然后自己加上了一些按键控制和主菜单动画</p>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><pre><code>&lt;!@@javascript@@!&gt;
+/**
+ * Created by Wu on 14-7-6.
+ */
+
+
+//    2 vector test success
+//    var aa=new Array();
+//    aa[0]=new Array();
+//    aa[0][0]=10;
+//    alert(aa[0][0]);
+//
+
+
+
+var Main_index=0;//当前主按钮序号
+var Child_index=0;//当前子按钮序号
+var animate_time=200;//每个动画的执行时间
+var main_panel_button_counts=0;
+var child_panel_counts= new Array();
+var child_now_index=new Array();
+var can_press_key=true;
+
+
+
+$(document).ready(function(){
+
+    //init
+    main_panel_button_counts=$(&quot;li.buttons&quot;).length;//count the sum of button in main panel
+    count_child_menu();
+    init_child_now_index();
+    main_panel_change(Main_index);
+    can_press_key=true;
+
+    $(document).keydown(function(event){
+    if(can_press_key==true){
+        log(&quot;keyCode:&quot;+event.keyCode+&quot; is clicked.&quot;);
+        if (event.keyCode==37){
+           //left key down
+       if (Main_index-1 &gt;=0 ){
+        main_panel_change(Main_index-1);
+       }
+        };
+        if (event.keyCode==39){
+            //right key down
+        if (Main_index+1&lt;main_panel_button_counts){
+            main_panel_change(Main_index+1);
+        }
+        }
+        if (event.keyCode==38){
+            //up key down
+        if(child_now_index[Main_index]&gt;0){
+            child_panel_change(child_now_index[Main_index]-1);
+        }
+        }
+    if (event.keyCode==40){
+        //down key down
+        if (child_now_index[Main_index]&lt;child_panel_counts[Main_index]-1){
+            child_panel_change(child_now_index[Main_index]+1);
+        }
+    }
+    }
+
+
+    });
+//funciton main_panel_change(destination)
+//this function is used to move main panel,
+//when key down or mouse click;
+//let $(&quot;li.buttons) move to destination
+//and run the animate.
+//
+
+
+    function main_panel_change(destination){
+    can_press_key=false;
+    log(&quot;can_press_key:&quot;+can_press_key);
+    //change the child panel
+
+
+    //=================bug 1 when click the keys quickly, display will be wrong===========
+    //$(&quot;li.mymenu&quot;).eq(0).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(1).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(2).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(4).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(5).fadeOut(animate_time);
+    $(&quot;li.mymenu&quot;).eq(Main_index).fadeOut(animate_time,function(){$(&quot;li.mymenu&quot;).eq(destination).fadeIn(animate_time);can_press_key=true;});
+
+    //change main panel background-color
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        if (i==destination){
+            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
+        }else{
+            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
+        }
+    }
+
+    //move main panel
+
+    var now_left=$(&quot;div#main_menu_panel&quot;).css(&quot;left&quot;);
+        var move_distance=100;
+
+        $(&quot;div#main_menu_panel&quot;).animate({left:&quot;-=&quot;+(destination-Main_index)*move_distance+&quot;px&quot;})
+
+        //let Main_index=destination
+           Main_index=destination;
+    child_panel_change(child_now_index[destination]);
+    }
+
+    //function child_panel_change()
+    //when key down up and down, call this
+    //1. get Main_index number to decide change which one
+    //2
+    function child_panel_change(destination){
+        log(&quot;child_destination :&quot;+destination);
+    //change main panel background-color
+    for (var i=0;i&lt;child_panel_counts[Main_index];i++){
+        if (i==destination){
+            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
+        }else{
+            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
+        }
+    }
+    child_now_index[Main_index]=destination;
+    }
+
+
+
+    //function count_child_menu()
+    //a for loop to init the child_panel_counts[]
+    function count_child_menu(){
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        child_panel_counts[i]=$(&quot;ul.popupmenu&quot;).eq(i).children(&quot;li&quot;).length;
+    }
+    }
+    //function init_child_now_index()
+    //init child_now_index to all 0
+    function init_child_now_index(){
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        child_now_index[i]=0;
+    }
+    }
+    //function log(data)
+    //to output @ &lt;p id=&quot;logoutput&quot;&gt;&lt;/p&gt;
+    function log(data){
+
+//    $(&quot;#logoutput&quot;).text($(&quot;#logoutput&quot;).text()+&quot;\r\n&quot;+data);
+    }
+//----------------------------below this line is mouse click event-------------------
+
+    //$(&quot;#logoutput&quot;).text(&quot;start test&quot;);
+    $(&quot;li.buttons&quot;).click(function(){
+
+        var now_index=$(this).index();
+        main_panel_change(now_index);
+        });
+
+    //子菜单被点击事件
+    $(&quot;ul.popupmenu li&quot;).click(function(){
+
+      //  alert(&quot;index:&quot;+);
+      var now_child_index=$(this).index();
+          child_panel_change(now_child_index);
+
+    });
+
+});
+</code></pre><h3 id="稍微分析一下吧"><a href="#稍微分析一下吧" class="headerlink" title="稍微分析一下吧"></a>稍微分析一下吧</h3><p>主要的两个函数是<strong><code>main_panel_change</code></strong>和<strong><code>child_panel_change</code></strong>这两个分别是主菜单和子菜单的控制函数,</p>
+<p>貌似没什么好讲的都挺简单&gt;&lt;</p>
+</div><footer class="post__foot u-cf"><a href="/2014/07/13/2014-07-13-Jqury-psp-menu/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-07-12T22:00:00.000Z" class="post__time">July 13, 2014</time><h1 class="post__title"><a href="/2014/07/13/2014-07-13-Next-step-of-blog/">pipicoldblog搭建下一步计划</a></h1></header><div class="post__main echo"><p>恩…那个jQuery的实现其实就是意味着我的这个blog终于可以加一点动态效果了</p>
+<p>恩.要做出来的样子应该是有可以在blog里面显示图片的,每篇blog自己带一个文件夹</p>
+<p>但是由于svn的代码空间只有100MB所以要把资源文件.主要是图片.</p>
+<p>放在storage里面,这件事情已经探究过可行性了之前,只是觉得麻烦&gt;&lt;</p>
+<p>另外关于主界面,一开始的界面要修改了,现在这样虽然简洁吧但是也很简陋&gt;&lt;</p>
+<p>现在觉得既然是已经做了一个仿制PSP的界面就干脆利用这个?</p>
+<p>大概的想法是黑白风格,然后把blog分为<strong>BLOG</strong>,<strong>PROJECT</strong>,<strong>PROFILE</strong>三个大块</p>
+<p>然后至多采用三级菜单</p>
+<h2 id="BLOG部分"><a href="#BLOG部分" class="headerlink" title="BLOG部分"></a>BLOG部分</h2><ol>
+<li>每个blog要加入一个<code>&lt;tag&gt;&lt;/tag&gt;</code>标签来进行分类</li>
+<li>每个blog的文件名还是日期</li>
+<li>每个加入一个<code>&lt;version&gt;&lt;/version&gt;</code>标签来标记现在的版本号</li>
+</ol>
+<p>PS:标记版本号的目的就是为了不要每次都要遍历一次所有文件然后找出tag</p>
+<p>但是也有变通的方法就是另外做个小程序每次发布新的blog之后把svn提交还有tag数据库的更新整合在一起<strong>用python写个?</strong></p>
+<h2 id="PROJECT部分"><a href="#PROJECT部分" class="headerlink" title="PROJECT部分"></a>PROJECT部分</h2><p>大概就是吧每个项目的源码git地址搞下来然后再把readme.md弄下来就好</p>
+<h2 id="PROFILE部分"><a href="#PROFILE部分" class="headerlink" title="PROFILE部分"></a>PROFILE部分</h2><p>自己随意写写就好~~</p>
+</div><footer class="post__foot u-cf"><a href="/2014/07/13/2014-07-13-Next-step-of-blog/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-15T22:00:00.000Z" class="post__time">May 16, 2014</time><h1 class="post__title"><a href="/2014/05/16/2014-05-16-virtual-ap-sta-mode/">虚拟AP和基础网模式</a></h1></header><div class="post__main echo"><p>今天的又在做毕设。</p>
+<p>昨天把网页设置的部分完了一点。</p>
+<p>今天想添加新功能，虚拟AP，AP模式和基础网模式互换</p>
+<h2 id="Part-1-虚拟AP"><a href="#Part-1-虚拟AP" class="headerlink" title="Part.1 虚拟AP"></a>Part.1 虚拟AP</h2><p>就是用一个路由器广播多个ssid</p>
+<p>这样的可以完成不同用户的独立控制。</p>
+<p>比如呢。我给家里的wifi分隔一下，一个是<code>Myself</code>，我自己用的。另一个是<code>Guest</code>,用来给访客用</p>
+<p>给自己的流量自然要多分一点，给访客的就让他们能够看网页就好啦~~~</p>
+<p>这个功能在<code>/etc/config/wireless</code>中有设置</p>
+<p>先看wireless里面的config信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">config wifi-device &apos;radio0&apos;</div><div class="line">        option type &apos;mac80211&apos;</div><div class="line">        option hwmode &apos;11ng&apos;</div><div class="line">        option path &apos;platform/ar933x_wmac&apos;</div><div class="line">        list ht_capab &apos;SHORT-GI-20&apos;</div><div class="line">        list ht_capab &apos;SHORT-GI-40&apos;</div><div class="line">        list ht_capab &apos;RX-STBC1&apos;</div><div class="line">        list ht_capab &apos;DSSS_CCK-40&apos;</div><div class="line">        option disabled &apos;0&apos;</div><div class="line">        option channel &apos;auto&apos;</div><div class="line">        option htmode &apos;HT40+&apos;</div><div class="line">        option country &apos;CN&apos;</div><div class="line">        option noscan &apos;1&apos;</div><div class="line"></div><div class="line">config wifi-iface</div><div class="line">        option device &apos;radio0&apos;</div><div class="line">        option network &apos;lan&apos;</div><div class="line">        option mode &apos;ap&apos;</div><div class="line">        option encryption &apos;none&apos;</div><div class="line">        option ssid &apos;pipi1net&apos;</div><div class="line"></div><div class="line">config wifi-iface</div><div class="line">        option device &apos;radio0&apos;</div><div class="line">        option network &apos;lan&apos;</div><div class="line">        option mode &apos;ap&apos;</div><div class="line">        option encryption &apos;none&apos;</div><div class="line">        option ssid &apos;pipi2net&apos;</div></pre></td></tr></table></figure>
+<p>参考资料在这里：<a href="http://wiki.openwrt.org/doc/uci/wireless" target="_blank" rel="external">Wireless configuration</a> | <a href="http://blog.sina.com.cn/s/blog_6838386a0101d7gh.html" target="_blank" rel="external">利用nodogsplash 打造多节点超强无线广告机 </a></p>
+<p>我这里就是建立了两个不同的ap</p>
+<p>一个是<code>pipi1net</code>，另一个是<code>pipi2net</code></p>
+<p>用uci实现</p>
+<h4 id="添加一个虚拟ap"><a href="#添加一个虚拟ap" class="headerlink" title="添加一个虚拟ap"></a>添加一个虚拟ap</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">uci add wireless wifi-iface</div><div class="line">uci set wireless.@wifi-iface[1].device=radio0</div><div class="line">uci set wireless.@wifi-iface[1].network=lan</div><div class="line">uci set wireless.@wifi-iface[1].mode=ap</div><div class="line">uci set wireless.@wifi-iface[1].encryption=none</div><div class="line">uci set wireless.@wifi-iface[1].ssid=pipi2net</div><div class="line">uci commit</div></pre></td></tr></table></figure>
+<h4 id="删除虚拟ap"><a href="#删除虚拟ap" class="headerlink" title="删除虚拟ap"></a>删除虚拟ap</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uci delete wireless.@wifi-iface[1]</div><div class="line">uci commit</div></pre></td></tr></table></figure>
+<p>记得如果要立即看到效果的话要添加<code>/etc/init.d/network restart</code>啊啊啊</p>
+<h2 id="Part-2-基础网和AP模式互换"><a href="#Part-2-基础网和AP模式互换" class="headerlink" title="Part.2 基础网和AP模式互换"></a>Part.2 基础网和AP模式互换</h2><p>基础网模式就是wifi-client，就是像手机一样用wifi连接在某个ap上作为从机</p>
+<p>AP模式是wifi-AP</p>
+<p>主要参考资料：<a href="http://wiki.openwrt.org/doc/recipes/routedap" target="_blank" rel="external">Routed AP</a> | <a href="http://wiki.openwrt.org/doc/recipes/routedclient" target="_blank" rel="external">Routed Client</a></p>
+<p>我的这个模块拿到手里面的时候就是默认的AP模式</p>
+<p>改为基础网（sta）模式要修改的地方<br>（修改第一个wifi ap）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> uci del wireless.@wifi-device[0].disabled</div><div class="line">uci del wireless.@wifi-iface[0].network</div><div class="line">uci set wireless.@wifi-iface[0].mode=sta</div><div class="line">uci commit wireless</div><div class="line">wifi</div></pre></td></tr></table></figure>
+<p><strong>PS：wifi命令相当于原来的/etc/init.d/network restart</strong></p>
+<p>然后就开始扫描空间中的wifi信号</p>
+<pre><code>iwlist scan
+</code></pre><p>官网资料上面说如果出现了Devic Busy或者资源被占用之类的事情</p>
+<p>可以执行</p>
+<pre><code>killall -9 wpa_supplicant
+iwlist scan
+</code></pre><p>我在图书馆的扫描结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">wlan0     Scan completed :</div><div class="line">          Cell 01 - Address: 00:1F:64:EB:4F:78</div><div class="line">                    Channel:1</div><div class="line">                    Frequency:2.412 GHz (Channel 1)</div><div class="line">                    Quality=29/70  Signal level=-81 dBm</div><div class="line">                    Encryption key:off</div><div class="line">                    ESSID:&quot;Cert_Download&quot;</div><div class="line">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s</div><div class="line">                              9 Mb/s; 12 Mb/s; 18 Mb/s</div><div class="line">                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s</div><div class="line">                    Mode:Master</div><div class="line">                    Extra:tsf=00000011157e1d06</div><div class="line">                    Extra: Last beacon: 740ms ago</div><div class="line">                    IE: Unknown: 000D436572745F446F776E6C6F6164</div><div class="line">                    IE: Unknown: 010882848B960C121824</div><div class="line">                    IE: Unknown: 030101</div><div class="line">                    IE: Unknown: 0706434E20010D14</div><div class="line">                    IE: Unknown: 2A0100</div><div class="line">                    IE: Unknown: 32043048606C</div><div class="line">                    IE: Unknown: 2D1AAD0103FFFF000000000000000000000000000000040</div><div class="line">                    IE: Unknown: 331AAD0103FFFF000000000000000000000000000000040</div><div class="line">                    IE: Unknown: 3D160100170000000000000000000000000000000000000</div><div class="line">                    IE: Unknown: 34160100170000000000000000000000000000000000000</div><div class="line"></div><div class="line">                    IE: Unknown: 4A0E14000A002C01C800140005001900</div><div class="line">                    IE: Unknown: 7F0101</div><div class="line">                    IE: Unknown: DD180050F2020101060003A4000027A4000042435E00623</div><div class="line">                    IE: Unknown: DD0900037F01010000FF7F</div><div class="line">          Cell 02 - Address: 00:1F:64:EC:4F:78</div><div class="line">                    Channel:1</div><div class="line">                    Frequency:2.412 GHz (Channel 1)</div><div class="line">                    Quality=31/70  Signal level=-79 dBm</div><div class="line">                    Encryption key:off</div><div class="line">                    ESSID:&quot;BUPT-3&quot;</div><div class="line">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s</div><div class="line">                              9 Mb/s; 12 Mb/s; 18 Mb/s</div><div class="line">                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s</div><div class="line">                    Mode:Master</div><div class="line">                    Extra:tsf=4b000011157e26e8</div><div class="line">                    Extra: Last beacon: 710ms ago</div><div class="line">                    IE: Unknown: 0006425550542D33</div><div class="line">                    IE: Unknown: 010882848B960C121824</div><div class="line">                    IE: Unknown: 030101</div><div class="line">                    IE: Unknown: 0706434E20010D14</div><div class="line">                    IE: Unknown: 2A0100</div><div class="line">                    IE: Unknown: 32043048606C</div><div class="line">                    IE: Unknown: 2D1AAD0103FFFF000000000000000000000000000000040</div><div class="line"></div><div class="line">                    IE: Unknown: 331AAD0103FFFF000000000000000000000000000000040</div><div class="line">                    IE: Unknown: 3D160100170000000000000000000000000000000000000</div><div class="line">                    IE: Unknown: 34160100170000000000000000000000000000000000000</div><div class="line">                    IE: Unknown: 4A0E14000A002C01C800140005001900</div><div class="line">                    IE: Unknown: 7F0101</div><div class="line">                    IE: Unknown: DD180050F2020101060003A4000027A4000042435E00623</div><div class="line">                    IE: Unknown: DD0900037F01010000FF7F</div><div class="line">          Cell 03 - Address: 00:1F:64:ED:4F:78</div><div class="line">                    Channel:1</div><div class="line">                    Frequency:2.412 GHz (Channel 1)</div><div class="line">                    Quality=30/70  Signal level=-80 dBm</div><div class="line">                    Encryption key:on</div><div class="line">                    ESSID:&quot;eID_WAPI&quot;</div><div class="line">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s</div><div class="line">                              9 Mb/s; 12 Mb/s; 18 Mb/s</div><div class="line">                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s</div><div class="line">                    Mode:Master</div><div class="line">                    Extra:tsf=32000011157e379a</div><div class="line">                    Extra: Last beacon: 2000ms ago</div><div class="line">                    IE: Unknown: 00086549445F57415049</div><div class="line">                    IE: Unknown: 010882848B960C121824</div><div class="line">                    IE: Unknown: 030101</div><div class="line">                    IE: Unknown: 0706434E20010D14</div><div class="line">                    IE: Unknown: 2A0100</div><div class="line">                    IE: Unknown: 44140100010000147201010000147201001472010000</div><div class="line">                    IE: Unknown: 32043048606C</div><div class="line">                    IE: Unknown: 2D1AAD0103FFFF000000000000000000000000000000040</div><div class="line">                    IE: Unknown: 331AAD0103FFFF000000000000000000000000000000040</div><div class="line">                    IE: Unknown: 3D160100170000000000000000000000000000000000000</div><div class="line">                    IE: Unknown: 34160100170000000000000000000000000000000000000</div><div class="line">                    IE: Unknown: 4A0E14000A002C01C800140005001900</div><div class="line">                    IE: Unknown: 7F0101</div><div class="line">                    IE: Unknown: DD180050F2020101060003A4000027A4000042435E00623</div><div class="line">                    IE: Unknown: DD0900037F01010000FF7F</div><div class="line">          Cell 04 - Address: 3E:4B:D6:A1:34:28</div><div class="line">                    Channel:6</div><div class="line">                    Frequency:2.437 GHz (Channel 6)</div><div class="line">                    Quality=26/70  Signal level=-84 dBm</div><div class="line">                    Encryption key:on</div><div class="line">                    ESSID:&quot;AWIN-JPMT21CIJMJ&quot;</div><div class="line">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s</div><div class="line">                              9 Mb/s; 12 Mb/s; 18 Mb/s</div><div class="line">                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s</div><div class="line">                    Mode:Master</div><div class="line">                    Extra:tsf=00000002ea7a06c0</div><div class="line">                    Extra: Last beacon: 410ms ago</div><div class="line"></div><div class="line">.........................实在太长了就截取到这里吧</div></pre></td></tr></table></figure>
+<p>于是呢我们就能找到想要加入的wfi网络的SSID和加密协议了~</p>
+<p>根据这个信息使用UCI命令再次修改<code>/etc/config/wireless</code></p>
+<p>尝试连接至<strong>BUPT-3</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uci set wireless.@wifi-iface[0].ssid=BUPT-3</div><div class="line">uci set wireless.@wifi-iface[0].network=wan</div><div class="line">uci commit</div></pre></td></tr></table></figure>
+<p>设置之后的<code>/etc/cofig/wireless</code>文件<code>wifi-iface[0]</code>部分内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config wifi-iface</div><div class="line">        option device &apos;radio0&apos;</div><div class="line">        option encryption &apos;none&apos;</div><div class="line">        option mode &apos;sta&apos;</div><div class="line">        option network &apos;wan&apos;</div><div class="line">        option ssid &apos;BUPT-3&apos;</div></pre></td></tr></table></figure>
+<p>执行<code>wifi</code>命令之后出现一下信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[ 1275.460000] wlan0: authenticate with 00:1f:64:ec:4f:78</div><div class="line">[ 1275.470000] wlan0: send auth to 00:1f:64:ec:4f:78 (try 1/3)</div><div class="line">[ 1275.530000] wlan0: authenticated</div><div class="line">[ 1275.540000] wlan0: associate with 00:1f:64:ec:4f:78 (try 1/3)</div><div class="line">[ 1275.550000] wlan0: RX AssocResp from 00:1f:64:ec:4f:78 (capab=0x421 status=0</div><div class="line">aid=9)</div><div class="line">[ 1275.560000] wlan0: associated</div><div class="line">[ 1275.560000] IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready</div></pre></td></tr></table></figure>
+<p>成功变为基础网模式</p>
+<p>再次切换为AP模式只需恢复原有config即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">uci set wireless.@wifi-iface[0].network=lan</div><div class="line">uci set wireless.@wifi-iface[0].ssid=pipinet</div><div class="line">uci set wireless.@wifi-iface[0].mode=ap</div><div class="line">uci commit</div></pre></td></tr></table></figure>
+</div><footer class="post__foot u-cf"><a href="/2014/05/16/2014-05-16-virtual-ap-sta-mode/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-14T22:00:00.000Z" class="post__time">May 15, 2014</time><h1 class="post__title"><a href="/2014/05/15/2014-05-15-prepare-to-finish-wifi-module/">wifi路由要结题啦</a></h1></header><div class="post__main echo"><p>昨天清考去了感觉能过的恩。。。</p>
+<p>于是欢脱的过了半天今天继续做毕设。</p>
+<p>不过老师给我消息说20号左右答辩，要把论文也写出来</p>
+<p>。。。</p>
+<p>今天试了一下ser2net。。工作状态ok</p>
+<p>于是整理一下这个星期要做的事情（毕设）：</p>
+<h4 id="一、把可以演示的demo做出来"><a href="#一、把可以演示的demo做出来" class="headerlink" title="一、把可以演示的demo做出来"></a>一、把可以演示的demo做出来</h4><p><strong>软件部分。</strong></p>
+<ol>
+<li><p>要演示修改ssid（这就是修改配置）【ok】</p>
+</li>
+<li><p>传输数据（小灯亮）【和Netduino的沟通】【ok】</p>
+</li>
+<li>网页的配置工具（选作）【ing】</li>
+</ol>
+<p>网页功能测试已经通过。</p>
+<p>下一步测试uci命令<br>测试成功。</p>
+<p>整合一下</p>
+<p>开始写网页</p>
+<ol>
+<li>争取能把ser2net的源码中控制串口的部分提取一下【later】</li>
+</ol>
+<p><strong>硬件部分。</strong></p>
+<ol>
+<li>做一块板子（手做）</li>
+</ol>
+<h4 id="二、写毕业论文"><a href="#二、写毕业论文" class="headerlink" title="二、写毕业论文"></a>二、写毕业论文</h4><p>提纲</p>
+<p>正文</p>
+<p>翻译文献</p>
+</div><footer class="post__foot u-cf"><a href="/2014/05/15/2014-05-15-prepare-to-finish-wifi-module/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-05-02T22:00:00.000Z" class="post__time">May 3, 2014</time><h1 class="post__title"><a href="/2014/05/03/2014-05-03-Try-UCI/">try UCI</a></h1></header><div class="post__main echo"><p>恩昨天的串口弄了一天继续失败，于是为了赶进度来做uci的部分。</p>
+<p>主要参考资料</p>
+<p><a href="http://wiki.openwrt.org/zh-cn/doc/uci" target="_blank" rel="external">UCI系统</a></p>
+<p><a href="http://www.sl088.com/voyage/2012/03/3407.slboat" target="_blank" rel="external">OPENWRT的一些UCI命令 BY 船长@又在折腾</a></p>
+<p>然后自己折腾了一下</p>
+<p>恩</p>
+<p>首先可以用</p>
+<pre><code>uci export
+</code></pre><p>来输出所有的当前信息</p>
+<p>然后，用</p>
+<pre><code>uci show 【package名字】
+</code></pre><p>就可以看到这个包下面的所有参数和选项了。</p>
+<p>然后就</p>
+<pre><code>uci set
+</code></pre><p>命令就可以设置每个选项的具体值</p>
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><p>恩今天改了个无线的ssid试了一下</p>
+<p>先<code>uci export</code></p>
+<p>发现wireless包下面有ssid的选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package wireless</div><div class="line"></div><div class="line">config wifi-device &apos;radio0&apos;</div><div class="line">	option type &apos;mac80211&apos;</div><div class="line">	option hwmode &apos;11ng&apos;</div><div class="line">	option path &apos;platform/ar933x_wmac&apos;</div><div class="line">	list ht_capab &apos;SHORT-GI-20&apos;</div><div class="line">	list ht_capab &apos;SHORT-GI-40&apos;</div><div class="line">	list ht_capab &apos;RX-STBC1&apos;</div><div class="line">	list ht_capab &apos;DSSS_CCK-40&apos;</div><div class="line">	option disabled &apos;0&apos;</div><div class="line">	option channel &apos;auto&apos;</div><div class="line">	option htmode &apos;HT40+&apos;</div><div class="line">	option country &apos;CN&apos;</div><div class="line">	option noscan &apos;1&apos;</div><div class="line"></div><div class="line">config wifi-iface</div><div class="line">	option device &apos;radio0&apos;</div><div class="line">	option network &apos;lan&apos;</div><div class="line">	option mode &apos;ap&apos;</div><div class="line">	option encryption &apos;none&apos;</div><div class="line">	option ssid &apos;FUCKMATH&apos;</div></pre></td></tr></table></figure>
+<p>于是运行<code>uci show</code></p>
+<p>输出信息如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">wireless.radio0=wifi-device</div><div class="line">wireless.radio0.type=mac80211</div><div class="line">wireless.radio0.hwmode=11ng</div><div class="line">wireless.radio0.path=platform/ar933x_wmac</div><div class="line">wireless.radio0.ht_capab=SHORT-GI-20 SHORT-GI-40 RX-STBC1 DSSS_CCK-40</div><div class="line">wireless.radio0.disabled=0</div><div class="line">wireless.radio0.channel=auto</div><div class="line">wireless.radio0.htmode=HT40+</div><div class="line">wireless.radio0.country=CN</div><div class="line">wireless.radio0.noscan=1</div><div class="line">wireless.@wifi-iface[0]=wifi-iface</div><div class="line">wireless.@wifi-iface[0].device=radio0</div><div class="line">wireless.@wifi-iface[0].network=lan</div><div class="line">wireless.@wifi-iface[0].mode=ap</div><div class="line">wireless.@wifi-iface[0].encryption=none</div><div class="line">wireless.@wifi-iface[0].ssid=FUCKMATH</div></pre></td></tr></table></figure>
+<p>根据最后一条信息。。</p>
+<p>输入<code>uci set wireless.@wifi-iface[0].ssid=pipicoldnet</code></p>
+<p>运行成功没提示恩。</p>
+<p>再次输入<code>uci commit</code></p>
+<p>然后输入<code>/etc/init.d/network restart</code></p>
+<p>或者重启也行。就能看到网络的ssid改了</p>
+<h4 id="关于一些命令的使用-使用中会陆续添加"><a href="#关于一些命令的使用-使用中会陆续添加" class="headerlink" title="关于一些命令的使用(使用中会陆续添加)"></a>关于一些命令的使用(使用中会陆续添加)</h4><p><code>uci export</code></p>
+<p>这个是导出所有的当前配置文件。。所有的包和选项，可以使用<code>uci export &gt; export.txt</code>类似的组合命令输出到文件</p>
+<p><code>uci import</code> <strong><em>暂未试用</em></strong></p>
+<p>顾名思义，导入配置，</p>
+<p><code>uci show 【package】</code></p>
+<p>显示某个包的内容</p>
+<p><code>uci set</code></p>
+<p>这个set后面要跟具体的选项的从属关系和值，具体的用法参见上文实例</p>
+<p><code>uci commit</code></p>
+<p>提交set命令所进行的修改</p>
+<p><code>uci get</code></p>
+<p>获取某个特定的配置项的值</p>
+<h4 id="config文件的形式"><a href="#config文件的形式" class="headerlink" title="config文件的形式"></a>config文件的形式</h4><p>关于每个package的config文件怎么配置就要看第一个链接里面的那个各个config文件详述的表格了</p>
+<p>觉得uci命令是配置路由器基础功能的核心部分</p>
+<p>明天的任务：</p>
+<p>恩早上高数复习（高效一点啦）</p>
+<p>下午之后用lua吧uci命令运行一下试一试~</p>
+<p>串口那里改个波特率试试？最好还是能双向通讯吧</p>
+</div><footer class="post__foot u-cf"><a href="/2014/05/03/2014-05-03-Try-UCI/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-04-29T22:00:00.000Z" class="post__time">April 30, 2014</time><h1 class="post__title"><a href="/2014/04/30/2014-04-30-Graduation-design/">月末的毕业设计</a></h1></header><div class="post__main echo"><p>恩一转眼就月末了呢。</p>
+<p>这个星期大概就没什么进展，从上次编译出SDK以后就一直没有coding关于毕设的事情</p>
+<p>前几天看了一下教程<a href="http://hi.baidu.com/gouooo/item/6932bfa97d23d1981410736a" target="_blank" rel="external">【整理】如何在OpenWRT环境下做开发</a></p>
+<p>发现自己还是要学一些关于<strong>Makefile</strong>的东西，于是就找了个<strong>跟我一起学Makefile</strong>看了看，</p>
+<p>恩目前还没看完但是觉得还是挺有收获的。</p>
+<p>于是今天早上就按照教程上的写了个helloworld程序</p>
+<p>遇到了一下的问题恩</p>
+<p>一开始我的Makefile是这样写的。。（这里只是最后的一些执行语句）</p>
+<p><a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#64;&#x40;&#33;">&#x21;&#64;&#64;&#109;&#97;&#107;&#101;&#64;&#x40;&#33;</a></p>
+<p>#prepare</p>
+<p>define Build/Prepare<br>mkdir -p $(PKG_BUILD_DIR)<br>$(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
+<p>#install will be call</p>
+<p>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
+<p>#the function eval will add the text into makefile</p>
+<p>$(eval $(call BuildPackage,helloworld))</p>
+<p>但是每次make的时候总是报错说是最后一行少了一个分隔符（separator）</p>
+<p>百度了一下说是命令之前要加上一个<code>TAB</code>字符什么的</p>
+<p>但是Makefile直接调用函数什么的根本不用加<code>TAB</code>啊啊啊啊。。。</p>
+<p>于是琢磨了好久发现是在之前的<code>define</code>里面有问题</p>
+<p>Makefile的define就是宏。。就相当于是文本替换。所以在</p>
+<p><a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#33;&#64;&#64;&#109;&#97;&#107;&#x65;&#x40;&#x40;&#x21;">&#33;&#64;&#64;&#109;&#97;&#107;&#x65;&#x40;&#x40;&#x21;</a><br>define Package/$(PKG_NAME)/install<br>$(INSTALL_DIR) $(1)/bin<br>$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/<br>endef</p>
+<p>这样打出的命令之前是没有<code>TAB</code>字符的。。于是在最后一行调用的时候就出现了缺少分隔符错误</p>
+<p>后来修改成这样就正确了</p>
+<p><a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#58;&#33;&#x40;&#64;&#x6d;&#97;&#x6b;&#x65;&#x40;&#x40;&#33;">&#33;&#x40;&#64;&#x6d;&#97;&#x6b;&#x65;&#x40;&#x40;&#33;</a><br>define Build/Prepare<br>    mkdir -p $(PKG_BUILD_DIR)<br>    $(CP) ./src/* $(PKG_BUILD_DIR)/<br>endef</p>
+<p>define Package/helloworld/install<br>    $(INSTALL_DIR) $(1)/bin<br>    $(INSTALL_BIN) $(PKG_BUILD_DIR)/helloworld $(1)/bin/<br>endef</p>
+<p>$(eval $(call BuildPackage,helloworld))<br><strong>注意上面这两个define中的行命令的行首都有TAB</strong></p>
+<p>恩。小问题但是要注意细节恩~</p>
+</div><footer class="post__foot u-cf"><a href="/2014/04/30/2014-04-30-Graduation-design/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-04-22T22:00:00.000Z" class="post__time">April 23, 2014</time><h1 class="post__title"><a href="/2014/04/23/2014-04-23-escape/">关于图片存储</a></h1></header><div class="post__main echo"><p>逃避毕设来做blog</p>
+</div><footer class="post__foot u-cf"><a href="/2014/04/23/2014-04-23-escape/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-04-21T22:00:00.000Z" class="post__time">April 22, 2014</time><h1 class="post__title"><a href="/2014/04/22/2014-04-22-pipicoldblog-building-notes-5/">pipicoldblog搭建手记5</a></h1></header><div class="post__main echo"><p>弄了两个上午。终于把GeSHi的代码高亮功能加到blog上面了</p>
+<p>现在只需要在代码段中加入<code>&lt;!@@php@@!&gt;</code></p>
+<p>类似的字符串就能自动高亮了。</p>
+<p>一下是收工后的总结：</p>
+<p>恩就是玩弄字符串的一次操作</p>
+<p>大概思路是找到所有的<code>&lt;pre&gt;&lt;code&gt;</code>和<code>&lt;/pre&gt;&lt;/code&gt;</code>对的坐标,分别放在两个数组里面</p>
+<p>然后把文章的主题进行按照得到的坐标进行分割成一个<code>sub_content</code>数组</p>
+<p>分隔后的每1,3,5….单数个数组元素都是代码了(因为每篇文章都有标题所以)<code>sub_content[0]</code>总是有东西的</p>
+<p>然后就是用GeSHi处理一下再扔进去.</p>
+<p>总之现在的blog显示页面<code>t.php</code>已经有自己独立的css提供样式了,</p>
+<p>对了关于CSS显示<code>&lt;pre&gt;</code>标签.还遇到了一个不能自动换行的小问题,百度了一下找到了一篇文章</p>
+<p><a href="http://www.16sucai.com/2010/10/941.html" target="_blank" rel="external">使pre的内容自动换行</a></p>
+<p>大概就是加上个样式</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> &lt;!@@<span class="keyword">css</span>@@!&gt;</div><div class="line"> pre &#123;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">pre-wrap</span>;</div><div class="line"><span class="selector-tag">word-wrap</span>: <span class="selector-tag">break-word</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>有空记得我再把原来的代码全部加上<code>&lt;!@@code@@!&gt;</code>的tag吧~</li>
+</ul>
+<p>下面就用高亮代码的代码显示高亮代码的代码(好绕口的一句话!!!~~~~)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line">&lt;!@@php@@!&gt;</div><div class="line"><span class="comment">//highlight_func.php</span></div><div class="line"></div><div class="line"><span class="comment">//written by pipicold</span></div><div class="line"></div><div class="line"><span class="keyword">include_once</span> <span class="string">"./libs/geshi/geshi.php"</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">highlight_article</span><span class="params">($blogcontent)</span></span>&#123;</div><div class="line"></div><div class="line">	$geshi=<span class="keyword">new</span> GeSHi();</div><div class="line"></div><div class="line">	$body_start=stripos($blogcontent, <span class="string">"&lt;body"</span>);</div><div class="line">	$body_end=strripos($blogcontent, <span class="string">"&lt;/body&gt;"</span>);</div><div class="line">	$content=substr($blogcontent, $body_start,$body_end+<span class="number">7</span>-$body_start);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">	$code_starts=<span class="keyword">array</span>();</div><div class="line">	$code_ends=<span class="keyword">array</span>();</div><div class="line">	$sub_contents=<span class="keyword">array</span>();</div><div class="line"></div><div class="line"></div><div class="line">	$start_point=<span class="number">0</span>;</div><div class="line">	$end_point=<span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line"></div><div class="line">		$tmp = stripos($content, <span class="string">"&lt;pre&gt;&lt;code&gt;"</span>,$start_point);</div><div class="line"></div><div class="line">		<span class="keyword">if</span> ($tmp == <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">			array_push($code_starts, $tmp);</div><div class="line">			$start_point=$tmp+<span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line"></div><div class="line">		$tmp = stripos($content, <span class="string">"&lt;/code&gt;&lt;/pre&gt;"</span>,$end_point);</div><div class="line"></div><div class="line">		<span class="keyword">if</span> ($tmp == <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">			array_push($code_ends, $tmp);</div><div class="line">			$end_point=$tmp+<span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (count($code_starts)==<span class="number">0</span>)&#123;</div><div class="line">		array_push($sub_contents, $content);</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		$sub_contents[<span class="number">0</span>]=substr($content, <span class="number">0</span>,$code_starts[<span class="number">0</span>]<span class="number">-1</span>);</div><div class="line">		<span class="keyword">for</span> ($i=<span class="number">0</span>; $i &lt; count($code_starts) ; $i++) &#123; <span class="comment">//代码区一定在$sub_content中的2i+1的那个位置0&lt;i&lt;count($code_starts)</span></div><div class="line">			$sub_contents[$i*<span class="number">2</span>+<span class="number">1</span>] = substr($content, $code_starts[$i],($code_ends[$i]+<span class="number">13</span>-$code_starts[$i]));</div><div class="line"></div><div class="line">			<span class="comment">//---------parse_code code---start</span></div><div class="line">			$language=<span class="keyword">null</span>;</div><div class="line">			$sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>]=htmlspecialchars_decode($sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>],ENT_QUOTES);<span class="comment">//把html代码转成字符</span></div><div class="line">			preg_match(<span class="string">"/&lt;!@@(.+?)@@!&gt;/"</span>, $sub_contents[$i*<span class="number">2</span>+<span class="number">1</span>], $language);</div><div class="line"></div><div class="line">			<span class="keyword">if</span> ($language==<span class="keyword">null</span>) &#123;</div><div class="line"></div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				$sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>]=substr($sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>], <span class="number">11</span>,<span class="number">-13</span>);</div><div class="line">				$geshi-&gt;set_language($language[<span class="number">1</span>]);</div><div class="line"></div><div class="line">				$sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>]=str_ireplace(<span class="string">"&lt;!@@"</span>.$language[<span class="number">1</span>].<span class="string">"@@!&gt;"</span>, <span class="string">""</span>, $sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>]);</div><div class="line"></div><div class="line">				$geshi-&gt;set_source($sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>]);</div><div class="line">				$sub_contents[<span class="number">2</span>*$i+<span class="number">1</span>]=$geshi-&gt;parse_code();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">//---------parse_code code----end</span></div><div class="line"></div><div class="line">			<span class="keyword">if</span> ($code_starts[$i+<span class="number">1</span>]==<span class="keyword">null</span>)&#123;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				$sub_contents[$i*<span class="number">2</span>+<span class="number">2</span>] =	substr($content, $code_ends[$i]+<span class="number">14</span>,($code_starts[$i+<span class="number">1</span>]<span class="number">-1</span>-$code_ends[$i]<span class="number">-14</span>));</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line">		array_push($sub_contents, substr($content, $code_ends[count($code_ends)<span class="number">-1</span>]+<span class="number">14</span>));</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> implode(<span class="string">""</span>, $sub_contents);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</div><footer class="post__foot u-cf"><a href="/2014/04/22/2014-04-22-pipicoldblog-building-notes-5/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-04-20T22:00:00.000Z" class="post__time">April 21, 2014</time><h1 class="post__title"><a href="/2014/04/21/2014-04-21-one-hour-everyday/">琐碎事物一小时什么的</a></h1></header><div class="post__main echo"><p>前段时间看了微信上@warfalcon的账号，</p>
+<p>上面提到了每天花一小时去完成梦想然后坚持一百天什么的。</p>
+<p>我就用这1小时每天做点事情把。总感觉我有一堆杂事要做好不爽</p>
+<ul>
+<li><p><strong>blog的更新</strong> 关于markdown语法解析那一块其实就是字符串操作的练习</p>
+</li>
+<li><p><strong>笔记本</strong> 的耳机孔要重新焊一下</p>
+</li>
+<li><p><strong>重新安装Ubuntu14.04</strong> 到ssd硬盘，有可能要重装windows</p>
+</li>
+<li><p>微信公众账号的功能更新</p>
+</li>
+<li><p>学点设计</p>
+</li>
+<li><p>学画画</p>
+</li>
+</ul>
+</div><footer class="post__foot u-cf"><a href="/2014/04/21/2014-04-21-one-hour-everyday/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-03-24T23:52:00.000Z" class="post__time">March 25, 2014</time><h1 class="post__title"><a href="/2014/03/25/2014-03-25-The-First-Blog/">第一篇blog</a></h1></header><div class="post__main echo"><p>恩。纠结了一下还是决定用<a href="http://mahua.jser.me" title="Mahua" target="_blank" rel="external">Mahua</a>来写这个文档。</p>
+<p>有过想自己用php写一个Markdown和HTML之间转换的小程序。不过因为我在网上找到了一个<a href="http://michelf.ca/projects/php-markdown/" target="_blank" rel="external">PHP Markdown Extra</a></p>
+<p>所以觉得是不是还有必要自己写？</p>
+<p>（自己写的话最好加一个小功能：<em>图片大小</em>）</p>
+<p>对了最近在看<strong>《设计模式之禅这本书》</strong></p>
+<p>其实自己写也是对自己一个练手的好机会诶。尽量用LSP原则去构建类吧</p>
+<p>恩。以上。</p>
+<p>&gt;</p>
+<h2 id="关于博客的结构问题"><a href="#关于博客的结构问题" class="headerlink" title="关于博客的结构问题"></a>关于博客的结构问题</h2><p>大概想了一下恩</p>
+<ul>
+<li>在v1.0时期，博客以页面形式保存，就是在目录下有个blogs目录</li>
+<li>文件命名规则为“日期+当日第几篇序号”例如这一篇就是”2014032501”</li>
+<li>另外为了以后加入php markdown转换，所以所有文档还要保存一份markdown格式的在根目录下/markbak文件夹里面</li>
+<li>主页的话v1.0做一个能搜索本地blogs文件夹并超链接过去，恩。用个内联框架就可以展示啦</li>
+</ul>
+<p>以上。</p>
+<pre><code>pipicold
+2014-03-25
+</code></pre></div><footer class="post__foot u-cf"><a href="/2014/03/25/2014-03-25-The-First-Blog/#disqus_thread" class="post__foot-link u-fr">0 COMMENTS</a></footer></article></main><footer class="foot"><div class="foot-copy u-fl">&copy; 2016 Dongmin Wu</div><menu class="page-menu u-fr"><li class="page-menu__item"><a title="Previous" href="/page/2/" class="page-menu__link icon-arrow-left"></a></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled"></span></li></menu></footer></body></html>
