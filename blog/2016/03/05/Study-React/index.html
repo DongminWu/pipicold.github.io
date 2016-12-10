@@ -1,0 +1,694 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Code, Game" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="The Link of React Tutorial: http://facebook.github.io/react/docs/tutorial.html
+
+Above is the tutorial which told me that I need to setted up a node.js server
+About installing the Nodenpm installnode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Study Notes of React Tutorial">
+<meta property="og:url" content="http://pipicold.github.com/blog/2016/03/05/Study-React/index.html">
+<meta property="og:site_name" content="WU.Dongmin">
+<meta property="og:description" content="The Link of React Tutorial: http://facebook.github.io/react/docs/tutorial.html
+
+Above is the tutorial which told me that I need to setted up a node.js server
+About installing the Nodenpm installnode">
+<meta property="og:image" content="http://pipicold.github.com/img/2016-03-05/1.png">
+<meta property="og:image" content="http://pipicold.github.com/img/2016-03-05/3.png">
+<meta property="og:image" content="http://pipicold.github.com/img/2016-03-05/2.png">
+<meta property="og:updated_time" content="2016-11-10T22:30:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Study Notes of React Tutorial">
+<meta name="twitter:description" content="The Link of React Tutorial: http://facebook.github.io/react/docs/tutorial.html
+
+Above is the tutorial which told me that I need to setted up a node.js server
+About installing the Nodenpm installnode">
+<meta name="twitter:image" content="http://pipicold.github.com/img/2016-03-05/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pipicold.github.com/blog/2016/03/05/Study-React/"/>
+
+
+  <title> Study Notes of React Tutorial | WU.Dongmin </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WU.Dongmin</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Wish I can finish my every year's plan</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Study Notes of React Tutorial
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T00:00:00+01:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>The Link of React Tutorial: <a href="http://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">http://facebook.github.io/react/docs/tutorial.html</a></p>
+</blockquote>
+<p>Above is the tutorial which told me that I need to setted up a node.js server</p>
+<h2 id="About-installing-the-Node"><a href="#About-installing-the-Node" class="headerlink" title="About installing the Node"></a>About installing the Node</h2><p>npm install<br>node server.js<br>By the command above, I can start a Node.JS server on 127.0.0.1:3000</p>
+<p>I have not used any node.js server anymore, so I searched some topic about what the “npm” it is.</p>
+<p>The link of the usage of npm: <a href="http://www.tutorialspoint.com/nodejs/nodejs_npm.htm" target="_blank" rel="external">http://www.tutorialspoint.com/nodejs/nodejs_npm.htm</a></p>
+<p>For my MAC, I use brew to install node.js, the command is:</p>
+<p>brew install nodejs<br>The GIT repo address of my learning is: <a href="https://git.coding.net/pipicold/react-test.git" target="_blank" rel="external">https://git.coding.net/pipicold/react-test.git</a></p>
+<h2 id="About-the-fundamental-knowledge"><a href="#About-the-fundamental-knowledge" class="headerlink" title="About the fundamental knowledge"></a>About the fundamental knowledge</h2><p>To create a React component: <code>React.createClass()</code></p>
+<p>While creating a component, a important method is</p>
+<p><code>render: ()</code></p>
+<p>In this method, you can added some codes for when your component is firstly added.</p>
+<p>You do not have to return basic HTML. You can return a tree of components that you (or someone else) built.</p>
+<p><code>ReactDOM.render()</code> instantiates the root component, starts the framework, and injects the markup into a raw DOM element, provided as the second argument.</p>
+<p><img src="/img/2016-03-05/1.png" alt="first render"></p>
+<p>The class name of a component equals the name of the tag</p>
+<p>example:</p>
+<p>If I defined a class named “CommentBox” by the code:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> CommentBox = React.createClass();</div></pre></td></tr></table></figure>
+<p>I should call this component by:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render(        &lt;CommentBox /&gt;,        document.getElementById("content"))</div></pre></td></tr></table></figure>
+<h2 id="Composing-Components"><a href="#Composing-Components" class="headerlink" title="Composing Components"></a>Composing Components</h2><p>I found that maybe React cannot divide the code into separated files</p>
+<p>Firstly, I wrote 3 files</p>
+<ol>
+<li>tutorial2.js</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> CommentList = React.createClass(   </div><div class="line">    &#123;           </div><div class="line">        <span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;         </div><div class="line">            <span class="keyword">return</span>(         </div><div class="line">               &lt;div className="commentList"&gt;     </div><div class="line">                    Hello, I am a CommentList      </div><div class="line">               &lt;/div&gt;        </div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">);</div><div class="line"><span class="keyword">var</span> CommentForm = React.createClass(</div><div class="line">    &#123;            </div><div class="line">        <span class="attr">render</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                </div><div class="line">            <span class="keyword">return</span>(                        </div><div class="line">                &lt;div className = "commentForm"&gt;                        </div><div class="line">                    Hey, I am a Comment Form                      </div><div class="line">                &lt;/div&gt;</div><div class="line">            );            </div><div class="line">        &#125;        </div><div class="line">    &#125;        </div><div class="line">);</div></pre></td></tr></table></figure>
+<ol>
+<li>tutorialall.js</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var CommentBox = React.createClass(</div><div class="line">        &#123;</div><div class="line">render: function()&#123;                </div><div class="line">return (                        </div><div class="line">        //'className' means 'class' in standard HTML</div><div class="line">        &lt;div className = "commentBox"&gt;                        </div><div class="line">        Hello pipicold                        </div><div class="line">        &lt;h1&gt;Comments&lt;/h1&gt;</div><div class="line">        &lt;CommentList /&gt;                        </div><div class="line">        &lt;CommentForm /&gt;                        </div><div class="line">        &lt;/div&gt;                      </div><div class="line">       );  </div><div class="line">&#125;        </div><div class="line">&#125;        </div><div class="line">);</div><div class="line">ReactDOM.render(</div><div class="line">        &lt;CommentBox /&gt;,      </div><div class="line">        document.getElementById('content')        </div><div class="line">        );</div></pre></td></tr></table></figure>
+<ol>
+<li>index.html</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span>     <span class="tag">&lt;<span class="name">html</span>&gt;</span>  </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>React Tutorial<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="comment">&lt;!-- Not present in the tutorial. Just for basic styling. --&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/base.css"</span> /&gt;</span>    </div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span>  </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span> <span class="attr">src</span>=<span class="string">"scripts/tutorial2.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>    </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span> <span class="attr">src</span>=<span class="string">"scripts/tutorialall.js"</span>&gt;</span><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span> <span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>It will not work.</p>
+<p>After I merged those two JS file into one, the page went to normal.</p>
+<p>Using props</p>
+<p>the braces seems to mean the call of properties</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"comment"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">className</span>=<span class="string">"commentAuthor"</span>&gt;</span></div><div class="line">&#123;this.props.author&#125;  </div><div class="line"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span>  </div><div class="line">&#123;this.props.children&#125;       </div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>what should be came up with is that the <code>{this.props.children}</code> means the elements between the tags: <code>&lt;Comment&gt; &lt;/Comment&gt;</code></p>
+<h2 id="Component-Properties"><a href="#Component-Properties" class="headerlink" title="Component Properties"></a>Component Properties</h2><p>Pass the properties like original HTML</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render: function()&#123;                </div><div class="line">    return(                        </div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"commentList"</span>&gt;</span>                        </div><div class="line">            <span class="tag">&lt;<span class="name">Comment</span> <span class="attr">author</span>=<span class="string">"Mrs. Wu"</span>&gt;</span> I do not like baby<span class="tag">&lt;/<span class="name">Comment</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">Comment</span> <span class="attr">author</span>=<span class="string">"Mr. Wu"</span>&gt;</span> I don't like baby<span class="tag">&lt;/<span class="name">Comment</span>&gt;</span>  </div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">          );            </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>By the way, I found that it is unimportant for the sequence of each Component, you can put a Component at any where but should before the line :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ReactDOM.render();</div></pre></td></tr></table></figure>
+<p>Besides, you can use any characters between tags in JSX</p>
+<p>The rendered page showed like follow:</p>
+<p><img src="/img/2016-03-05/3.png" alt="first render"></p>
+<h2 id="Adding-Markdown"><a href="#Adding-Markdown" class="headerlink" title="Adding Markdown"></a>Adding Markdown</h2><p><a href="http://facebook.github.io/react/docs/tutorial.html#adding-markdown" target="_blank" rel="external">http://facebook.github.io/react/docs/tutorial.html#adding-markdown</a></p>
+<p>Marked is a external library wirtten in JS</p>
+<p>offical usage in its github website: <a href="https://github.com/chjj/marked" target="_blank" rel="external">https://github.com/chjj/marked</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Marked in the browser<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"lib/marked.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML =      marked(<span class="string">'# Marked in browser\n\nRendered by **marked**.'</span>);  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Whlie applying it to React, just us the braces to run your JS code</p>
+<p>the content in the braces means the JS code, outside of that is the HTML part</p>
+<p>besides, you cannot use “;” in the return, reason:</p>
+<p><a href="http://blog.csdn.net/lihongxun945/article/details/45826851" target="_blank" rel="external">http://blog.csdn.net/lihongxun945/article/details/45826851</a></p>
+<blockquote>
+<p>因为 React.createElement(“div”, null, var a = 1;) 是语法错误。</p>
+<p>那么你也可以理解为什么大括号中的js表达式不能有分号结尾了吧。</p>
+<p>需要注意的是，如果你在属性中输出JS变量，是不能加引号的，不然会被当做字符串而不被解析。</p>
+<p>应该是这样：</p>
+</blockquote>
+<p>the renderred page is like this:</p>
+<p><img src="/img/2016-03-05/2.png" alt="first render"></p>
+<p>according to the description of React’s tutorial</p>
+<p>That’s React protecting you from an XSS attack. There’s a way to get around it but the framework warns you not to use it:</p>
+<p>two steps:</p>
+<ol>
+<li>using html: tag</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rawMarkup: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> rawMarkup = marked(<span class="keyword">this</span>.props.children.toString(), &#123;<span class="attr">sanitize</span>: <span class="literal">true</span>&#125;);</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">__html</span>: rawMarkup &#125;;</div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
+<ol>
+<li>using span tag</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;this.rawMarkup()&#125;</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>caution! you must use comma to separate two functions</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> Comment = React.createClass(</div><div class="line">        &#123;</div><div class="line">            <span class="attr">rawMarkup</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></div><div class="line">            &#123;</div><div class="line">                <span class="keyword">var</span> rawMarkup = marked( <span class="keyword">this</span>.props.children.toString(), &#123;<span class="attr">sanitize</span>:<span class="literal">true</span>&#125;);</div><div class="line">                <span class="keyword">return</span> &#123;<span class="attr">__html</span>: rawMarkup&#125;;</div><div class="line">            &#125;,<span class="comment">//be careful of this comma!!</span></div><div class="line">            render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">return</span>(</div><div class="line">                        <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"comment"</span>&gt;</span></span></div><div class="line">                            <span class="tag">&lt;<span class="name">h2</span> <span class="attr">className</span>=<span class="string">"commentAuthor"</span>&gt;</span></div><div class="line">                                &#123;this.props.author&#125;</div><div class="line">                            <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">span</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;this.rawMarkup()&#125;/</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                        );</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        );</div></pre></td></tr></table></figure>
+<h2 id="Hook-up-the-data-model"><a href="#Hook-up-the-data-model" class="headerlink" title="Hook up the data model"></a>Hook up the data model</h2><p>It is so fun and free while using function in JavaScript:</p>
+<p><a href="http://www.jb51.net/article/22742.htm" target="_blank" rel="external">http://www.jb51.net/article/22742.htm</a></p>
+<p>再有一个值得说一下的，就是JS中的函数的参数不一定是严格匹配的，通常的编程经验，比如有这样一个函数 fun(aa,bb)，那么我们在调用这个函数的时候就应该给他传递两个参数。但是在JS中，我们可以给他传递任意个参数，1个，3个，等等，都可以。JS中的参数传递，不完全是按照函数声明时指定的那些参数，在每次调用函数的时候，都会有一个命名为arguments的数组，这个数组里面存储了函数调用时，传递进来的所有参数，有了它，我们甚至可以不再函数声明时指定形式参数</p>
+<h2 id="Reactive-state"><a href="#Reactive-state" class="headerlink" title="Reactive state"></a>Reactive state</h2><p> To implement interactions, we introduce mutable state to the component. this.state is private to the component and can be changed by calling this.setState(). When the state updates, the component re-renders itself.</p>
+<h2 id="Adding-new-comments"><a href="#Adding-new-comments" class="headerlink" title="Adding new comments"></a>Adding new comments</h2><p>it is so hard for me to debug in React, maybe I should find a way to debug it.</p>
+<p>also, I was not so familir with the “function” of Javascript, I should learn about it</p>
+<p>It is so tired for me, because it is already 1.30 am now…I must go to bed…</p>
+<p>There is an extension for debuging React, on chrome.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/blog/2015/06/18/Nor-Flash-Learning/" rel="next" title="学习一下norflash">
+                <i class="fa fa-chevron-left"></i> 学习一下norflash
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/blog/2016/03/06/Wince-Jenkins-Building/" rel="prev" title="Using Jenkins to Build Wince">
+                Using Jenkins to Build Wince <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.gif"
+               alt="Dongmin Wu" />
+          <p class="site-author-name" itemprop="name">Dongmin Wu</p>
+          <p class="site-description motion-element" itemprop="description">The blog of myself</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pipicold" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://cn.linkedin.com/in/dongmin-wu-44185086" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#About-installing-the-Node"><span class="nav-number">1.</span> <span class="nav-text">About installing the Node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#About-the-fundamental-knowledge"><span class="nav-number">2.</span> <span class="nav-text">About the fundamental knowledge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composing-Components"><span class="nav-number">3.</span> <span class="nav-text">Composing Components</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component-Properties"><span class="nav-number">4.</span> <span class="nav-text">Component Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adding-Markdown"><span class="nav-number">5.</span> <span class="nav-text">Adding Markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook-up-the-data-model"><span class="nav-number">6.</span> <span class="nav-text">Hook up the data model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactive-state"><span class="nav-number">7.</span> <span class="nav-text">Reactive state</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adding-new-comments"><span class="nav-number">8.</span> <span class="nav-text">Adding new comments</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongmin Wu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Code, Game" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="说起来真的好久没更新blog了
+上一次的文章日期还是5月16日.
+于是快过了2个月过来报道一下!
+唔这两个月对于技术方面真的是很少更新.
+上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计
+大概是一个FLASH+Arduino的一个展示性的项目
+唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧
+之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&amp;gt;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="老子回来了!带着jQuery">
+<meta property="og:url" content="http://pipicold.github.com/blog/2014/07/13/Jqury-psp-menu/index.html">
+<meta property="og:site_name" content="WU.Dongmin">
+<meta property="og:description" content="说起来真的好久没更新blog了
+上一次的文章日期还是5月16日.
+于是快过了2个月过来报道一下!
+唔这两个月对于技术方面真的是很少更新.
+上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计
+大概是一个FLASH+Arduino的一个展示性的项目
+唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧
+之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&amp;gt;&amp;">
+<meta property="og:updated_time" content="2016-11-10T22:30:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="老子回来了!带着jQuery">
+<meta name="twitter:description" content="说起来真的好久没更新blog了
+上一次的文章日期还是5月16日.
+于是快过了2个月过来报道一下!
+唔这两个月对于技术方面真的是很少更新.
+上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计
+大概是一个FLASH+Arduino的一个展示性的项目
+唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧
+之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&amp;gt;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pipicold.github.com/blog/2014/07/13/Jqury-psp-menu/"/>
+
+
+  <title> 老子回来了!带着jQuery | WU.Dongmin </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WU.Dongmin</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Wish I can finish my every year's plan</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                老子回来了!带着jQuery
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2014-07-13T00:00:00+02:00" content="2014-07-13">
+              2014-07-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>说起来真的好久没更新blog了</p>
+<p>上一次的文章日期还是5月16日.</p>
+<p>于是快过了2个月过来报道一下!</p>
+<p>唔这两个月对于技术方面真的是很少更新.</p>
+<p>上篇blog更新完了之后就忙着写毕业论文和帮媳妇儿做她的毕业设计</p>
+<p>大概是一个FLASH+Arduino的一个展示性的项目</p>
+<p>唔它重要的一点就是serproxy吧, 有空的话我再把源文件上传到git吧</p>
+<p>之后就是毕业季和大家玩耍然后和基友们白白和老婆分居两地&gt;&lt;</p>
+<p>一个人来到上海找房子安顿下来开始上班,然后最近陷入了一点对未来的迷茫之中…</p>
+<p>回归正题,这两天下班的时候想了想不能那么无聊是吧~于是自己学了一下jQuery这个框架怎么使用,发现它确实比原生的Javascript要好用和方便许多~!!!!</p>
+<p>大概就属于随意敲敲代码就能弄出漂亮网页应用</p>
+<p>目前还是一个完成了一半的状态</p>
+<p>先是展示</p>
+<p>就是一个点击就能切换二级菜单的东西..</p>
+<p>唔用的原理是仿造于<strong>图片轮播</strong>的</p>
+<p>然后自己加上了一些按键控制和主菜单动画</p>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><pre><code>&lt;!@@javascript@@!&gt;
+/**
+ * Created by Wu on 14-7-6.
+ */
+
+
+//    2 vector test success
+//    var aa=new Array();
+//    aa[0]=new Array();
+//    aa[0][0]=10;
+//    alert(aa[0][0]);
+//
+
+
+
+var Main_index=0;//当前主按钮序号
+var Child_index=0;//当前子按钮序号
+var animate_time=200;//每个动画的执行时间
+var main_panel_button_counts=0;
+var child_panel_counts= new Array();
+var child_now_index=new Array();
+var can_press_key=true;
+
+
+
+$(document).ready(function(){
+
+    //init
+    main_panel_button_counts=$(&quot;li.buttons&quot;).length;//count the sum of button in main panel
+    count_child_menu();
+    init_child_now_index();
+    main_panel_change(Main_index);
+    can_press_key=true;
+
+    $(document).keydown(function(event){
+    if(can_press_key==true){
+        log(&quot;keyCode:&quot;+event.keyCode+&quot; is clicked.&quot;);
+        if (event.keyCode==37){
+           //left key down
+       if (Main_index-1 &gt;=0 ){
+        main_panel_change(Main_index-1);
+       }
+        };
+        if (event.keyCode==39){
+            //right key down
+        if (Main_index+1&lt;main_panel_button_counts){
+            main_panel_change(Main_index+1);
+        }
+        }
+        if (event.keyCode==38){
+            //up key down
+        if(child_now_index[Main_index]&gt;0){
+            child_panel_change(child_now_index[Main_index]-1);
+        }
+        }
+    if (event.keyCode==40){
+        //down key down
+        if (child_now_index[Main_index]&lt;child_panel_counts[Main_index]-1){
+            child_panel_change(child_now_index[Main_index]+1);
+        }
+    }
+    }
+
+
+    });
+//funciton main_panel_change(destination)
+//this function is used to move main panel,
+//when key down or mouse click;
+//let $(&quot;li.buttons) move to destination
+//and run the animate.
+//
+
+
+    function main_panel_change(destination){
+    can_press_key=false;
+    log(&quot;can_press_key:&quot;+can_press_key);
+    //change the child panel
+
+
+    //=================bug 1 when click the keys quickly, display will be wrong===========
+    //$(&quot;li.mymenu&quot;).eq(0).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(1).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(2).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(4).fadeOut(animate_time);
+    //$(&quot;li.mymenu&quot;).eq(5).fadeOut(animate_time);
+    $(&quot;li.mymenu&quot;).eq(Main_index).fadeOut(animate_time,function(){$(&quot;li.mymenu&quot;).eq(destination).fadeIn(animate_time);can_press_key=true;});
+
+    //change main panel background-color
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        if (i==destination){
+            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
+        }else{
+            $(&quot;li.buttons&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
+        }
+    }
+
+    //move main panel
+
+    var now_left=$(&quot;div#main_menu_panel&quot;).css(&quot;left&quot;);
+        var move_distance=100;
+
+        $(&quot;div#main_menu_panel&quot;).animate({left:&quot;-=&quot;+(destination-Main_index)*move_distance+&quot;px&quot;})
+
+        //let Main_index=destination
+           Main_index=destination;
+    child_panel_change(child_now_index[destination]);
+    }
+
+    //function child_panel_change()
+    //when key down up and down, call this
+    //1. get Main_index number to decide change which one
+    //2
+    function child_panel_change(destination){
+        log(&quot;child_destination :&quot;+destination);
+    //change main panel background-color
+    for (var i=0;i&lt;child_panel_counts[Main_index];i++){
+        if (i==destination){
+            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;#e0e0e0&quot;);
+        }else{
+            $(&quot;ul.popupmenu&quot;).eq(Main_index).children(&quot;li&quot;).eq(i).css(&quot;background-color&quot;,&quot;transparent&quot;);
+        }
+    }
+    child_now_index[Main_index]=destination;
+    }
+
+
+
+    //function count_child_menu()
+    //a for loop to init the child_panel_counts[]
+    function count_child_menu(){
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        child_panel_counts[i]=$(&quot;ul.popupmenu&quot;).eq(i).children(&quot;li&quot;).length;
+    }
+    }
+    //function init_child_now_index()
+    //init child_now_index to all 0
+    function init_child_now_index(){
+    for (var i=0;i&lt;main_panel_button_counts;i++){
+        child_now_index[i]=0;
+    }
+    }
+    //function log(data)
+    //to output @ &lt;p id=&quot;logoutput&quot;&gt;&lt;/p&gt;
+    function log(data){
+
+//    $(&quot;#logoutput&quot;).text($(&quot;#logoutput&quot;).text()+&quot;\r\n&quot;+data);
+    }
+//----------------------------below this line is mouse click event-------------------
+
+    //$(&quot;#logoutput&quot;).text(&quot;start test&quot;);
+    $(&quot;li.buttons&quot;).click(function(){
+
+        var now_index=$(this).index();
+        main_panel_change(now_index);
+        });
+
+    //子菜单被点击事件
+    $(&quot;ul.popupmenu li&quot;).click(function(){
+
+      //  alert(&quot;index:&quot;+);
+      var now_child_index=$(this).index();
+          child_panel_change(now_child_index);
+
+    });
+
+});
+</code></pre><h3 id="稍微分析一下吧"><a href="#稍微分析一下吧" class="headerlink" title="稍微分析一下吧"></a>稍微分析一下吧</h3><p>主要的两个函数是<strong><code>main_panel_change</code></strong>和<strong><code>child_panel_change</code></strong>这两个分别是主菜单和子菜单的控制函数,</p>
+<p>貌似没什么好讲的都挺简单&gt;&lt;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/blog/2014/05/16/virtual-ap-sta-mode/" rel="next" title="虚拟AP和基础网模式">
+                <i class="fa fa-chevron-left"></i> 虚拟AP和基础网模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/blog/2014/07/13/Next-step-of-blog/" rel="prev" title="pipicoldblog搭建下一步计划">
+                pipicoldblog搭建下一步计划 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.gif"
+               alt="Dongmin Wu" />
+          <p class="site-author-name" itemprop="name">Dongmin Wu</p>
+          <p class="site-description motion-element" itemprop="description">The blog of myself</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pipicold" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://cn.linkedin.com/in/dongmin-wu-44185086" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-number">1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稍微分析一下吧"><span class="nav-number">2.</span> <span class="nav-text">稍微分析一下吧</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongmin Wu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

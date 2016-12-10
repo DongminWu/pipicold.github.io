@@ -1,0 +1,672 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Code, Game" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="这两天都在配置编译服务器,
+1. 服务器的IP地址的问题虚拟机的IP地址的问题搞定了.修改/etc/sysconfig/network-scripts/ifcfg-ens32
+12345678910111213141516171819TYPE=&amp;quot;Ethernet&amp;quot;BOOTPROTO=&amp;quot;static&amp;quot;DEFROUTE=&amp;quot;yes&amp;quot;IPV4_F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习笔记1">
+<meta property="og:url" content="http://pipicold.github.com/blog/2015/02/28/Happy-Birthday/index.html">
+<meta property="og:site_name" content="WU.Dongmin">
+<meta property="og:description" content="这两天都在配置编译服务器,
+1. 服务器的IP地址的问题虚拟机的IP地址的问题搞定了.修改/etc/sysconfig/network-scripts/ifcfg-ens32
+12345678910111213141516171819TYPE=&amp;quot;Ethernet&amp;quot;BOOTPROTO=&amp;quot;static&amp;quot;DEFROUTE=&amp;quot;yes&amp;quot;IPV4_F">
+<meta property="og:updated_time" content="2016-11-10T22:30:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux学习笔记1">
+<meta name="twitter:description" content="这两天都在配置编译服务器,
+1. 服务器的IP地址的问题虚拟机的IP地址的问题搞定了.修改/etc/sysconfig/network-scripts/ifcfg-ens32
+12345678910111213141516171819TYPE=&amp;quot;Ethernet&amp;quot;BOOTPROTO=&amp;quot;static&amp;quot;DEFROUTE=&amp;quot;yes&amp;quot;IPV4_F">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pipicold.github.com/blog/2015/02/28/Happy-Birthday/"/>
+
+
+  <title> Linux学习笔记1 | WU.Dongmin </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WU.Dongmin</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Wish I can finish my every year's plan</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux学习笔记1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-02-28T11:14:00+01:00" content="2015-02-28">
+              2015-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这两天都在配置编译服务器,</p>
+<h3 id="1-服务器的IP地址的问题"><a href="#1-服务器的IP地址的问题" class="headerlink" title="1. 服务器的IP地址的问题"></a>1. 服务器的IP地址的问题</h3><p>虚拟机的IP地址的问题搞定了.<br>修改/etc/sysconfig/network-scripts/ifcfg-ens32</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">TYPE=&quot;Ethernet&quot;</div><div class="line">BOOTPROTO=&quot;static&quot;</div><div class="line">DEFROUTE=&quot;yes&quot;</div><div class="line">IPV4_FAILURE_FATAL=&quot;no&quot;</div><div class="line">IPV6INIT=&quot;yes&quot;</div><div class="line">IPV6_AUTOCONF=&quot;yes&quot;</div><div class="line">IPV6_DEFROUTE=&quot;yes&quot;</div><div class="line">IPV6_FAILURE_FATAL=&quot;no&quot;</div><div class="line">NAME=&quot;ens32&quot;</div><div class="line">UUID=&quot;476287bc-8643-404f-984e-8fd719a2832f&quot;</div><div class="line">ONBOOT=&quot;yes&quot;</div><div class="line">HWADDR=&quot;00:50:56:8C:6E:82&quot;</div><div class="line">PEERDNS=&quot;yes&quot;</div><div class="line">PEERROUTES=&quot;yes&quot;</div><div class="line">IPV6_PEERDNS=&quot;yes&quot;</div><div class="line">IPV6_PEERROUTES=&quot;yes&quot;</div><div class="line">IPADDR=10.79.183.125</div><div class="line">NETMASK=255.255.255.0</div><div class="line">GATEWAY=10.79.183.1</div></pre></td></tr></table></figure>
+<p>又遇到了一个dns的问题</p>
+<p>在这个文件里面还需要添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DNS1=&quot;64.104.123.144&quot;</div><div class="line">DNS2=&quot;171.70.168.183&quot;</div></pre></td></tr></table></figure>
+<h3 id="2-Sudo权限设置"><a href="#2-Sudo权限设置" class="headerlink" title="2. Sudo权限设置."></a>2. Sudo权限设置.</h3><p>主要是看了一个blog <a href="https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos" target="_blank" rel="external">How To Edit the Sudoers File on Ubuntu and CentOS</a></p>
+<p>/etc/sudoers里面  </p>
+<p><code>root        ALL=(ALL:ALL) ALL</code></p>
+<p>这一行下面添加</p>
+<p><code>demo        ALL=(ALL:ALL) ALL</code></p>
+<p>就ok</p>
+<h3 id="3-64位系统的交叉编译环境-arm-linux-gcc-不能使用的问题"><a href="#3-64位系统的交叉编译环境-arm-linux-gcc-不能使用的问题" class="headerlink" title="3. 64位系统的交叉编译环境 arm-linux-gcc 不能使用的问题."></a>3. 64位系统的交叉编译环境 arm-linux-gcc 不能使用的问题.</h3><p>有两个库找不到, <code>libz.so.1</code>和<code>ld-linux.so.2</code></p>
+<p>google了一下, 问题是出在这个服务器是64位的, 有些32位的lib没有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install glibc.i686</div><div class="line">yum install zlib.i686</div></pre></td></tr></table></figure>
+<h3 id="4-fedora-设置环境变量"><a href="#4-fedora-设置环境变量" class="headerlink" title="4. fedora 设置环境变量"></a>4. fedora 设置环境变量</h3><p>修改/etc/profile文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PATH=/opt/tool:$PATH</div><div class="line">export PATH</div></pre></td></tr></table></figure>
+<p>立即执行 环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">. /etc/profile</div></pre></td></tr></table></figure>
+<p>注意 点 <code>.</code> 和 <code>/</code> 之间有个空格</p>
+<h3 id="5-tftp-Server-on-Fedora-21"><a href="#5-tftp-Server-on-Fedora-21" class="headerlink" title="5. tftp Server on Fedora 21"></a>5. tftp Server on Fedora 21</h3><p>这个弄了我好久.</p>
+<p>tftpServer的本质是用tftpd来作为server</p>
+<p>但是可以用不同的服务来启动.</p>
+<p>Fedora 18的文档是这样写的.</p>
+<p>&gt;<br>On the DHCP server, verify that the tftp-server package is installed with the command rpm -q tftp-server.<br>tftp is an xinetd-based service. Configure xinetd to process tftp requests by editing /etc/xinetd.d/tftp so that disable = no.<br>Start the tftp service with the following commands:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start xinetd.service</div><div class="line">systemctl enable xinetd.service</div></pre></td></tr></table></figure></p>
+<p>These commands configure the tftp and xinetd services to immediately turn on and also configure them to start at boot.</p>
+<p>但是到了Fedora 21的文档就变成了</p>
+<p>&gt;</p>
+<ol>
+<li>Install the tftp server package.<br> yum install tftp-server</li>
+<li>Start and enable the tftp socket. systemd will automatically start the tftpd service when required.<br> systemctl start tftp.socket<br> systemctl enable tftp.socket</li>
+</ol>
+<p>恩其实是两个不同的服务调用了同一个程序: /usr/sbin/in.tftpd</p>
+<p>这个程序的帮助: man in.tftpd</p>
+<h4 id="xinet"><a href="#xinet" class="headerlink" title="xinet"></a>xinet</h4><p>配置文件位置: /etc/xinet.d/tftp   没有的话就自己建立一个<br>配置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">service tftp</div><div class="line">&#123;</div><div class="line">	disable		=	no</div><div class="line">	socket_type	=	dgram</div><div class="line">	protocol	=	udp</div><div class="line">	wait		=	yes</div><div class="line">	user		=	root</div><div class="line">	server		=	/usr/sbin/in.tftpd</div><div class="line">	server_args	=	-s /tftpboot</div><div class="line">	per_source	=	11</div><div class="line">	csp		    =	100 2</div><div class="line">	flags		=	IPv4</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意的是:</p>
+<ol>
+<li>server_args 这一项是 in.tftpd的参数, 意思是把/tftpboot作为根目录</li>
+<li>flags=IPv4是采用IPv4的端口,否则默认用的是IPv6的.</li>
+</ol>
+<h5 id="tftp-service-tftp-socket"><a href="#tftp-service-tftp-socket" class="headerlink" title="tftp.service / tftp.socket"></a>tftp.service / tftp.socket</h5><p>配置文件位置: <code>/usr/lib/systemd/system/tftp.service</code><br>内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=Tftp Server</div><div class="line">Requires=tftp.socket</div><div class="line">Documentation=man:in.tftpd</div><div class="line"></div><div class="line">[Service]</div><div class="line">ExecStart=/usr/sbin/in.tftpd -s /tftpboot</div><div class="line">StandardInput=socket</div><div class="line"></div><div class="line">[Install]</div><div class="line">Also=tftp.socket</div></pre></td></tr></table></figure>
+<p>IPV4的配置在 <code>/usr/lib/systemd/system/tftp.service</code><br>要配置成这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=Tftp Server Activation Socket</div><div class="line"></div><div class="line">[Socket]</div><div class="line">ListenDatagram=0.0.0.0:69</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=sockets.target</div></pre></td></tr></table></figure>
+<p>重要的是ListenDatagram这一项</p>
+<p><strong>配置成功!!!!</strong></p>
+<p>要把selinux配置成自由模式(放纵模式?)</p>
+<p><code>setenforce 0</code></p>
+<p>linux的帮助这样写的</p>
+<p>&gt;<br>setenforce(8)                               SELinux Command Line documentation                              setenforce(8)<br>NAME<br>       setenforce - modify the mode SELinux is running in<br>SYNOPSIS<br>       setenforce [Enforcing|Permissive|1|0]<br>DESCRIPTION<br>       Use Enforcing or 1 to put SELinux in enforcing mode.<br>       Use Permissive or 0 to put SELinux in permissive mode.<br>       If  SELinux  is  disabled  and you want to enable it, or SELinux is enabled and you want to disable it, please see<br>       selinux(8).<br>AUTHOR<br>       Dan Walsh, <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x64;&#119;&#97;&#x6c;&#x73;&#x68;&#x40;&#x72;&#x65;&#100;&#x68;&#97;&#116;&#x2e;&#99;&#x6f;&#x6d;">&#x64;&#119;&#97;&#x6c;&#x73;&#x68;&#x40;&#x72;&#x65;&#100;&#x68;&#97;&#116;&#x2e;&#99;&#x6f;&#x6d;</a><br>SEE ALSO<br>       selinux(8), getenforce(8), selinuxenabled(8)<br>dwalsh@redhat.com                                      7 April 2004                                         setenforce(8)</p>
+<h5 id="查看SELinux状态："><a href="#查看SELinux状态：" class="headerlink" title="查看SELinux状态："></a>查看SELinux状态：</h5><p>1、/usr/sbin/sestatus -v      ##如果SELinux status参数为enabled即为开启状态</p>
+<p>SELinux status:                 enabled</p>
+<p>2、getenforce                 ##也可以用这个命令检查</p>
+<h5 id="关闭SELinux："><a href="#关闭SELinux：" class="headerlink" title="关闭SELinux："></a>关闭SELinux：</h5><p>1、临时关闭（不用重启机器）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setenforce 0                  <span class="comment">##设置SELinux 成为permissive模式</span></div><div class="line"></div><div class="line">                              <span class="comment">##setenforce 1 设置SELinux 成为enforcing模式</span></div></pre></td></tr></table></figure>
+<p>2、修改配置文件需要重启机器：</p>
+<p>修改/etc/selinux/config 文件</p>
+<p>将SELINUX=enforcing改为SELINUX=disabled</p>
+<h4 id="服务的启动"><a href="#服务的启动" class="headerlink" title="服务的启动"></a>服务的启动</h4><p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">systemctl status xinetd.service  //查看状态</div><div class="line"></div><div class="line">systemctl start xinetd.service   //启动</div><div class="line"></div><div class="line">systemctl stop xinetd.service    //停止</div><div class="line"></div><div class="line">systemctl restart xinetd.service //重启</div><div class="line"></div><div class="line">systemctl enable xinetd.service  //开机自启动</div></pre></td></tr></table></figure>
+<h4 id="Samba-服务"><a href="#Samba-服务" class="headerlink" title="Samba 服务"></a>Samba 服务</h4><p><a href="http://docs.fedoraproject.org/en-US/Fedora/21/html/System_Administrators_Guide/ch-File_and_Print_Servers.html#samba-rgs-overview" target="_blank" rel="external">Fedora Samba配置文档</a></p>
+<p><strong>1. 改/etc/samba/smb.conf 文件</strong></p>
+<p>在最下面加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[dongmwu]</div><div class="line">path = /home/dongmwu</div><div class="line">writeable = yes</div><div class="line">public = yes</div><div class="line">guest ok = no</div></pre></td></tr></table></figure>
+<p><strong>2. 设置密码</strong></p>
+<p><code>smbpasswd -a username</code></p>
+<p><strong>3. 重启samba服务</strong></p>
+<p><code>systemctl restart smb.service</code></p>
+<p><strong>4. 记住关防火墙!!!</strong></p>
+<p><code>systemctl stop firewalld.service</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/blog/2015/02/17/Linux-Driver-Study/" rel="next" title="Study of Linux Driver">
+                <i class="fa fa-chevron-left"></i> Study of Linux Driver
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/blog/2015/03/04/Liunx-command-one/" rel="prev" title="Linux学习笔记2">
+                Linux学习笔记2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.gif"
+               alt="Dongmin Wu" />
+          <p class="site-author-name" itemprop="name">Dongmin Wu</p>
+          <p class="site-description motion-element" itemprop="description">The blog of myself</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pipicold" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://cn.linkedin.com/in/dongmin-wu-44185086" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-服务器的IP地址的问题"><span class="nav-number">1.</span> <span class="nav-text">1. 服务器的IP地址的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Sudo权限设置"><span class="nav-number">2.</span> <span class="nav-text">2. Sudo权限设置.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-64位系统的交叉编译环境-arm-linux-gcc-不能使用的问题"><span class="nav-number">3.</span> <span class="nav-text">3. 64位系统的交叉编译环境 arm-linux-gcc 不能使用的问题.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-fedora-设置环境变量"><span class="nav-number">4.</span> <span class="nav-text">4. fedora 设置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-tftp-Server-on-Fedora-21"><span class="nav-number">5.</span> <span class="nav-text">5. tftp Server on Fedora 21</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xinet"><span class="nav-number">5.1.</span> <span class="nav-text">xinet</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tftp-service-tftp-socket"><span class="nav-number">5.1.1.</span> <span class="nav-text">tftp.service / tftp.socket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看SELinux状态："><span class="nav-number">5.1.2.</span> <span class="nav-text">查看SELinux状态：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关闭SELinux："><span class="nav-number">5.1.3.</span> <span class="nav-text">关闭SELinux：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务的启动"><span class="nav-number">5.2.</span> <span class="nav-text">服务的启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Samba-服务"><span class="nav-number">5.3.</span> <span class="nav-text">Samba 服务</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongmin Wu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
