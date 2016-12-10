@@ -1,0 +1,627 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Code, Game" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="最近公司项目遇到了两个关于Nor Flash的问题, 于是就学习了一下NorFlash是怎么操作的.
+项目的平台是博通(boardcom)的, 不过应该nor的操作是通用而相似的.
+首先是找了一个特别好的文章 ===&amp;gt; Nor Flash
+文章讲的很清楚, 接下来讲下遇到的问题
+1. flash设备的时序
+We have been able to track the problem and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习一下norflash">
+<meta property="og:url" content="http://pipicold.github.io/2015/06/18/Nor-Flash-Learning/index.html">
+<meta property="og:site_name" content="WU.Dongmin">
+<meta property="og:description" content="最近公司项目遇到了两个关于Nor Flash的问题, 于是就学习了一下NorFlash是怎么操作的.
+项目的平台是博通(boardcom)的, 不过应该nor的操作是通用而相似的.
+首先是找了一个特别好的文章 ===&amp;gt; Nor Flash
+文章讲的很清楚, 接下来讲下遇到的问题
+1. flash设备的时序
+We have been able to track the problem and">
+<meta property="og:updated_time" content="2016-11-10T22:30:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习一下norflash">
+<meta name="twitter:description" content="最近公司项目遇到了两个关于Nor Flash的问题, 于是就学习了一下NorFlash是怎么操作的.
+项目的平台是博通(boardcom)的, 不过应该nor的操作是通用而相似的.
+首先是找了一个特别好的文章 ===&amp;gt; Nor Flash
+文章讲的很清楚, 接下来讲下遇到的问题
+1. flash设备的时序
+We have been able to track the problem and">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pipicold.github.io/2015/06/18/Nor-Flash-Learning/"/>
+
+
+  <title> 学习一下norflash | WU.Dongmin </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WU.Dongmin</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Wish I can finish my every year's plan</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                学习一下norflash
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-06-18T00:00:00+02:00" content="2015-06-18">
+              2015-06-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Embedded/" itemprop="url" rel="index">
+                    <span itemprop="name">Embedded</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近公司项目遇到了两个关于Nor Flash的问题, 于是就学习了一下NorFlash是怎么操作的.</p>
+<p>项目的平台是博通(boardcom)的, 不过应该nor的操作是通用而相似的.</p>
+<p>首先是找了一个特别好的文章 ===&gt; <a href="http://wiki.dzsc.com/info/5353.html" target="_blank" rel="external">Nor Flash</a></p>
+<p>文章讲的很清楚, 接下来讲下遇到的问题</p>
+<h3 id="1-flash设备的时序"><a href="#1-flash设备的时序" class="headerlink" title="1. flash设备的时序"></a>1. flash设备的时序</h3><blockquote>
+<p>We have been able to track the problem and that’s caused by the fact that factory used slower flash devices on some production batch (100ns Vs 110ns).</p>
+</blockquote>
+<p>遇到的问题是工厂换了一块和现在的IO速度不同的Nor Flash. 然后让我们看看是不是能够修改一下我们这边的设定</p>
+<p>发现了可以提供修改的寄存器</p>
+<h3 id="2-查看新的Nor-Flash是否合适"><a href="#2-查看新的Nor-Flash是否合适" class="headerlink" title="2. 查看新的Nor Flash是否合适"></a>2. 查看新的Nor Flash是否合适</h3><p>用了两款新的Nor Flash, 但是不知道现有的代码是否支持?</p>
+<p>主要的配置是有两种方式,</p>
+<p>第一种方式, 是查询一个配置表, 里面把现在在产品上面用到的FLASH芯片的配置都列了出来</p>
+<p>第二种方式, 是通过查询CFI信息, 获取芯片内部的配置, 关于CFI信息是什么东西</p>
+<p>这里有份spansion的文档介绍  ====&gt; <a href="http://www.spansion.com/Support/Application%20Notes/Quick_Guide_to_CFI_AN.pdf" target="_blank" rel="external">Quick Guide to Common Flash Interface</a></p>
+<p>然后还涉及到一个命令集的事情, 其实就是Nor 不仅仅有CFI命令, 还有自己的比如读数据, 写数据, 擦除数据的时候的指令集</p>
+<p>之前提到的文章<a href="http://wiki.dzsc.com/info/5353.html" target="_blank" rel="external">Nor Flash</a>里面有详细的说法.</p>
+<p>ok that is all</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/07/Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/05/Study-React/" rel="prev" title="Study Notes of React Tutorial">
+                Study Notes of React Tutorial <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Dongmin Wu" />
+          <p class="site-author-name" itemprop="name">Dongmin Wu</p>
+          <p class="site-description motion-element" itemprop="description">The blog of myself</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pipicold" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://cn.linkedin.com/in/dongmin-wu-44185086" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-flash设备的时序"><span class="nav-number">1.</span> <span class="nav-text">1. flash设备的时序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-查看新的Nor-Flash是否合适"><span class="nav-number">2.</span> <span class="nav-text">2. 查看新的Nor Flash是否合适</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dongmin Wu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
